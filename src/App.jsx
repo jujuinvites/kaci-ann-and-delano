@@ -95,12 +95,14 @@ const DEFAULT_CONTENT = {
 const DEFAULT_BRIDAL = {
   bridesmaids: ['Alicia Brown', 'Tameka Wright', 'Shanice Powell', 'Nadine Clarke'],
   groomsmen: ['Marcus Reid', 'Devon Campbell', 'Andre Smith', 'Kemar Walters'],
-  flowerGirls: ['Aria Brown', 'Maya Reid'],
+  flowerGirls: ["Khalian Russell", "K'Drian Russell"],
   specialRoles: [
-    { role: 'Maid of Honour', name: 'Sasha Williams' },
-    { role: 'Best Man', name: 'Damion Grant' },
-    { role: 'Officiant', name: 'Pastor R. Bennett' },
-    { role: 'Ring Bearer', name: 'Noah Campbell' }
+    { role: 'Matron of Honour', name: 'Kendra Simpson' },
+    { role: 'Best Man', name: 'Alex Russell' },
+    { role: 'Officiant', name: 'Bishop Vernon Morrison' },
+    { role: 'Ring Bearer', name: 'Mykal Russell' },
+    { role: 'Scripture Readers', name: "Omarion Campbell & K'Fian Russell" },
+    { role: 'Special Solo', name: 'Shanique Davis' },
   ]
 };
 
@@ -114,6 +116,28 @@ const DEFAULT_GUESTS = [
 
 // Replace with the real Google Apps Script web app endpoint
 const GUEST_NOTES_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyZUAxo330ZmV20qUtsMw5xadmt3heQLjxWUrE0xiN40HT3VIo8lfyMBQuNZDrrE966/exec'; // e.g. 'https://script.google.com/macros/s/XXXX/exec'
+
+async function fetchGuestsFromSheet() {
+  if (!GUEST_NOTES_ENDPOINT) return null;
+  try {
+    const res = await fetch(`${GUEST_NOTES_ENDPOINT}?action=getGuests`);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return Array.isArray(data) ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+function syncGuestsToSheet(guests) {
+  if (!GUEST_NOTES_ENDPOINT) return;
+  fetch(GUEST_NOTES_ENDPOINT, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'guests', guests })
+  }).catch(() => {});
+}
 
 /* =============================================================
    localStorage helpers
@@ -2298,9 +2322,18 @@ export default function App() {
     storage.get('wedding.content', DEFAULT_CONTENT)
   );
 
-  useEffect(() => storage.set('wedding.guests', guests), [guests]);
+  useEffect(() => {
+    storage.set('wedding.guests', guests);
+    syncGuestsToSheet(guests);
+  }, [guests]);
   useEffect(() => storage.set('wedding.bridal', bridal), [bridal]);
   useEffect(() => storage.set('wedding.content', content), [content]);
+
+  useEffect(() => {
+    fetchGuestsFromSheet().then((data) => {
+      if (data && data.length > 0) setGuests(data);
+    });
+  }, []);
 
   // scroll to top on page change; reset auth when leaving admin
   useEffect(() => {
@@ -2310,17 +2343,21 @@ export default function App() {
 
   const goHome = () => setPage('home');
 
+  const bg = page === 'home'
+    ? theme.pageBg
+    : 'linear-gradient(160deg, #dce8f3 0%, #e8e3de 55%, #f3efe9 100%)';
+
   return (
-    <div style={{ background: theme.pageBg, minHeight: '100vh' }}>
+    <div style={{ background: bg, minHeight: '100vh' }}>
       <Header onNavigate={setPage} current={page} />
 
       {page === 'home' && (
         <>
           <Hero content={content} />
-          <div style={{ background: '#dce8f0' }}>
+          <div style={{ background: 'linear-gradient(180deg, #d4e6f1 0%, #dde7ef 100%)' }}>
             <FindYourSeat guests={guests} />
           </div>
-          <div style={{ background: '#e4edf4' }}>
+          <div style={{ background: 'linear-gradient(180deg, #dde7ef 0%, #e8e3de 100%)' }}>
             <ExploreGrid onNavigate={setPage} />
           </div>
         </>
