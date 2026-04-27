@@ -211,7 +211,7 @@ const SectionHeader = ({ overline, title, subtitle }) => (
       <div
         style={{
           fontFamily: theme.fonts.body,
-          fontSize: 12,
+          fontSize: 14,
           letterSpacing: 4,
           textTransform: 'uppercase',
           color: theme.dustyBlue,
@@ -226,7 +226,7 @@ const SectionHeader = ({ overline, title, subtitle }) => (
         fontFamily: theme.fonts.script,
         fontSize: 'clamp(44px, 9vw, 68px)',
         fontWeight: 400,
-        color: theme.text,
+        color: '#1a3558',
         margin: 0,
         lineHeight: 1.15
       }}
@@ -883,7 +883,7 @@ function TimelinePage({ content, onBack }) {
             <div
               style={{
                 fontFamily: theme.fonts.body,
-                fontSize: 11,
+                fontSize: 14,
                 letterSpacing: 3,
                 textTransform: 'uppercase',
                 color: theme.dustyBlue,
@@ -935,7 +935,7 @@ function MenuPage({ content, onBack }) {
             <div
               style={{
                 fontFamily: theme.fonts.body,
-                fontSize: 11,
+                fontSize: 14,
                 letterSpacing: 4,
                 textTransform: 'uppercase',
                 color: theme.dustyBlue,
@@ -1023,7 +1023,7 @@ function LoveWisdomPage({ content, onBack }) {
               fontFamily: theme.fonts.script,
               fontSize: 'clamp(52px, 11vw, 76px)',
               fontWeight: 400,
-              color: theme.text,
+              color: '#1a3558',
               margin: 0,
               lineHeight: 1.15
             }}
@@ -1154,7 +1154,7 @@ const Subhead = ({ children }) => (
   <div
     style={{
       fontFamily: theme.fonts.body,
-      fontSize: 11,
+      fontSize: 14,
       letterSpacing: 3,
       textTransform: 'uppercase',
       color: theme.dustyBlue,
@@ -1187,7 +1187,7 @@ function BridalPartyPage({ bridal, onBack }) {
             <div
               style={{
                 fontFamily: theme.fonts.body,
-                fontSize: 11,
+                fontSize: 14,
                 letterSpacing: 4,
                 textTransform: 'uppercase',
                 color: theme.dustyBlue,
