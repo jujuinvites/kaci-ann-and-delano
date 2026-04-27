@@ -93,16 +93,14 @@ const DEFAULT_CONTENT = {
 };
 
 const DEFAULT_BRIDAL = {
-  bridesmaids: ['Alicia Brown', 'Tameka Wright', 'Shanice Powell', 'Nadine Clarke'],
-  groomsmen: ['Marcus Reid', 'Devon Campbell', 'Andre Smith', 'Kemar Walters'],
-  flowerGirls: ["Khalian Russell", "K'Drian Russell"],
-  specialRoles: [
-    { role: 'Matron of Honour', name: 'Kendra Simpson' },
-    { role: 'Best Man', name: 'Alex Russell' },
-    { role: 'Officiant', name: 'Bishop Vernon Morrison' },
-    { role: 'Ring Bearer', name: 'Mykal Russell' },
-    { role: 'Scripture Readers', name: "Omarion Campbell & K'Fian Russell" },
-    { role: 'Special Solo', name: 'Shanique Davis' },
+  roles: [
+    { role: 'Matron of Honour', names: ['Kendra Simpson'] },
+    { role: 'Best Man', names: ['Alex Russell'] },
+    { role: 'Officiant', names: ['Bishop Vernon Morrison'] },
+    { role: 'Flower Girls', names: ["Khalian Russell", "K'Drian Russell"] },
+    { role: 'Ring Bearer', names: ['Mykal Russell'] },
+    { role: 'Scripture Readers', names: ['Omarion Campbell', "K'Fian Russell"] },
+    { role: 'Special Solo', names: ['Shanique Davis'] },
   ]
 };
 
@@ -1141,89 +1139,50 @@ const Subhead = ({ children }) => (
    PAGE: BRIDAL PARTY
    ============================================================= */
 function BridalPartyPage({ bridal, onBack }) {
-  const groups = [
-    { key: 'bridesmaids', label: 'Bridesmaids' },
-    { key: 'groomsmen', label: 'Groomsmen' },
-    { key: 'flowerGirls', label: 'Flower Girls' }
-  ];
-
+  const roles = bridal.roles || [];
   return (
     <Section>
       <BackLink onBack={onBack} />
       <SectionHeader overline="By Our Side" title="Bridal Party" />
-
-      {bridal.specialRoles?.length > 0 && (
-        <div style={{ marginBottom: 56 }}>
+      <div style={{ maxWidth: 480, margin: '0 auto' }}>
+        {roles.map((item, i) => (
           <div
+            key={i}
             style={{
-              display: 'grid',
-              gap: 14,
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))'
+              textAlign: 'center',
+              padding: '32px 0',
+              borderBottom: i < roles.length - 1 ? `1px solid ${theme.divider}` : 'none',
             }}
           >
-            {bridal.specialRoles.map((r, i) => (
-              <SoftCard
-                key={i}
-                style={{
-                  textAlign: 'center',
-                  padding: '24px 18px',
-                  background: `linear-gradient(180deg, #fff, ${theme.beigeBg})`
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: theme.fonts.body,
-                    fontSize: 11,
-                    letterSpacing: 3,
-                    textTransform: 'uppercase',
-                    color: theme.dustyBlue,
-                    marginBottom: 8
-                  }}
-                >
-                  {r.role}
-                </div>
-                <div style={{ fontFamily: theme.fonts.title, fontSize: 20, color: theme.text }}>
-                  {r.name}
-                </div>
-              </SoftCard>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {groups.map((g) => {
-        const list = bridal[g.key] || [];
-        if (list.length === 0) return null;
-        return (
-          <div key={g.key} style={{ marginBottom: 44 }}>
-            <Subhead>{g.label}</Subhead>
             <div
               style={{
-                display: 'grid',
-                gap: 10,
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))'
+                fontFamily: theme.fonts.body,
+                fontSize: 11,
+                letterSpacing: 4,
+                textTransform: 'uppercase',
+                color: theme.dustyBlue,
+                marginBottom: 14,
               }}
             >
-              {list.map((name, i) => (
-                <div
-                  key={i}
-                  style={{
-                    background: 'rgba(255,255,255,0.7)',
-                    borderRadius: 14,
-                    padding: '16px 18px',
-                    fontFamily: theme.fonts.title,
-                    fontSize: 17,
-                    color: theme.text,
-                    boxShadow: theme.cardShadow
-                  }}
-                >
-                  {name}
-                </div>
-              ))}
+              {item.role}
             </div>
+            {(item.names || []).map((name, j) => (
+              <div
+                key={j}
+                style={{
+                  fontFamily: theme.fonts.title,
+                  fontSize: 'clamp(20px, 4vw, 26px)',
+                  fontWeight: 400,
+                  color: theme.text,
+                  lineHeight: 1.5,
+                }}
+              >
+                {name}
+              </div>
+            ))}
           </div>
-        );
-      })}
+        ))}
+      </div>
     </Section>
   );
 }
@@ -2070,27 +2029,38 @@ function GuestsAdmin({ guests, setGuests }) {
 
 /* ---------- Bridal admin ---------- */
 function BridalAdmin({ bridal, setBridal }) {
-  const updateList = (key, value) => {
-    const arr = value.split('\n').map((s) => s.trim()).filter(Boolean);
-    setBridal({ ...bridal, [key]: arr });
+  const roles = bridal.roles || [];
+
+  const addRole = () =>
+    setBridal({ ...bridal, roles: [...roles, { role: '', names: [''] }] });
+
+  const removeRole = (i) =>
+    setBridal({ ...bridal, roles: roles.filter((_, idx) => idx !== i) });
+
+  const updateRoleTitle = (i, value) => {
+    const updated = [...roles];
+    updated[i] = { ...updated[i], role: value };
+    setBridal({ ...bridal, roles: updated });
   };
 
-  const updateSpecial = (i, field, value) => {
-    const arr = [...(bridal.specialRoles || [])];
-    arr[i] = { ...arr[i], [field]: value };
-    setBridal({ ...bridal, specialRoles: arr });
+  const addName = (ri) => {
+    const updated = [...roles];
+    updated[ri] = { ...updated[ri], names: [...(updated[ri].names || []), ''] };
+    setBridal({ ...bridal, roles: updated });
   };
 
-  const addSpecial = () => {
-    setBridal({
-      ...bridal,
-      specialRoles: [...(bridal.specialRoles || []), { role: '', name: '' }]
-    });
+  const updateName = (ri, ni, value) => {
+    const updated = [...roles];
+    const names = [...(updated[ri].names || [])];
+    names[ni] = value;
+    updated[ri] = { ...updated[ri], names };
+    setBridal({ ...bridal, roles: updated });
   };
 
-  const removeSpecial = (i) => {
-    const arr = (bridal.specialRoles || []).filter((_, idx) => idx !== i);
-    setBridal({ ...bridal, specialRoles: arr });
+  const removeName = (ri, ni) => {
+    const updated = [...roles];
+    updated[ri] = { ...updated[ri], names: updated[ri].names.filter((_, i) => i !== ni) };
+    setBridal({ ...bridal, roles: updated });
   };
 
   const fieldStyle = {
@@ -2101,86 +2071,93 @@ function BridalAdmin({ bridal, setBridal }) {
     background: '#fff',
     color: theme.text,
     outline: 'none',
-    width: '100%'
+    flex: 1,
+    minWidth: 0,
   };
 
-  const Group = ({ k, label }) => (
-    <div style={{ marginBottom: 18 }}>
-      <Subhead>{label}</Subhead>
-      <textarea
-        rows={4}
-        value={(bridal[k] || []).join('\n')}
-        onChange={(e) => updateList(k, e.target.value)}
-        placeholder="One name per line"
-        style={{ ...fieldStyle, resize: 'vertical' }}
-      />
-    </div>
-  );
+  const btnSm = {
+    background: 'transparent',
+    border: `1px solid ${theme.divider}`,
+    borderRadius: 8,
+    padding: '8px 12px',
+    fontSize: 12,
+    cursor: 'pointer',
+  };
 
   return (
     <SoftCard>
-      <Group k="bridesmaids" label="Bridesmaids" />
-      <Group k="groomsmen" label="Groomsmen" />
-      <Group k="flowerGirls" label="Flower Girls" />
-
-      <div>
-        <Subhead>Special Roles</Subhead>
-        {(bridal.specialRoles || []).map((r, i) => (
-          <div
-            key={i}
-            style={{
-              display: 'grid',
-              gap: 10,
-              gridTemplateColumns: '1fr 1fr auto',
-              marginBottom: 10
-            }}
-          >
+      <Subhead>Bridal Party Roles</Subhead>
+      {roles.map((item, i) => (
+        <div
+          key={i}
+          style={{
+            border: `1px solid ${theme.divider}`,
+            borderRadius: 14,
+            padding: 16,
+            marginBottom: 14,
+            background: 'rgba(255,255,255,0.6)',
+          }}
+        >
+          <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center' }}>
             <input
-              placeholder="Role"
-              value={r.role}
-              onChange={(e) => updateSpecial(i, 'role', e.target.value)}
-              style={fieldStyle}
-            />
-            <input
-              placeholder="Name"
-              value={r.name}
-              onChange={(e) => updateSpecial(i, 'name', e.target.value)}
+              value={item.role}
+              onChange={(e) => updateRoleTitle(i, e.target.value)}
+              placeholder="Role title"
               style={fieldStyle}
             />
             <button
-              onClick={() => removeSpecial(i)}
-              style={{
-                background: 'transparent',
-                border: `1px solid ${theme.divider}`,
-                borderRadius: 10,
-                padding: '0 14px',
-                color: '#a34646',
-                fontSize: 12,
-                letterSpacing: 1.5,
-                textTransform: 'uppercase'
-              }}
+              onClick={() => removeRole(i)}
+              style={{ ...btnSm, color: '#a34646', letterSpacing: 1, textTransform: 'uppercase' }}
             >
               Remove
             </button>
           </div>
-        ))}
-        <button
-          onClick={addSpecial}
-          style={{
-            padding: '10px 18px',
-            borderRadius: 999,
-            border: 'none',
-            background: theme.dustyBlue,
-            color: '#fff',
-            fontSize: 12,
-            letterSpacing: 2,
-            textTransform: 'uppercase',
-            marginTop: 6
-          }}
-        >
-          Add Role
-        </button>
-      </div>
+
+          {(item.names || []).map((name, j) => (
+            <div key={j} style={{ display: 'flex', gap: 8, marginBottom: 8 }}>
+              <input
+                value={name}
+                onChange={(e) => updateName(i, j, e.target.value)}
+                placeholder="Name"
+                style={fieldStyle}
+              />
+              {(item.names || []).length > 1 && (
+                <button
+                  onClick={() => removeName(i, j)}
+                  style={{ ...btnSm, color: '#a34646', fontSize: 18, lineHeight: 1, padding: '4px 10px' }}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+          ))}
+
+          <button
+            onClick={() => addName(i)}
+            style={{ ...btnSm, color: theme.dustyBlue, borderColor: theme.dustyBlue, letterSpacing: 1.5, textTransform: 'uppercase', marginTop: 4 }}
+          >
+            + Add Name
+          </button>
+        </div>
+      ))}
+
+      <button
+        onClick={addRole}
+        style={{
+          padding: '10px 20px',
+          borderRadius: 999,
+          border: 'none',
+          background: theme.dustyBlue,
+          color: '#fff',
+          fontSize: 12,
+          letterSpacing: 2,
+          textTransform: 'uppercase',
+          cursor: 'pointer',
+          marginTop: 8,
+        }}
+      >
+        Add Role
+      </button>
     </SoftCard>
   );
 }
@@ -2315,9 +2292,12 @@ export default function App() {
   const [guests, setGuests] = useState(() =>
     storage.get('wedding.guests', DEFAULT_GUESTS)
   );
-  const [bridal, setBridal] = useState(() =>
-    storage.get('wedding.bridal', DEFAULT_BRIDAL)
-  );
+  const [bridal, setBridal] = useState(() => {
+    const saved = storage.get('wedding.bridal', DEFAULT_BRIDAL);
+    // migrate old structure (specialRoles) to new roles array
+    if (saved && !saved.roles) return DEFAULT_BRIDAL;
+    return saved;
+  });
   const [content, setContent] = useState(() =>
     storage.get('wedding.content', DEFAULT_CONTENT)
   );
