@@ -113,14 +113,45 @@ const DEFAULT_GUESTS = [
 ];
 
 const GUEST_NOTES_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzDXAv08SbrOdZxAZVOq6g7LiwLE4Bacp5k0bW_0vrY_RLECiFjH9cr7fEegIIWZDPsmQ/exec';
+const GUESTS_SHEET_URL = 'https://docs.google.com/spreadsheets/d/11YkKUVhGwRb_ivQomiakuLo-ItrthgavSfsoMQQEHJk/gviz/tq?tqx=out:csv';
+
+function splitCSVLine(line) {
+  const result = [];
+  let cur = '';
+  let inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQ && line[i + 1] === '"') { cur += '"'; i++; }
+      else inQ = !inQ;
+    } else if (ch === ',' && !inQ) {
+      result.push(cur.trim());
+      cur = '';
+    } else {
+      cur += ch;
+    }
+  }
+  result.push(cur.trim());
+  return result;
+}
 
 async function fetchGuestsFromSheet() {
-  if (!GUEST_NOTES_ENDPOINT) return null;
   try {
-    const res = await fetch(`${GUEST_NOTES_ENDPOINT}?action=getGuests`);
+    const res = await fetch(`${GUESTS_SHEET_URL}&t=${Date.now()}`);
     if (!res.ok) return null;
-    const data = await res.json();
-    return Array.isArray(data) ? data : null;
+    const text = await res.text();
+    const lines = text.split(/\r?\n/).filter(l => l.trim());
+    if (lines.length < 2) return null;
+    const headers = splitCSVLine(lines[0]).map(h => h.toLowerCase());
+    const ni = headers.indexOf('name');
+    const ti = headers.indexOf('table');
+    const si = headers.indexOf('seat');
+    const gi = headers.indexOf('group');
+    const rows = lines.slice(1).map(line => {
+      const c = splitCSVLine(line);
+      return { name: c[ni] || '', table: c[ti] || '', seat: c[si] || '', group: c[gi] || '' };
+    }).filter(g => g.name);
+    return rows.length ? rows : null;
   } catch {
     return null;
   }
