@@ -112,8 +112,7 @@ const DEFAULT_GUESTS = [
   { name: 'Pastor R. Bennett', table: '3', seat: '1', group: 'Officiant' }
 ];
 
-// Replace with the real Google Apps Script web app endpoint
-const GUEST_NOTES_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyZUAxo330ZmV20qUtsMw5xadmt3heQLjxWUrE0xiN40HT3VIo8lfyMBQuNZDrrE966/exec'; // e.g. 'https://script.google.com/macros/s/XXXX/exec'
+const GUEST_NOTES_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzDXAv08SbrOdZxAZVOq6g7LiwLE4Bacp5k0bW_0vrY_RLECiFjH9cr7fEegIIWZDPsmQ/exec';
 
 async function fetchGuestsFromSheet() {
   if (!GUEST_NOTES_ENDPOINT) return null;
