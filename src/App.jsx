@@ -193,12 +193,12 @@ const SectionHeader = ({ overline, title, subtitle }) => (
     )}
     <h2
       style={{
-        fontFamily: theme.fonts.title,
-        fontSize: 'clamp(28px, 5vw, 40px)',
-        fontWeight: 500,
+        fontFamily: theme.fonts.script,
+        fontSize: 'clamp(44px, 9vw, 68px)',
+        fontWeight: 400,
         color: theme.text,
         margin: 0,
-        letterSpacing: 0.5
+        lineHeight: 1.15
       }}
     >
       {title}
