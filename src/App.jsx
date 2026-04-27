@@ -65,22 +65,19 @@ const DEFAULT_CONTENT = {
 
   menu: [
     {
-      section: 'Starters',
-      items: ['Ackee & Saltfish Tartlets', 'Pumpkin Soup', 'Garden Salad with Mango Vinaigrette']
-    },
-    {
       section: 'Proteins',
-      items: ['Jerk Chicken', 'Curried Goat', 'Grilled Snapper with Escovitch']
+      items: ['Honey BBQ Pork Chops', 'Chicken (Baked & Fried)', 'Fish', 'Curried Goat']
     },
     {
       section: 'Sides',
-      items: ['Rice & Peas', 'Festival', 'Steamed Callaloo', 'Roasted Breadfruit']
+      items: ['Rice & Peas', 'Mashed Potatoes', 'Mac & Cheese', 'Vegetable Salad']
     },
     {
-      section: 'Sweets',
-      items: ['Black Cake', 'Coconut Drops', 'Sorrel Sorbet']
+      section: 'Cocktail Hour',
+      items: ['Kebabs', 'Sandwiches', 'Water & Juice']
     }
   ],
+  menuNote: 'Buffet Service — Please help yourself as your table is invited',
 
   timeline: [
     { time: '3:00 PM', title: 'Guest Arrival', detail: 'Welcome drinks on the terrace' },
@@ -226,7 +223,7 @@ const SectionHeader = ({ overline, title, subtitle }) => (
         fontFamily: theme.fonts.script,
         fontSize: 'clamp(44px, 9vw, 68px)',
         fontWeight: 400,
-        color: '#1a3558',
+        color: theme.dustyBlue,
         margin: 0,
         lineHeight: 1.15
       }}
@@ -968,6 +965,22 @@ function MenuPage({ content, onBack }) {
             ))}
           </div>
         ))}
+        {content.menuNote && (
+          <div
+            style={{
+              marginTop: 16,
+              paddingTop: 28,
+              borderTop: `1px solid ${theme.divider}`,
+              fontFamily: theme.fonts.body,
+              fontSize: 14,
+              fontStyle: 'italic',
+              color: theme.textSoft,
+              lineHeight: 1.7
+            }}
+          >
+            {content.menuNote}
+          </div>
+        )}
       </div>
     </Section>
   );
@@ -1023,7 +1036,7 @@ function LoveWisdomPage({ content, onBack }) {
               fontFamily: theme.fonts.script,
               fontSize: 'clamp(52px, 11vw, 76px)',
               fontWeight: 400,
-              color: '#1a3558',
+              color: theme.dustyBlue,
               margin: 0,
               lineHeight: 1.15
             }}
