@@ -78,39 +78,50 @@ const DEFAULT_CONTENT = {
 
   menu: [
     {
-      section: 'Proteins',
-      items: ['Honey BBQ Pork Chops', 'Chicken (Baked & Fried)', 'Fish', 'Curried Goat']
+      section: 'Appetizer',
+      items: ['Chicken Soup w/ Dinner Rolls']
+    },
+    {
+      section: 'Main Course',
+      items: ['Escoveitch Fish', 'Baked Chicken', 'Stew Pork']
+    },
+    {
+      section: 'Carbohydrates',
+      items: ['Rice & Peas']
     },
     {
       section: 'Sides',
-      items: ['Rice & Peas', 'Mashed Potatoes', 'Mac & Cheese', 'Vegetable Salad']
+      items: ['Baked Mac & Cheese', 'Mashed Potatoes', 'Steam Veg']
+    },
+    {
+      section: 'Drinks',
+      items: ['Fruit Punch', 'Pineapple Ginger Juice', 'Champagne', 'Water']
     },
     {
       section: 'Cocktail Hour',
-      items: ['Kebabs', 'Sandwiches', 'Water & Juice']
+      items: ['Water', 'Juice', 'Soup']
     }
   ],
   menuNote: 'Buffet Service — Please help yourself as your table is invited',
 
   timeline: [
-    { time: '3:00 PM', title: 'Guest Arrival', detail: 'Welcome drinks on the terrace' },
-    { time: '4:00 PM', title: 'Ceremony', detail: 'Garden lawn — please be seated by 3:45 PM' },
-    { time: '5:00 PM', title: 'Cocktail Hour', detail: 'Live acoustic set & canapés' },
-    { time: '6:30 PM', title: 'Reception & Dinner', detail: 'Toasts, dinner, and first dance' },
-    { time: '9:00 PM', title: 'Dancing', detail: 'The party begins — dress for movement' },
-    { time: '11:30 PM', title: 'Send-Off', detail: 'Sparklers under the stars' }
+    { time: '1:30 PM', title: 'Guest Arrival', detail: '' },
+    { time: '2:00 PM', title: 'Ceremony Begins', detail: '' },
+    { time: '3:00 PM', title: 'Cocktail Hour', detail: '' },
+    { time: '5:00 PM', title: 'Reception', detail: '' },
+    { time: '9:00 PM', title: 'Send Off', detail: '' }
   ]
 };
 
 const DEFAULT_BRIDAL = {
   roles: [
-    { role: 'Matron of Honour', names: ['Kendra Simpson'] },
-    { role: 'Best Man', names: ['Alex Russell'] },
+    { role: 'Matron of Honour', names: ['Mrs Kendra Simpson'] },
+    { role: 'Bridesmaid', names: ["Ms K'Fian Russell"] },
+    { role: 'Best Man', names: ['Mr Alex Russell'] },
+    { role: 'Groomsman', names: ['Mr Jamoy Anguin'] },
     { role: 'Officiant', names: ['Bishop Vernon Morrison'] },
     { role: 'Flower Girls', names: ["Khalian Russell", "K'Drian Russell"] },
-    { role: 'Ring Bearer', names: ['Mykal Russell'] },
-    { role: 'Scripture Readers', names: ['Omarion Campbell', "K'Fian Russell"] },
-    { role: 'Special Solo', names: ['Shanique Davis'] }
+    { role: 'Ring Bearer', names: ['Mykal Russell'] }
   ]
 };
 
@@ -281,9 +292,9 @@ const BackLink = ({ onBack }) => (
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
   { id: 'timeline', label: 'Wedding Timeline' },
+  { id: 'programme', label: 'Wedding Programme' },
   { id: 'menu', label: 'Menu' },
   { id: 'bridal', label: 'Bridal Party' },
-  { id: 'notes', label: 'Guest Notes' },
   { id: 'seating', label: 'Seating Plan' },
   { id: 'love', label: 'Love & Wisdom' }
 ];
@@ -733,6 +744,10 @@ const EXPLORE_CARDS = [
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
   },
   {
+    id: 'programme', title: 'Wedding Programme',
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+  },
+  {
     id: 'menu', title: 'Menu',
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
   },
@@ -743,10 +758,6 @@ const EXPLORE_CARDS = [
   {
     id: 'love', title: 'Love & Wisdom',
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
-  },
-  {
-    id: 'notes', title: 'Guest Notes',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
   },
   {
     id: 'seating', title: 'Seating Plan',
@@ -974,8 +985,7 @@ function LoveWisdomPage({ onBack }) {
   const activities = [
     { title: 'Song Dedication', body: 'Identify a love song played by the DJ and either sing a short line or name the artist.' },
     { title: 'Marriage Advice', body: 'Work together to share your best piece of advice for a happy and lasting marriage.' },
-    { title: 'Memory Lane', body: 'Share a favourite memory you have with the bride or groom.' },
-    { title: 'Love Prediction', body: 'Predict where the couple will be in 10 years — the more creative, the better.' }
+    { title: 'Memory Lane', body: 'Share a favourite memory you have with the bride or groom.' }
   ];
 
   const intro = 'While waiting to be served, each table is invited to take part in a fun and meaningful challenge.';
@@ -1149,137 +1159,108 @@ function BridalPartyPage({ bridal, onBack }) {
 }
 
 /* =============================================================
-   PAGE: GUEST NOTES
+   PAGE: WEDDING PROGRAMME
    ============================================================= */
-function GuestNotesPage({ onBack }) {
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
-
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!name.trim() || !message.trim()) return;
-    setSubmitting(true);
-    setError('');
-    try {
-      if (GUEST_NOTES_ENDPOINT) {
-        await fetch(GUEST_NOTES_ENDPOINT, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name.trim(), message: message.trim(), timestamp: new Date().toISOString() })
-        });
-      }
-      const existing = storage.get('wedding.guestNotes', []);
-      existing.push({ name: name.trim(), message: message.trim(), at: Date.now() });
-      storage.set('wedding.guestNotes', existing);
-      setSuccess(true);
-      setName('');
-      setMessage('');
-    } catch {
-      setError('Something went wrong — please try again.');
-    } finally {
-      setSubmitting(false);
+function WeddingProgrammePage({ onBack }) {
+  const sections = [
+    {
+      title: 'Ceremony',
+      items: [
+        'Processional',
+        'Musical Prelude',
+        'Seating of Family & Guests',
+        "Entrance: Groom's Parents, Bride & Groom Grandparents, Bridal Party, Ring Bearer, Flower Girls",
+        "Bride's Entrance",
+        'Opening Song',
+        'Officiant: Bishop Vernon Morrison',
+        'Invocation: Rev Deloris Trowers',
+        'Welcome',
+        'Scripture Readings: Mr Adrian Huntley',
+        'Officiant Address to Couple',
+        'Exchange of Vows & Rings',
+        'Signing of Registry — Special Item: Ministry of Song by Sis Shanique Davis',
+        'Unity Ceremony: Sand Ceremony',
+        'Blessings / Prayer for Couple',
+        'Pronouncement',
+        'Recessional'
+      ]
+    },
+    {
+      title: 'Cocktail Hour',
+      items: [
+        'Refreshments, Water & Juice',
+        'Dominoes',
+        'Jumbo Jenga',
+        'DJ Entertainment',
+        'Wedding Mirror'
+      ]
+    },
+    {
+      title: 'Reception',
+      items: [
+        "MC / Director of Program: Bishop Marlon O'Leslie",
+        'Invitation to Dinner',
+        'Seating of Guests',
+        'Bridal Party Entrance',
+        'Newly Wed Entrance',
+        'First Dance: Newly Weds',
+        'Blessing of Meal & Cake: Sis Mavis Bailey',
+        'Serving of Dishes',
+        'Toast / Speeches',
+        'Unveiling of Cake: Mothers of Couple',
+        'Cutting & Feeding of Cake',
+        'Games: Shoe Couples, Removing of Garter, Tossing of Bouquet & Garter',
+        'Dessert & Wedding Favour Handouts',
+        'Send Off'
+      ]
     }
-  };
-
-  const fieldStyle = {
-    width: '100%',
-    padding: '14px 18px',
-    border: `1px solid ${theme.divider}`,
-    borderRadius: 14,
-    background: theme.cardBg,
-    fontSize: 15,
-    color: theme.text,
-    outline: 'none',
-    boxShadow: theme.cardShadow,
-    fontFamily: theme.fonts.body,
-    transition: 'border-color 200ms ease, box-shadow 200ms ease'
-  };
+  ];
 
   return (
     <Section>
       <BackLink onBack={onBack} />
-      <SectionHeader
-        overline="Leave A Note"
-        title="Guest Notes"
-        subtitle="Share a wish, a memory, or a piece of advice for the newlyweds."
-      />
-      <form onSubmit={submit} style={{ maxWidth: 520, margin: '0 auto', animation: 'fadeInUp 0.55s ease both', animationDelay: '0.2s' }}>
-        <input
-          type="text"
-          placeholder="Your name"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          style={{ ...fieldStyle, marginBottom: 12 }}
-          onFocus={e => { e.currentTarget.style.borderColor = theme.dustyBlue; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(107,143,168,0.15)'; }}
-          onBlur={e => { e.currentTarget.style.borderColor = theme.divider; e.currentTarget.style.boxShadow = theme.cardShadow; }}
-        />
-        <textarea
-          placeholder="Your message"
-          value={message}
-          onChange={e => setMessage(e.target.value)}
-          rows={5}
-          style={{ ...fieldStyle, resize: 'vertical', marginBottom: 16 }}
-          onFocus={e => { e.currentTarget.style.borderColor = theme.dustyBlue; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(107,143,168,0.15)'; }}
-          onBlur={e => { e.currentTarget.style.borderColor = theme.divider; e.currentTarget.style.boxShadow = theme.cardShadow; }}
-        />
-        <button
-          type="submit"
-          disabled={submitting}
-          style={{
-            width: '100%',
-            padding: '14px 22px',
-            borderRadius: 999,
-            border: 'none',
-            background: theme.dustyBlue,
-            color: '#fff',
-            fontSize: 12,
-            letterSpacing: 3,
-            textTransform: 'uppercase',
-            opacity: submitting ? 0.7 : 1,
-            cursor: submitting ? 'default' : 'pointer',
-            transition: 'transform 200ms ease, box-shadow 200ms ease',
-            boxShadow: '0 4px 14px rgba(107,143,168,0.30)'
-          }}
-          onMouseEnter={e => { if (!submitting) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 22px rgba(107,143,168,0.35)'; } }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(107,143,168,0.30)'; }}
-        >
-          {submitting ? 'Sending…' : 'Send Note'}
-        </button>
-
-        {success && (
-          <div style={{
-            marginTop: 18,
-            padding: 16,
-            borderRadius: 14,
-            background: 'rgba(107,143,168,0.08)',
-            color: theme.dustyBlue,
-            fontFamily: theme.fonts.body,
-            fontSize: 14,
-            textAlign: 'center',
-            animation: 'scaleIn 0.4s ease both'
-          }}>
-            Thank you — your note has been saved with love.
+      <SectionHeader overline="Order of the Day" title="Wedding Programme" />
+      <div style={{ maxWidth: 560, margin: '0 auto' }}>
+        {sections.map((sec, i) => (
+          <div
+            key={i}
+            style={{
+              marginBottom: 48,
+              animation: 'fadeInUp 0.5s ease both',
+              animationDelay: `${0.1 + i * 0.12}s`
+            }}
+          >
+            <div style={{
+              fontFamily: theme.fonts.body,
+              fontSize: 14,
+              letterSpacing: 4,
+              textTransform: 'uppercase',
+              color: theme.dustyBlue,
+              marginBottom: 16,
+              textAlign: 'center'
+            }}>
+              {sec.title}
+            </div>
+            <div style={{ width: 32, height: 1, margin: '0 auto 20px', background: theme.divider }} />
+            {sec.items.map((item, j) => (
+              <div key={j} style={{
+                fontFamily: theme.fonts.body,
+                fontSize: 15,
+                color: theme.text,
+                padding: '10px 0',
+                borderBottom: j < sec.items.length - 1 ? `1px solid ${theme.divider}` : 'none',
+                lineHeight: 1.6,
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 12
+              }}>
+                <span style={{ color: theme.dustyBlue, opacity: 0.55, fontSize: 9, marginTop: 5, flexShrink: 0 }}>◆</span>
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
-        )}
-        {error && (
-          <div style={{
-            marginTop: 18,
-            padding: 16,
-            borderRadius: 14,
-            background: 'rgba(180,80,80,0.08)',
-            color: '#a34646',
-            fontSize: 14,
-            textAlign: 'center',
-            animation: 'scaleIn 0.4s ease both'
-          }}>
-            {error}
-          </div>
-        )}
-      </form>
+        ))}
+      </div>
     </Section>
   );
 }
@@ -1416,10 +1397,10 @@ export default function App() {
         )}
 
         {page === 'timeline' && <TimelinePage content={content} onBack={goHome} />}
+        {page === 'programme' && <WeddingProgrammePage onBack={goHome} />}
         {page === 'menu' && <MenuPage content={content} onBack={goHome} />}
         {page === 'love' && <LoveWisdomPage onBack={goHome} />}
         {page === 'bridal' && <BridalPartyPage bridal={bridal} onBack={goHome} />}
-        {page === 'notes' && <GuestNotesPage onBack={goHome} />}
         {page === 'seating' && <SeatingPlanPage guests={guests} onBack={goHome} />}
       </FadeInPage>
 
