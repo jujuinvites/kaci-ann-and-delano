@@ -935,7 +935,7 @@ function MenuPage({ content, onBack }) {
           >
             <div style={{
               fontFamily: theme.fonts.body,
-              fontSize: 14,
+              fontSize: 15,
               letterSpacing: 4,
               textTransform: 'uppercase',
               color: theme.dustyBlue,
@@ -947,9 +947,9 @@ function MenuPage({ content, onBack }) {
             {sec.items.map((it, j) => (
               <div key={j} style={{
                 fontFamily: theme.fonts.title,
-                fontSize: 17,
+                fontSize: 20,
                 color: theme.text,
-                margin: '6px 0',
+                margin: '8px 0',
                 lineHeight: 1.6
               }}>
                 {it}
@@ -1175,7 +1175,7 @@ function WeddingProgrammePage({ onBack }) {
         'Officiant: Bishop Vernon Morrison',
         'Invocation: Rev Deloris Trowers',
         'Welcome',
-        'Scripture Readings: Mr Adrian Huntley',
+        'Scripture Readings: Mr Adrian Huntley & Ms Shelian Samuels',
         'Officiant Address to Couple',
         'Exchange of Vows & Rings',
         'Signing of Registry — Special Item: Ministry of Song by Sis Shanique Davis',
