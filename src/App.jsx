@@ -121,7 +121,8 @@ const DEFAULT_BRIDAL = {
     { role: 'Groomsman', names: ['Mr Jamoy Anguin'] },
     { role: 'Officiant', names: ['Bishop Vernon Morrison'] },
     { role: 'Flower Girls', names: ["Khalian Russell", "K'Drian Russell"] },
-    { role: 'Ring Bearer', names: ['Mykal Russell'] }
+    { role: 'Ring Bearer', names: ['Mykal Russell'] },
+    { role: 'Scripture Readers', names: ['Mr Adrian Huntley', 'Ms Shelian Samuels'] }
   ]
 };
 
@@ -465,7 +466,7 @@ function Footer() {
 function Hero({ content }) {
   return (
     <div style={{
-      background: 'linear-gradient(160deg, #b8d4e8 0%, #c9dfee 30%, #dce8f0 65%, #e8dfd8 100%)',
+      background: 'linear-gradient(to bottom, #ffffff 0%, #dce8f0 60%, #b8d4e8 100%)',
       textAlign: 'center',
       overflow: 'hidden'
     }}>
