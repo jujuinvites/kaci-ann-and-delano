@@ -115,14 +115,14 @@ const DEFAULT_CONTENT = {
 
 const DEFAULT_BRIDAL = {
   roles: [
-    { role: 'Matron of Honour', names: ['Mrs Kendra Simpson'] },
-    { role: 'Bridesmaid', names: ["Ms K'Fian Russell"] },
-    { role: 'Best Man', names: ['Mr Alex Russell'] },
-    { role: 'Groomsman', names: ['Mr Jamoy Anguin'] },
+    { role: 'Matron of Honour', names: ['Mrs. Kendra Simpson'] },
+    { role: 'Bridesmaid', names: ["Ms. K'Fian Russell"] },
+    { role: 'Best Man', names: ['Mr. Alex Russell'] },
+    { role: 'Groomsman', names: ['Mr. Jamoy Anguin'] },
     { role: 'Officiant', names: ['Bishop Vernon Morrison'] },
     { role: 'Flower Girls', names: ["Khalian Russell", "K'Drian Russell"] },
     { role: 'Ring Bearer', names: ['Mykal Russell'] },
-    { role: 'Scripture Readers', names: ['Mr Adrian Huntley', 'Ms Shelian Samuels'] }
+    { role: 'Scripture Readers', names: ['Mr. Adrian Huntley', 'Ms. Shelian Samuels'] }
   ]
 };
 
@@ -473,7 +473,8 @@ function Hero({ content }) {
       <div style={{ padding: '72px 24px 48px', maxWidth: 680, margin: '0 auto' }}>
         <div style={{
           fontFamily: theme.fonts.body,
-          fontSize: 15,
+          fontSize: 17,
+          fontWeight: 700,
           letterSpacing: 4,
           textTransform: 'uppercase',
           color: theme.dustyBlue,
@@ -1174,12 +1175,12 @@ function WeddingProgrammePage({ onBack }) {
         "Bride's Entrance",
         'Opening Song',
         'Officiant: Bishop Vernon Morrison',
-        'Invocation: Rev Deloris Trowers',
+        'Invocation: Rev. Deloris Trowers',
         'Welcome',
-        'Scripture Readings: Mr Adrian Huntley & Ms Shelian Samuels',
+        'Scripture Readings: Mr. Adrian Huntley & Ms. Shelian Samuels',
         'Officiant Address to Couple',
         'Exchange of Vows & Rings',
-        'Signing of Registry — Special Item: Ministry of Song by Sis Shanique Davis',
+        'Signing of Registry — Special Item: Ministry of Song by Sis. Shanique Davis',
         'Unity Ceremony: Sand Ceremony',
         'Blessings / Prayer for Couple',
         'Pronouncement',
@@ -1205,7 +1206,7 @@ function WeddingProgrammePage({ onBack }) {
         'Bridal Party Entrance',
         'Newly Wed Entrance',
         'First Dance: Newly Weds',
-        'Blessing of Meal & Cake: Sis Mavis Bailey',
+        'Blessing of Meal & Cake: Sis. Mavis Bailey',
         'Serving of Dishes',
         'Toast / Speeches',
         'Unveiling of Cake: Mothers of Couple',
