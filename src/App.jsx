@@ -465,17 +465,25 @@ function Footer() {
 function Hero({ content }) {
   return (
     <div style={{
-      background: 'linear-gradient(to bottom, #ffffff 0%, #FAF8F4 30%, #dce8f0 100%)',
+      backgroundImage: 'url(/images/background.svg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center top',
       textAlign: 'center',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      position: 'relative'
     }}>
-      <div style={{ padding: '72px 24px 48px', maxWidth: 680, margin: '0 auto' }}>
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.10) 60%, rgba(0,0,0,0.32) 100%)',
+        pointerEvents: 'none'
+      }} />
+      <div style={{ padding: '72px 24px 48px', maxWidth: 680, margin: '0 auto', position: 'relative' }}>
         <div style={{
           fontFamily: theme.fonts.body,
           fontSize: 15,
           letterSpacing: 4,
           textTransform: 'uppercase',
-          color: theme.dustyBlue,
+          color: 'rgba(255,255,255,0.88)',
           marginBottom: 36,
           animation: 'fadeInUp 0.6s ease both',
           animationDelay: '0.1s'
@@ -491,6 +499,7 @@ function Hero({ content }) {
             maxWidth: 560,
             display: 'block',
             margin: '0 auto 40px',
+            mixBlendMode: 'screen',
             animation: 'fadeInUp 0.8s cubic-bezier(0.22,1,0.36,1) both',
             animationDelay: '0.25s'
           }}
@@ -506,19 +515,19 @@ function Hero({ content }) {
           animation: 'fadeIn 0.8s ease both',
           animationDelay: '0.5s'
         }}>
-          <div style={{ height: 1, width: 56, background: theme.divider }} />
+          <div style={{ height: 1, width: 56, background: 'rgba(255,255,255,0.5)' }} />
           <svg width="32" height="18" viewBox="0 0 32 18" fill="none">
-            <circle cx="11" cy="9" r="7" stroke={theme.dustyBlue} strokeWidth="1.5" fill="none" />
-            <circle cx="21" cy="9" r="7" stroke={theme.dustyBlue} strokeWidth="1.5" fill="none" />
+            <circle cx="11" cy="9" r="7" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" fill="none" />
+            <circle cx="21" cy="9" r="7" stroke="rgba(255,255,255,0.7)" strokeWidth="1.5" fill="none" />
           </svg>
-          <div style={{ height: 1, width: 56, background: theme.divider }} />
+          <div style={{ height: 1, width: 56, background: 'rgba(255,255,255,0.5)' }} />
         </div>
 
         <div style={{
           fontFamily: theme.fonts.title,
           fontSize: 'clamp(20px, 3vw, 26px)',
           fontWeight: 700,
-          color: theme.text,
+          color: '#ffffff',
           letterSpacing: 1,
           marginBottom: 10,
           animation: 'fadeInUp 0.6s ease both',
@@ -531,7 +540,7 @@ function Hero({ content }) {
           fontFamily: theme.fonts.title,
           fontSize: 17,
           fontStyle: 'italic',
-          color: theme.textSoft,
+          color: 'rgba(255,255,255,0.85)',
           marginBottom: 28,
           animation: 'fadeInUp 0.6s ease both',
           animationDelay: '0.7s'
@@ -542,7 +551,7 @@ function Hero({ content }) {
         <p style={{
           fontFamily: theme.fonts.body,
           fontSize: 16,
-          color: theme.textSoft,
+          color: 'rgba(255,255,255,0.80)',
           lineHeight: 1.8,
           maxWidth: 480,
           margin: '0 auto',
