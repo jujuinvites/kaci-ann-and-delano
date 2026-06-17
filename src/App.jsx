@@ -1354,13 +1354,9 @@ function SeatingPlanPage({ guests, onBack }) {
 export default function App() {
   const [page, setPage] = useState('home');
 
-  const [guests, setGuests] = useState(() => storage.get('wedding.guests', DEFAULT_GUESTS));
-  const [bridal] = useState(() => {
-    const saved = storage.get('wedding.bridal', DEFAULT_BRIDAL);
-    if (saved && !saved.roles) return DEFAULT_BRIDAL;
-    return saved;
-  });
-  const [content] = useState(() => storage.get('wedding.content', DEFAULT_CONTENT));
+  const [guests, setGuests] = useState(DEFAULT_GUESTS);
+  const [bridal] = useState(DEFAULT_BRIDAL);
+  const [content] = useState(DEFAULT_CONTENT);
 
   useEffect(() => {
     fetchGuestsFromSheet().then(data => {
