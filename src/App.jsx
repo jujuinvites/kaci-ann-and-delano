@@ -937,7 +937,8 @@ function MenuPage({ content, onBack }) {
           >
             <div style={{
               fontFamily: theme.fonts.body,
-              fontSize: 15,
+              fontSize: 18,
+              fontWeight: 700,
               letterSpacing: 4,
               textTransform: 'uppercase',
               color: theme.dustyBlue,
@@ -1134,7 +1135,8 @@ function BridalPartyPage({ bridal, onBack }) {
           >
             <div style={{
               fontFamily: theme.fonts.body,
-              fontSize: 14,
+              fontSize: 18,
+              fontWeight: 700,
               letterSpacing: 4,
               textTransform: 'uppercase',
               color: theme.dustyBlue,
@@ -1234,7 +1236,8 @@ function WeddingProgrammePage({ onBack }) {
           >
             <div style={{
               fontFamily: theme.fonts.body,
-              fontSize: 14,
+              fontSize: 18,
+              fontWeight: 700,
               letterSpacing: 4,
               textTransform: 'uppercase',
               color: theme.dustyBlue,
