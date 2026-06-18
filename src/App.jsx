@@ -903,7 +903,7 @@ function ExploreGrid({ onNavigate }) {
             onClick={() => onNavigate(c.id)}
             className="explore-card"
             style={{
-              background: 'none',
+              background: '#ffffff',
               border: 'none',
               borderRadius: 18,
               padding: 0,
@@ -923,7 +923,6 @@ function ExploreGrid({ onNavigate }) {
                 width: '100%',
                 height: 'auto',
                 display: 'block',
-                borderRadius: 18,
                 transition: 'transform 180ms cubic-bezier(0.23,1,0.32,1)'
               }}
             />
