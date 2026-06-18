@@ -39,6 +39,9 @@ function GlobalStyles() {
           transform: translateY(-6px) scale(1.02);
           box-shadow: 0 14px 32px rgba(80,120,150,0.18);
         }
+        .explore-card:hover .explore-icon {
+          transform: scale(1.12);
+        }
         .soft-card-hover:hover {
           transform: translateY(-4px);
           box-shadow: 0 12px 30px rgba(80,120,150,0.16);
@@ -49,6 +52,15 @@ function GlobalStyles() {
         }
         .nav-menu-item:hover {
           background: rgba(90,136,168,0.06) !important;
+        }
+      }
+
+      /* Respect reduced-motion preferences */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-delay: 0ms !important;
+          transition-duration: 0.01ms !important;
         }
       }
     `}</style>
@@ -314,7 +326,7 @@ const SectionHeader = ({ overline, title, subtitle }) => (
         textTransform: 'uppercase',
         color: theme.dustyBlue,
         marginBottom: 12,
-        animation: 'fadeIn 0.6s ease both',
+        animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
         animationDelay: '0.05s'
       }}>
         {overline}
@@ -339,7 +351,7 @@ const SectionHeader = ({ overline, title, subtitle }) => (
         color: theme.textSoft,
         marginTop: 14,
         lineHeight: 1.6,
-        animation: 'fadeIn 0.6s ease both',
+        animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
         animationDelay: '0.25s'
       }}>
         {subtitle}
@@ -381,7 +393,7 @@ const BackLink = ({ onBack, light }) => (
       marginBottom: 20,
       padding: 0,
       cursor: 'pointer',
-      animation: 'fadeIn 0.4s ease both',
+      animation: 'fadeIn 0.4s cubic-bezier(0.23,1,0.32,1) both',
       display: 'block'
     }}
   >
@@ -473,7 +485,7 @@ function Header({ onNavigate, current }) {
         <div style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex' }}>
           <div
             onClick={() => setMenuOpen(false)}
-            style={{ flex: 1, background: 'rgba(0,0,0,0.35)', animation: 'fadeIn 0.25s ease both' }}
+            style={{ flex: 1, background: 'rgba(0,0,0,0.35)', animation: 'fadeIn 0.25s cubic-bezier(0.23,1,0.32,1) both' }}
           />
           <div style={{
             width: 300,
@@ -531,7 +543,7 @@ function Header({ onNavigate, current }) {
                     color: current === item.id ? theme.dustyBlue : theme.text,
                     cursor: 'pointer',
                     transition: 'background 200ms ease, color 200ms ease',
-                    animation: `fadeInUp 0.35s ease both`,
+                    animation: `fadeInUp 0.35s cubic-bezier(0.23,1,0.32,1) both`,
                     animationDelay: `${i * 0.04}s`
                   }}
                   className={`nav-menu-item${current === item.id ? ' active' : ''}`}
@@ -582,8 +594,8 @@ function Hero({ content }) {
           textTransform: 'uppercase',
           color: theme.dustyBlue,
           marginBottom: 36,
-          animation: 'fadeInUp 0.6s ease both',
-          animationDelay: '0.1s'
+          animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
+          animationDelay: '0.05s'
         }}>
           Welcome to the wedding of
         </div>
@@ -596,8 +608,8 @@ function Hero({ content }) {
             maxWidth: 560,
             display: 'block',
             margin: '0 auto 40px',
-            animation: 'fadeInUp 0.8s cubic-bezier(0.22,1,0.36,1) both',
-            animationDelay: '0.25s'
+            animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
+            animationDelay: '0.15s'
           }}
           onError={e => { e.currentTarget.style.display = 'none'; }}
         />
@@ -608,8 +620,8 @@ function Hero({ content }) {
           justifyContent: 'center',
           gap: 14,
           marginBottom: 22,
-          animation: 'fadeIn 0.8s ease both',
-          animationDelay: '0.5s'
+          animation: 'fadeIn 0.4s cubic-bezier(0.23,1,0.32,1) both',
+          animationDelay: '0.28s'
         }}>
           <div style={{ height: 1, width: 56, background: theme.divider }} />
           <svg width="32" height="18" viewBox="0 0 32 18" fill="none">
@@ -626,8 +638,8 @@ function Hero({ content }) {
           color: theme.text,
           letterSpacing: 1,
           marginBottom: 10,
-          animation: 'fadeInUp 0.6s ease both',
-          animationDelay: '0.6s'
+          animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
+          animationDelay: '0.36s'
         }}>
           {content.date}
         </div>
@@ -638,8 +650,8 @@ function Hero({ content }) {
           fontStyle: 'italic',
           color: theme.textSoft,
           marginBottom: 28,
-          animation: 'fadeInUp 0.6s ease both',
-          animationDelay: '0.7s'
+          animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
+          animationDelay: '0.44s'
         }}>
           {content.venueLine1}
         </div>
@@ -651,8 +663,8 @@ function Hero({ content }) {
           lineHeight: 1.8,
           maxWidth: 480,
           margin: '0 auto',
-          animation: 'fadeInUp 0.6s ease both',
-          animationDelay: '0.85s'
+          animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
+          animationDelay: '0.52s'
         }}>
           {content.welcomeMessage}
         </p>
@@ -665,8 +677,8 @@ function Hero({ content }) {
         style={{
           width: '100%',
           display: 'block',
-          animation: 'fadeIn 1.2s ease both',
-          animationDelay: '0.4s'
+          animation: 'fadeIn 0.7s cubic-bezier(0.23,1,0.32,1) both',
+          animationDelay: '0.2s'
         }}
         onError={e => { e.currentTarget.style.display = 'none'; }}
       />
@@ -777,7 +789,7 @@ function FindYourSeat({ guests }) {
 
       <div style={{ marginTop: 28, minHeight: 80, textAlign: 'center' }}>
         {loading && (
-          <div style={{ fontFamily: theme.fonts.body, color: theme.textSoft, animation: 'fadeIn 0.3s ease both' }}>
+          <div style={{ fontFamily: theme.fonts.body, color: theme.textSoft, animation: 'fadeIn 0.3s cubic-bezier(0.23,1,0.32,1) both' }}>
             Searching…
           </div>
         )}
@@ -830,7 +842,7 @@ function FindYourSeat({ guests }) {
           <div style={{
             fontFamily: theme.fonts.body,
             color: theme.textSoft,
-            animation: 'fadeIn 0.4s ease both'
+            animation: 'fadeIn 0.4s cubic-bezier(0.23,1,0.32,1) both'
           }}>
             We couldn't find that name — please try a different spelling, or ask a host.
           </div>
@@ -931,11 +943,14 @@ function ExploreGrid({ onNavigate }) {
               animationDelay: `${0.05 + i * 0.07}s`
             }}
           >
-            <span style={{
-              color: theme.dustyBlue,
-              transition: 'transform 300ms ease',
-              display: 'block'
-            }}>
+            <span
+              className="explore-icon"
+              style={{
+                color: theme.dustyBlue,
+                transition: 'transform 180ms cubic-bezier(0.23,1,0.32,1)',
+                display: 'block'
+              }}
+            >
               {c.icon}
             </span>
             <span style={{
@@ -976,7 +991,7 @@ function TimelinePage({ content, onBack }) {
             style={{
               position: 'relative',
               padding: '14px 0 26px',
-              animation: 'fadeInUp 0.5s ease both',
+              animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
               animationDelay: `${0.15 + i * 0.09}s`
             }}
           >
@@ -1035,7 +1050,7 @@ function MenuPage({ content, onBack }) {
             key={i}
             style={{
               marginBottom: 44,
-              animation: 'fadeInUp 0.55s ease both',
+              animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
               animationDelay: `${0.2 + i * 0.12}s`
             }}
           >
@@ -1074,7 +1089,7 @@ function MenuPage({ content, onBack }) {
             fontStyle: 'italic',
             color: theme.textSoft,
             lineHeight: 1.7,
-            animation: 'fadeIn 0.6s ease both',
+            animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
             animationDelay: '0.5s'
           }}>
             {content.menuNote}
@@ -1125,7 +1140,7 @@ function LoveWisdomPage({ onBack }) {
           justifyContent: 'center',
           gap: 12,
           marginBottom: 32,
-          animation: 'fadeIn 0.8s ease both',
+          animation: 'fadeIn 0.8s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.2s'
         }}>
           <div style={{ flex: 1, maxWidth: 90, height: 1, background: 'rgba(107,143,168,0.35)' }} />
@@ -1146,7 +1161,7 @@ function LoveWisdomPage({ onBack }) {
           textAlign: 'center',
           margin: '0 auto 40px',
           maxWidth: 460,
-          animation: 'fadeIn 0.7s ease both',
+          animation: 'fadeIn 0.7s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.3s'
         }}>
           {intro}
@@ -1233,7 +1248,7 @@ function BridalPartyPage({ bridal, onBack }) {
               textAlign: 'center',
               padding: '32px 0',
               borderBottom: i < roles.length - 1 ? `1px solid ${theme.divider}` : 'none',
-              animation: 'fadeInUp 0.5s ease both',
+              animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
               animationDelay: `${0.1 + i * 0.09}s`
             }}
           >
@@ -1314,7 +1329,7 @@ const ProgrammeItemRow = ({ item, delay }) => (
     border: '1px solid rgba(255,255,255,0.28)',
     boxShadow: '0 4px 16px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.25)',
     textAlign: 'center',
-    animation: 'fadeInUp 0.45s ease both',
+    animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
     animationDelay: `${delay}s`,
     boxSizing: 'border-box',
   }}>
@@ -1469,7 +1484,7 @@ function KeyFamilyPage({ onBack }) {
               <div key={mi} style={{
                 textAlign: 'center', padding: '28px 0',
                 borderBottom: mi < group.members.length - 1 ? `1px solid ${theme.divider}` : 'none',
-                animation: 'fadeInUp 0.5s ease both',
+                animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
                 animationDelay: `${0.1 + (gi * 4 + mi) * 0.08}s`
               }}>
                 <div style={{
