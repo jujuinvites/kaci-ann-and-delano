@@ -174,19 +174,24 @@ const DEFAULT_BRIDAL = {
 
 const DEFAULT_KEY_FAMILY = [
   {
-    group: 'Ceremony',
+    group: 'Key Family Members',
     members: [
-      { role: 'Officiant', names: ['Bishop Vernon Morrison'] },
-      { role: 'Invocation', names: ['Rev. Deloris Trowers'] },
-      { role: 'Scripture Readers', names: ['Mr. Adrian Huntley', 'Ms. Shelian Samuels'] },
-      { role: 'Ministry of Song', names: ['Sis. Shanique Davis'] },
+      { role: 'Mother of Bride', names: ['Ms. Shelian Samuels'] },
+      { role: 'Father of Bride', names: ['Mr. Michael Russell'] },
+      { role: 'Mother of Groom', names: ['Rev. Deloris Trowers'] },
+      { role: 'Father of Groom', names: ['Mr. Adrian Huntley'] },
     ]
   },
   {
-    group: 'Reception',
+    group: 'Key Participants',
     members: [
-      { role: 'Director of Programme', names: ["Bishop Marlon O'Leslie"] },
-      { role: 'Blessing of Meal & Cake', names: ['Sis. Mavis Bailey'] },
+      { role: 'Officiant', names: ['Bishop Vernon Morrison'] },
+      { role: 'Soloist', names: ['Ms. Shanique Davis'] },
+      { role: 'Sand Ceremony', names: ['Minister Mavis Bailey'] },
+      { role: 'Prayer for Couple', names: ['Minister Jacqueline Richards'] },
+      { role: 'Scripture Readers', names: ['Ms. Shelian Samuels', 'Mr. Adrian Huntley'] },
+      { role: 'Master of Ceremony', names: ["Bishop Marlon O'Leslie"] },
+      { role: 'Blessing of Meal & Cake', names: ['Sis. Joan Douglas'] },
     ]
   }
 ];
@@ -201,12 +206,16 @@ const CEREMONY_PROGRAMME = [
   { item: 'Officiant', participant: 'Bishop Vernon Morrison' },
   { item: 'Invocation', participant: 'Rev. Deloris Trowers' },
   { item: 'Welcome' },
-  { item: 'Scripture Readings', participant: 'Mr. Adrian Huntley & Mrs. Shelian Samuels' },
+  { item: 'Scripture Readings', subItems: [
+    'Psalms 128 — Mr. Adrian Huntley (Father of Groom)',
+    'Ecclesiastes 4:9–12 — Ms. Shelian Samuels (Mother of Bride)'
+  ]},
   { item: "Officiant's Address to the Couple" },
   { item: 'Exchange of Vows & Rings' },
-  { item: 'Signing of the Registry', detail: 'Ministry of Song', participant: 'Sis. Shanique Davis' },
-  { item: 'Unity Ceremony', detail: 'The Sand Ceremony' },
-  { item: 'Blessing & Prayer for the Couple' },
+  { item: 'Signing of the Registry', detail: 'An instrumental will be played' },
+  { item: 'Unity Ceremony', detail: 'The Sand Ceremony', participant: 'Minister Mavis Bailey' },
+  { item: 'Special Item', detail: 'Soloist', participant: 'Sis. Shanique Davis' },
+  { item: 'Blessing & Prayer for the Couple', participant: 'Minister Jacqueline Richards' },
   { item: 'Pronouncement' },
   { item: 'Recessional' },
 ];
@@ -226,12 +235,19 @@ const RECEPTION_PROGRAMME = [
   { item: 'Bridal Party Entrance' },
   { item: 'Newly Wed Entrance' },
   { item: 'First Dance', detail: 'Newly Weds' },
-  { item: 'Blessing of Meal & Cake', participant: 'Sis. Mavis Bailey' },
+  { item: 'Blessing of Meal & Cake', participant: 'Sis. Joan Douglas' },
   { item: 'Serving of Dishes' },
-  { item: 'Toast & Speeches' },
+  { item: 'Toast & Speeches', subItems: [
+    'To the Bride — Mrs. Kendra Simpson (Matron of Honour)',
+    'To the Groom — Mr. Alex Russell (Best Man)',
+    "To Bride's Parents — Mr. Damion Matthews",
+    "To Groom's Parents — Minister Jacqueline Richards",
+    'Open Toast (2–3)',
+    "Groom's Response"
+  ]},
   { item: 'Unveiling of Cake', detail: 'Mothers of the Couple' },
   { item: 'Cutting & Feeding of Cake' },
-  { item: 'Games', detail: 'Shoe Couples · Removing of Garter · Tossing of Bouquet & Garter' },
+  { item: 'Games', detail: "Couple's Shoe Game · Removing of Garter · Tossing of Bouquet & Garter", participant: 'TK Terike McKenzie' },
   { item: 'Dessert & Wedding Favour Handouts' },
   { item: 'Send Off' },
 ];
@@ -893,7 +909,7 @@ function ExploreGrid({ onNavigate }) {
       <div style={{
         display: 'grid',
         gap: 16,
-        gridTemplateColumns: 'repeat(auto-fit, minmax(155px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
         maxWidth: 880,
         margin: '0 auto'
       }}>
