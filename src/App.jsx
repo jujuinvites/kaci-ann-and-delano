@@ -1368,19 +1368,29 @@ const ProgrammeItemRow = ({ item, delay }) => (
    ============================================================= */
 function CeremonyProgrammePage({ onBack }) {
   return (
-    <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80, position: 'relative', overflow: 'hidden' }}>
+    <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80, position: 'relative' }}>
       {/* Orchid — top right */}
       <img src={theme.images.orchidImage} alt="" aria-hidden style={{
-        position: 'absolute', top: -10, right: -10, width: 200, opacity: 0.85,
-        pointerEvents: 'none'
+        position: 'fixed', top: 80, right: 0, width: 180, opacity: 0.85,
+        pointerEvents: 'none', zIndex: 0
       }} onError={e => { e.currentTarget.style.display='none'; }} />
       {/* Orchid — top left, mirrored */}
       <img src={theme.images.orchidImage} alt="" aria-hidden style={{
-        position: 'absolute', top: -10, left: -10, width: 200, opacity: 0.85,
-        pointerEvents: 'none', transform: 'scaleX(-1)'
+        position: 'fixed', top: 80, left: 0, width: 180, opacity: 0.85,
+        pointerEvents: 'none', transform: 'scaleX(-1)', zIndex: 0
       }} onError={e => { e.currentTarget.style.display='none'; }} />
 
-      <div style={{ maxWidth: 600, margin: '0 auto', padding: '48px 20px 0', position: 'relative' }}>
+      {/* Back button — upper left */}
+      <div style={{ padding: '16px 20px 0', position: 'relative', zIndex: 1 }}>
+        <button onClick={onBack} style={{
+          background: 'transparent', border: 'none',
+          color: 'rgba(255,255,255,0.75)', fontFamily: theme.fonts.body,
+          fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
+          padding: 0, cursor: 'pointer'
+        }}>← Back to Main Menu</button>
+      </div>
+
+      <div style={{ maxWidth: 600, margin: '0 auto', padding: '16px 20px 0', position: 'relative', zIndex: 1 }}>
         {/* Wax seal top center */}
         <div style={{ textAlign: 'center', marginBottom: 4 }}>
           <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{
@@ -1388,13 +1398,6 @@ function CeremonyProgrammePage({ onBack }) {
             animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both'
           }} onError={e => { e.currentTarget.style.display='none'; }} />
         </div>
-
-        <button onClick={onBack} style={{
-          background: 'transparent', border: 'none',
-          color: 'rgba(255,255,255,0.7)', fontFamily: theme.fonts.body,
-          fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
-          padding: 0, cursor: 'pointer', display: 'block', margin: '0 auto 12px'
-        }}>← Back to Main Menu</button>
 
         <ProgrammeSectionHeader overline="Order of Service" title="Ceremony" />
 
