@@ -247,7 +247,7 @@ const RECEPTION_PROGRAMME = [
   ]},
   { item: 'Unveiling of Cake', detail: 'Mothers of the Couple' },
   { item: 'Cutting & Feeding of Cake' },
-  { item: 'Games', detail: "Couple's Shoe Game · Removing of Garter · Tossing of Bouquet & Garter", participant: 'TK Terike McKenzie' },
+  { item: 'Games', subItems: ["Couple's Shoe Game", 'Removing of Garter', 'Tossing of Bouquet', 'Tossing of Garter'] },
   { item: 'Dessert & Wedding Favour Handouts' },
   { item: 'Send Off' },
 ];
