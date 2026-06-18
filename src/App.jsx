@@ -566,7 +566,7 @@ function Footer() {
   return (
     <div style={{ width: '100%', overflow: 'hidden', lineHeight: 0 }}>
       <img
-        src={theme.images.coupleBannerImage}
+        src="/images/footer.gif"
         alt="Kaci-Ann & Delano"
         style={{ width: '100%', display: 'block', objectFit: 'cover', minHeight: 180 }}
         onError={e => { e.currentTarget.style.display = 'none'; }}
