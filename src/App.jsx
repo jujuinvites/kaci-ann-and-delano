@@ -1320,9 +1320,9 @@ const ProgrammeItemRow = ({ item, delay }) => (
   }}>
     {/* Primary heading — ALL CAPS */}
     <div style={{
-      fontFamily: theme.fonts.body, fontSize: 13,
+      fontFamily: theme.fonts.body, fontSize: 16,
       color: '#fff', fontWeight: 700,
-      letterSpacing: '0.2em', textTransform: 'uppercase',
+      letterSpacing: '0.16em', textTransform: 'uppercase',
       lineHeight: 1.4
     }}>
       {item.item}
@@ -1333,8 +1333,8 @@ const ProgrammeItemRow = ({ item, delay }) => (
       <div style={{ marginTop: 6, display: 'flex', flexDirection: 'column', gap: 2 }}>
         {item.subItems.map((s, i) => (
           <div key={i} style={{
-            fontFamily: theme.fonts.title, fontSize: 13,
-            fontStyle: 'italic', color: 'rgba(255,255,255,0.82)',
+            fontFamily: theme.fonts.title, fontSize: 15,
+            fontStyle: 'italic', color: 'rgba(255,255,255,0.88)',
             letterSpacing: '0.02em', lineHeight: 1.5
           }}>
             {s}
@@ -1346,8 +1346,8 @@ const ProgrammeItemRow = ({ item, delay }) => (
     {/* Inline detail (e.g. "Ministry of Song", "The Sand Ceremony") */}
     {item.detail && (
       <div style={{
-        fontFamily: theme.fonts.title, fontSize: 13,
-        fontStyle: 'italic', color: 'rgba(255,255,255,0.78)',
+        fontFamily: theme.fonts.title, fontSize: 15,
+        fontStyle: 'italic', color: 'rgba(255,255,255,0.84)',
         marginTop: 5, lineHeight: 1.5, letterSpacing: '0.02em'
       }}>
         {item.detail}
@@ -1357,8 +1357,8 @@ const ProgrammeItemRow = ({ item, delay }) => (
     {/* Named participant — Playfair italic at readable size */}
     {item.participant && (
       <div style={{
-        fontFamily: theme.fonts.title, fontSize: 15,
-        fontStyle: 'italic', fontWeight: 500,
+        fontFamily: theme.fonts.title, fontSize: 17,
+        fontStyle: 'italic', fontWeight: 600,
         color: 'rgba(255,255,255,0.95)', marginTop: 5, lineHeight: 1.3
       }}>
         {item.participant}
