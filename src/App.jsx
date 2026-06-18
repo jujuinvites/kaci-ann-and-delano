@@ -893,7 +893,7 @@ function ExploreGrid({ onNavigate }) {
       <div style={{
         display: 'grid',
         gap: 16,
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(155px, 1fr))',
         maxWidth: 880,
         margin: '0 auto'
       }}>
@@ -903,14 +903,16 @@ function ExploreGrid({ onNavigate }) {
             onClick={() => onNavigate(c.id)}
             className="explore-card"
             style={{
-              background: '#ffffff',
-              border: 'none',
+              background: 'rgba(255,255,255,0.60)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255,255,255,0.75)',
               borderRadius: 18,
               padding: 0,
               cursor: 'pointer',
               overflow: 'hidden',
               transition: 'transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms ease-out',
-              boxShadow: theme.cardShadow,
+              boxShadow: '0 4px 20px rgba(80,120,160,0.12)',
               animation: 'scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
               animationDelay: `${0.05 + i * 0.07}s`
             }}
@@ -923,6 +925,7 @@ function ExploreGrid({ onNavigate }) {
                 width: '100%',
                 height: 'auto',
                 display: 'block',
+                mixBlendMode: 'multiply',
                 transition: 'transform 180ms cubic-bezier(0.23,1,0.32,1)'
               }}
             />
