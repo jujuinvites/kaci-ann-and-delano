@@ -27,11 +27,18 @@ function GlobalStyles() {
         to   { opacity: 1; transform: translateX(0); }
       }
 
+      /* Dark base */
+      body { background: #0a0f18; }
+
       /* Press feedback — every clickable element */
       button:active, a:active {
         transform: scale(0.96) !important;
         transition: transform 100ms cubic-bezier(0.23,1,0.32,1) !important;
       }
+
+      /* Input dark styling */
+      input::placeholder { color: rgba(138,164,184,0.6); }
+      input { color-scheme: dark; }
 
       /* Hover effects only on devices that support hover */
       @media (hover: hover) and (pointer: fine) {
@@ -66,15 +73,15 @@ const FadeInPage = ({ children, style }) => (
    THEME
    ============================================================= */
 const theme = {
-  dustyBlue: '#6b8fa8',
-  cream: '#FAF8F4',
-  beigeBg: '#EDE7E2',
-  pageBg: '#FAF8F4',
-  cardBg: '#ffffff',
-  cardShadow: '0 4px 20px rgba(80,110,140,0.10)',
-  text: '#2d3a4a',
-  textSoft: '#6b7a8a',
-  divider: 'rgba(107,143,168,0.18)',
+  dustyBlue: '#a8c8dc',
+  cream: '#0a0f18',
+  beigeBg: '#0d1520',
+  pageBg: '#0a0f18',
+  cardBg: 'rgba(255,255,255,0.06)',
+  cardShadow: '0 4px 24px rgba(0,0,0,0.5)',
+  text: '#dce8f2',
+  textSoft: '#8aa4b8',
+  divider: 'rgba(168,200,220,0.12)',
 
   fonts: {
     script: "'Great Vibes', cursive",
@@ -86,7 +93,10 @@ const theme = {
     logoImage: '/images/logo.png',
     namesImage: '/images/names.png',
     flowersImage: '/images/flowers.png',
-    coupleBannerImage: '/images/couple-banner.png'
+    coupleBannerImage: '/images/couple-banner.png',
+    bigFlowersImage: '/images/big-flowers.png',
+    blueFlowerImage: '/images/blue-flower.png',
+    waxSealImage: '/images/wax-seal.png',
   }
 };
 
@@ -363,16 +373,18 @@ const BackLink = ({ onBack }) => (
     onClick={onBack}
     style={{
       background: 'transparent',
-      border: 'none',
+      border: `1px solid rgba(168,200,220,0.25)`,
+      borderRadius: 999,
       color: theme.dustyBlue,
       fontFamily: theme.fonts.body,
-      fontSize: 12,
+      fontSize: 11,
       letterSpacing: 2,
       textTransform: 'uppercase',
       marginBottom: 18,
-      padding: 0,
+      padding: '8px 20px',
       cursor: 'pointer',
-      animation: 'fadeIn 0.4s ease both'
+      animation: 'fadeIn 0.4s ease both',
+      transition: 'border-color 200ms ease-out, color 200ms ease-out'
     }}
   >
     ← Back
@@ -406,7 +418,7 @@ function Header({ onNavigate, current }) {
         top: 0,
         zIndex: 50,
         backdropFilter: 'blur(12px)',
-        background: 'rgba(250,248,244,0.92)',
+        background: 'rgba(8,12,20,0.92)',
         borderBottom: `1px solid ${theme.divider}`,
         transition: 'box-shadow 200ms ease-out'
       }}>
@@ -467,7 +479,7 @@ function Header({ onNavigate, current }) {
           />
           <div style={{
             width: 300,
-            background: '#fff',
+            background: '#0d1520',
             height: '100%',
             overflowY: 'auto',
             display: 'flex',
@@ -559,7 +571,7 @@ function Footer() {
 function Hero({ content }) {
   return (
     <div style={{
-      background: 'linear-gradient(to bottom, #ffffff 0%, #dce8f0 60%, #b8d4e8 100%)',
+      background: 'linear-gradient(to bottom, #050810 0%, #080e18 60%, #0a1020 100%)',
       textAlign: 'center',
       overflow: 'hidden'
     }}>
@@ -649,7 +661,7 @@ function Hero({ content }) {
       </div>
 
       <img
-        src={theme.images.flowersImage}
+        src={theme.images.bigFlowersImage}
         alt=""
         aria-hidden
         style={{
@@ -732,16 +744,16 @@ function FindYourSeat({ guests }) {
             minWidth: 220,
             padding: '14px 20px',
             borderRadius: 999,
-            border: `1px solid ${theme.divider}`,
-            background: theme.cardBg,
+            border: `1px solid rgba(168,200,220,0.2)`,
+            background: 'rgba(255,255,255,0.06)',
             fontSize: 15,
             outline: 'none',
             color: theme.text,
-            boxShadow: theme.cardShadow,
+            boxShadow: 'none',
             transition: 'box-shadow 200ms ease, border-color 200ms ease'
           }}
-          onFocus={e => { e.currentTarget.style.borderColor = theme.dustyBlue; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(107,143,168,0.15)'; }}
-          onBlur={e => { e.currentTarget.style.borderColor = theme.divider; e.currentTarget.style.boxShadow = theme.cardShadow; }}
+          onFocus={e => { e.currentTarget.style.borderColor = theme.dustyBlue; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(168,200,220,0.15)'; }}
+          onBlur={e => { e.currentTarget.style.borderColor = 'rgba(168,200,220,0.2)'; e.currentTarget.style.boxShadow = 'none'; }}
         />
         <button
           type="submit"
@@ -777,7 +789,8 @@ function FindYourSeat({ guests }) {
             maxWidth: 420,
             margin: '0 auto',
             textAlign: 'center',
-            background: `linear-gradient(180deg, #fff, ${theme.beigeBg})`,
+            background: 'rgba(168,200,220,0.08)',
+            border: `1px solid rgba(168,200,220,0.18)`,
             animation: 'scaleIn 0.45s cubic-bezier(0.22,1,0.36,1) both'
           }}>
             <div style={{
@@ -905,8 +918,8 @@ function ExploreGrid({ onNavigate }) {
             onClick={() => onNavigate(c.id)}
             className="explore-card"
             style={{
-              background: '#fff',
-              border: 'none',
+              background: 'rgba(255,255,255,0.05)',
+              border: `1px solid rgba(168,200,220,0.12)`,
               borderRadius: 18,
               boxShadow: theme.cardShadow,
               padding: '32px 20px',
@@ -1089,7 +1102,7 @@ function LoveWisdomPage({ onBack }) {
 
   return (
     <div style={{
-      background: 'linear-gradient(175deg, #d6e8f3 0%, #e6dfd8 55%, #f1ece7 100%)',
+      background: 'linear-gradient(175deg, #080e18 0%, #0d1520 55%, #0a1018 100%)',
       minHeight: '100vh',
       paddingBottom: 72
     }}>
@@ -1147,7 +1160,8 @@ function LoveWisdomPage({ onBack }) {
             <div
               key={i}
               style={{
-                background: 'rgba(242, 236, 229, 0.62)',
+                background: 'rgba(168,200,220,0.07)',
+                border: `1px solid rgba(168,200,220,0.12)`,
                 borderRadius: 20,
                 padding: '22px 24px',
                 boxShadow: '0 2px 18px rgba(107,143,168,0.07)',
@@ -1304,9 +1318,10 @@ const ProgrammeItemRow = ({ item, index, delay }) => (
     display: 'flex', gap: 14,
     padding: '16px 18px', marginBottom: 8,
     borderRadius: 12,
-    background: 'rgba(255,255,255,0.75)',
+    background: 'rgba(255,255,255,0.05)',
+    border: '1px solid rgba(168,200,220,0.1)',
     backdropFilter: 'blur(4px)',
-    boxShadow: '0 2px 10px rgba(80,110,140,0.06)',
+    boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
     animation: 'fadeInUp 0.45s ease both',
     animationDelay: `${delay}s`
   }}>
@@ -1355,7 +1370,7 @@ const ProgrammeItemRow = ({ item, index, delay }) => (
 function CeremonyProgrammePage({ onBack }) {
   return (
     <div style={{
-      background: 'linear-gradient(160deg, #dce8f3 0%, #e8e3de 55%, #f3efe9 100%)',
+      background: 'linear-gradient(160deg, #080e18 0%, #0d1520 55%, #0a1018 100%)',
       minHeight: '100vh', paddingBottom: 72
     }}>
       <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 0' }}>
@@ -1384,7 +1399,7 @@ function CeremonyProgrammePage({ onBack }) {
 function ReceptionProgrammePage({ onBack }) {
   return (
     <div style={{
-      background: 'linear-gradient(160deg, #dce8f3 0%, #e8e3de 55%, #f3efe9 100%)',
+      background: 'linear-gradient(160deg, #080e18 0%, #0d1520 55%, #0a1018 100%)',
       minHeight: '100vh', paddingBottom: 72
     }}>
       <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 0' }}>
@@ -1495,7 +1510,8 @@ function SeatingPlanPage({ guests, onBack }) {
             key={table}
             className="soft-card-hover"
             style={{
-              background: 'rgba(255,255,255,0.85)',
+              background: 'rgba(255,255,255,0.05)',
+              border: `1px solid rgba(168,200,220,0.12)`,
               animation: 'scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
               animationDelay: `${0.1 + i * 0.07}s`,
               transition: 'transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms ease-out'
@@ -1557,7 +1573,7 @@ export default function App() {
 
   const bg = page === 'home'
     ? theme.pageBg
-    : 'linear-gradient(160deg, #dce8f3 0%, #e8e3de 55%, #f3efe9 100%)';
+    : 'linear-gradient(160deg, #080e18 0%, #0d1520 55%, #0a1018 100%)';
 
   const goHome = () => setPage('home');
 
@@ -1570,10 +1586,10 @@ export default function App() {
         {page === 'home' && (
           <>
             <Hero content={content} />
-            <div style={{ background: 'linear-gradient(180deg, #d4e6f1 0%, #dde7ef 100%)' }}>
+            <div style={{ background: 'linear-gradient(180deg, #0a1020 0%, #0d1525 100%)' }}>
               <FindYourSeat guests={guests} />
             </div>
-            <div style={{ background: 'linear-gradient(180deg, #dde7ef 0%, #e8e3de 100%)' }}>
+            <div style={{ background: 'linear-gradient(180deg, #0d1525 0%, #0a1020 100%)' }}>
               <ExploreGrid onNavigate={setPage} />
             </div>
           </>
