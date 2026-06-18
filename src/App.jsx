@@ -151,6 +151,70 @@ const DEFAULT_BRIDAL = {
   ]
 };
 
+const DEFAULT_KEY_FAMILY = [
+  {
+    group: 'Ceremony',
+    members: [
+      { role: 'Officiant', names: ['Bishop Vernon Morrison'] },
+      { role: 'Invocation', names: ['Rev. Deloris Trowers'] },
+      { role: 'Scripture Readers', names: ['Mr. Adrian Huntley', 'Ms. Shelian Samuels'] },
+      { role: 'Ministry of Song', names: ['Sis. Shanique Davis'] },
+    ]
+  },
+  {
+    group: 'Reception',
+    members: [
+      { role: 'Director of Programme', names: ["Bishop Marlon O'Leslie"] },
+      { role: 'Blessing of Meal & Cake', names: ['Sis. Mavis Bailey'] },
+    ]
+  }
+];
+
+const CEREMONY_PROGRAMME = [
+  { item: 'Processional' },
+  { item: 'Musical Prelude' },
+  { item: 'Seating of Family & Guests' },
+  { item: 'Entrance', detail: "Groom's Parents · Grandparents of the Couple · Bridal Party · Ring Bearer · Flower Girls" },
+  { item: "Bride's Entrance" },
+  { item: 'Opening Song' },
+  { item: 'Officiant', participant: 'Bishop Vernon Morrison' },
+  { item: 'Invocation', participant: 'Rev. Deloris Trowers' },
+  { item: 'Welcome' },
+  { item: 'Scripture Readings', participant: 'Mr. Adrian Huntley & Ms. Shelian Samuels' },
+  { item: 'Officiant Address to Couple' },
+  { item: 'Exchange of Vows & Rings' },
+  { item: 'Signing of Registry', detail: 'Ministry of Song', participant: 'Sis. Shanique Davis' },
+  { item: 'Unity Ceremony', detail: 'Sand Ceremony' },
+  { item: 'Blessings & Prayer for Couple' },
+  { item: 'Pronouncement' },
+  { item: 'Recessional' },
+];
+
+const COCKTAIL_PROGRAMME = [
+  { item: 'Refreshments — Water, Juice & Soup' },
+  { item: 'Dominoes' },
+  { item: 'Jumbo Jenga' },
+  { item: 'DJ Entertainment' },
+  { item: 'Wedding Mirror' },
+];
+
+const RECEPTION_PROGRAMME = [
+  { item: 'Director of Programme', participant: "Bishop Marlon O'Leslie" },
+  { item: 'Invitation to Dinner' },
+  { item: 'Seating of Guests' },
+  { item: 'Bridal Party Entrance' },
+  { item: 'Newly Wed Entrance' },
+  { item: 'First Dance', detail: 'Newly Weds' },
+  { item: 'Blessing of Meal & Cake', participant: 'Sis. Mavis Bailey' },
+  { item: 'Serving of Dishes' },
+  { item: 'Toast & Speeches' },
+  { item: 'Unveiling of Cake', detail: 'Mothers of the Couple' },
+  { item: 'Cutting & Feeding of Cake' },
+  { item: 'Games', detail: 'Shoe Couples · Removing of Garter · Tossing of Bouquet & Garter' },
+  { item: 'Dessert & Wedding Favour Handouts' },
+  { item: 'Send Off' },
+];
+
 const DEFAULT_GUESTS = [
   { name: 'Jane Doe', table: '1', seat: '1', group: 'Family' },
   { name: 'John Doe', table: '1', seat: '2', group: 'Family' },
@@ -321,11 +385,13 @@ const BackLink = ({ onBack }) => (
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
   { id: 'timeline', label: 'Wedding Timeline' },
-  { id: 'programme', label: 'Wedding Programme' },
-  { id: 'menu', label: 'Menu' },
+  { id: 'ceremony', label: 'Ceremony Programme' },
   { id: 'bridal', label: 'Bridal Party' },
+  { id: 'family', label: 'Key Family Members & Participants' },
   { id: 'seating', label: 'Seating Plan' },
-  { id: 'love', label: 'Love & Wisdom' }
+  { id: 'reception', label: 'Reception Programme' },
+  { id: 'menu', label: 'Menu' },
+  { id: 'love', label: 'Love & Wisdom' },
 ];
 
 function Header({ onNavigate, current }) {
@@ -773,25 +839,33 @@ const EXPLORE_CARDS = [
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
   },
   {
-    id: 'programme', title: 'Wedding Programme',
+    id: 'ceremony', title: 'Ceremony Programme',
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-  },
-  {
-    id: 'menu', title: 'Menu',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
   },
   {
     id: 'bridal', title: 'Bridal Party',
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
   },
   {
-    id: 'love', title: 'Love & Wisdom',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+    id: 'family', title: 'Key Family & Participants',
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
   },
   {
     id: 'seating', title: 'Seating Plan',
     icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-  }
+  },
+  {
+    id: 'reception', title: 'Reception Programme',
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+  },
+  {
+    id: 'menu', title: 'Menu',
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+  },
+  {
+    id: 'love', title: 'Love & Wisdom',
+    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+  },
 ];
 
 function ExploreGrid({ onNavigate }) {
@@ -1182,104 +1256,194 @@ function BridalPartyPage({ bridal, onBack }) {
 }
 
 /* =============================================================
-   PAGE: WEDDING PROGRAMME
+   PROGRAMME SHARED COMPONENTS
    ============================================================= */
-function WeddingProgrammePage({ onBack }) {
-  const sections = [
-    {
-      title: 'Ceremony',
-      items: [
-        'Processional',
-        'Musical Prelude',
-        'Seating of Family & Guests',
-        "Entrance: Groom's Parents, Bride & Groom Grandparents, Bridal Party, Ring Bearer, Flower Girls",
-        "Bride's Entrance",
-        'Opening Song',
-        'Officiant: Bishop Vernon Morrison',
-        'Invocation: Rev. Deloris Trowers',
-        'Welcome',
-        'Scripture Readings: Mr. Adrian Huntley & Ms. Shelian Samuels',
-        'Officiant Address to Couple',
-        'Exchange of Vows & Rings',
-        'Signing of Registry — Special Item: Ministry of Song by Sis. Shanique Davis',
-        'Unity Ceremony: Sand Ceremony',
-        'Blessings / Prayer for Couple',
-        'Pronouncement',
-        'Recessional'
-      ]
-    },
-    {
-      title: 'Cocktail Hour',
-      items: [
-        'Refreshments, Water & Juice',
-        'Dominoes',
-        'Jumbo Jenga',
-        'DJ Entertainment',
-        'Wedding Mirror'
-      ]
-    },
-    {
-      title: 'Reception',
-      items: [
-        "MC / Director of Program: Bishop Marlon O'Leslie",
-        'Invitation to Dinner',
-        'Seating of Guests',
-        'Bridal Party Entrance',
-        'Newly Wed Entrance',
-        'First Dance: Newly Weds',
-        'Blessing of Meal & Cake: Sis. Mavis Bailey',
-        'Serving of Dishes',
-        'Toast / Speeches',
-        'Unveiling of Cake: Mothers of Couple',
-        'Cutting & Feeding of Cake',
-        'Games: Shoe Couples, Removing of Garter, Tossing of Bouquet & Garter',
-        'Dessert & Wedding Favour Handouts',
-        'Send Off'
-      ]
-    }
-  ];
+const ProgrammeSectionHeader = ({ overline, title }) => (
+  <div style={{
+    background: 'linear-gradient(135deg, #4e7a96 0%, #6b8fa8 55%, #8ab0c8 100%)',
+    borderRadius: 20,
+    padding: '36px 28px 30px',
+    textAlign: 'center',
+    marginBottom: 20,
+    boxShadow: '0 8px 36px rgba(80,110,140,0.22)',
+    position: 'relative',
+    overflow: 'hidden'
+  }}>
+    <div style={{
+      position: 'absolute', top: 0, left: 0, right: 0, height: '50%',
+      background: 'linear-gradient(to bottom, rgba(255,255,255,0.09), transparent)',
+      borderRadius: '20px 20px 0 0', pointerEvents: 'none'
+    }}/>
+    {overline && (
+      <div style={{
+        fontFamily: theme.fonts.body, fontSize: 11,
+        letterSpacing: '0.3em', textTransform: 'uppercase',
+        color: 'rgba(255,255,255,0.7)', marginBottom: 10, position: 'relative'
+      }}>
+        {overline}
+      </div>
+    )}
+    <div style={{
+      fontFamily: theme.fonts.script,
+      fontSize: 'clamp(52px, 11vw, 72px)',
+      color: '#fff', lineHeight: 1.1, position: 'relative'
+    }}>
+      {title}
+    </div>
+    <div style={{ marginTop: 14, display: 'flex', justifyContent: 'center', position: 'relative' }}>
+      <svg width="44" height="26" viewBox="0 0 44 26" fill="none">
+        <circle cx="15" cy="13" r="10" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2"/>
+        <circle cx="29" cy="13" r="10" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2"/>
+      </svg>
+    </div>
+  </div>
+);
 
+const ProgrammeItemRow = ({ item, index, delay }) => (
+  <div style={{
+    display: 'flex', gap: 14,
+    padding: '16px 18px', marginBottom: 8,
+    borderRadius: 12,
+    background: 'rgba(255,255,255,0.75)',
+    backdropFilter: 'blur(4px)',
+    boxShadow: '0 2px 10px rgba(80,110,140,0.06)',
+    animation: 'fadeInUp 0.45s ease both',
+    animationDelay: `${delay}s`
+  }}>
+    <div style={{
+      width: 26, height: 26, flexShrink: 0,
+      borderRadius: '50%',
+      border: `1px solid rgba(107,143,168,0.4)`,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      fontFamily: theme.fonts.body, fontSize: 11, color: theme.dustyBlue,
+      marginTop: 1
+    }}>
+      {index + 1}
+    </div>
+    <div style={{ flex: 1 }}>
+      <div style={{
+        fontFamily: theme.fonts.body, fontSize: 15,
+        color: theme.text, fontWeight: 500,
+        letterSpacing: 0.2, lineHeight: 1.4
+      }}>
+        {item.item}
+      </div>
+      {item.detail && (
+        <div style={{
+          fontFamily: theme.fonts.body, fontSize: 13,
+          color: theme.textSoft, fontStyle: 'italic',
+          marginTop: 3, lineHeight: 1.5
+        }}>
+          {item.detail}
+        </div>
+      )}
+      {item.participant && (
+        <div style={{
+          fontFamily: theme.fonts.script, fontSize: 22,
+          color: theme.dustyBlue, marginTop: 2, lineHeight: 1.2
+        }}>
+          {item.participant}
+        </div>
+      )}
+    </div>
+  </div>
+);
+
+/* =============================================================
+   PAGE: CEREMONY PROGRAMME
+   ============================================================= */
+function CeremonyProgrammePage({ onBack }) {
+  return (
+    <div style={{
+      background: 'linear-gradient(160deg, #dce8f3 0%, #e8e3de 55%, #f3efe9 100%)',
+      minHeight: '100vh', paddingBottom: 72
+    }}>
+      <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 0' }}>
+        <BackLink onBack={onBack} />
+        <div style={{ marginTop: 16 }}>
+          <ProgrammeSectionHeader overline="Order of Service" title="Ceremony" />
+          {CEREMONY_PROGRAMME.map((item, i) => (
+            <ProgrammeItemRow key={i} item={item} index={i} delay={0.05 + i * 0.035} />
+          ))}
+
+          <div style={{ marginTop: 32 }}>
+            <ProgrammeSectionHeader overline="Following the Ceremony" title="Cocktail Hour" />
+            {COCKTAIL_PROGRAMME.map((item, i) => (
+              <ProgrammeItemRow key={i} item={item} index={i} delay={0.05 + i * 0.06} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =============================================================
+   PAGE: RECEPTION PROGRAMME
+   ============================================================= */
+function ReceptionProgrammePage({ onBack }) {
+  return (
+    <div style={{
+      background: 'linear-gradient(160deg, #dce8f3 0%, #e8e3de 55%, #f3efe9 100%)',
+      minHeight: '100vh', paddingBottom: 72
+    }}>
+      <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 0' }}>
+        <BackLink onBack={onBack} />
+        <div style={{ marginTop: 16 }}>
+          <ProgrammeSectionHeader overline="Evening Celebration" title="Reception" />
+          {RECEPTION_PROGRAMME.map((item, i) => (
+            <ProgrammeItemRow key={i} item={item} index={i} delay={0.05 + i * 0.04} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =============================================================
+   PAGE: KEY FAMILY MEMBERS & PARTICIPANTS
+   ============================================================= */
+function KeyFamilyPage({ onBack }) {
   return (
     <Section>
       <BackLink onBack={onBack} />
-      <SectionHeader overline="Order of the Day" title="Wedding Programme" />
-      <div style={{ maxWidth: 560, margin: '0 auto' }}>
-        {sections.map((sec, i) => (
-          <div
-            key={i}
-            style={{
-              marginBottom: 48,
-              animation: 'fadeInUp 0.5s ease both',
-              animationDelay: `${0.1 + i * 0.12}s`
-            }}
-          >
+      <SectionHeader overline="With Gratitude" title="Key Participants" />
+      <div style={{ maxWidth: 480, margin: '0 auto' }}>
+        {DEFAULT_KEY_FAMILY.map((group, gi) => (
+          <div key={gi} style={{ marginBottom: 52 }}>
             <div style={{
-              fontFamily: theme.fonts.body,
-              fontSize: 18,
-              fontWeight: 700,
-              letterSpacing: 4,
-              textTransform: 'uppercase',
-              color: theme.dustyBlue,
-              marginBottom: 16,
-              textAlign: 'center'
+              fontFamily: theme.fonts.body, fontSize: 11,
+              letterSpacing: 4, textTransform: 'uppercase',
+              color: theme.dustyBlue, textAlign: 'center',
+              paddingBottom: 14, marginBottom: 24,
+              borderBottom: `1px solid ${theme.divider}`
             }}>
-              {sec.title}
+              {group.group}
             </div>
-            <div style={{ width: 32, height: 1, margin: '0 auto 20px', background: theme.divider }} />
-            {sec.items.map((item, j) => (
-              <div key={j} style={{
-                fontFamily: theme.fonts.body,
-                fontSize: 15,
-                color: theme.text,
-                padding: '10px 0',
-                borderBottom: j < sec.items.length - 1 ? `1px solid ${theme.divider}` : 'none',
-                lineHeight: 1.6,
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 12
+            {group.members.map((member, mi) => (
+              <div key={mi} style={{
+                textAlign: 'center', padding: '28px 0',
+                borderBottom: mi < group.members.length - 1 ? `1px solid ${theme.divider}` : 'none',
+                animation: 'fadeInUp 0.5s ease both',
+                animationDelay: `${0.1 + (gi * 4 + mi) * 0.08}s`
               }}>
-                <span style={{ color: theme.dustyBlue, opacity: 0.55, fontSize: 9, marginTop: 5, flexShrink: 0 }}>◆</span>
-                <span>{item}</span>
+                <div style={{
+                  fontFamily: theme.fonts.body, fontSize: 11,
+                  fontWeight: 700, letterSpacing: 3,
+                  textTransform: 'uppercase', color: theme.dustyBlue,
+                  marginBottom: 12
+                }}>
+                  {member.role}
+                </div>
+                {member.names.map((name, ni) => (
+                  <div key={ni} style={{
+                    fontFamily: theme.fonts.title,
+                    fontSize: 'clamp(18px, 3.5vw, 24px)',
+                    fontWeight: 400, color: theme.text, lineHeight: 1.6
+                  }}>
+                    {name}
+                  </div>
+                ))}
               </div>
             ))}
           </div>
@@ -1416,10 +1580,12 @@ export default function App() {
         )}
 
         {page === 'timeline' && <TimelinePage content={content} onBack={goHome} />}
-        {page === 'programme' && <WeddingProgrammePage onBack={goHome} />}
+        {page === 'ceremony' && <CeremonyProgrammePage onBack={goHome} />}
+        {page === 'reception' && <ReceptionProgrammePage onBack={goHome} />}
+        {page === 'bridal' && <BridalPartyPage bridal={bridal} onBack={goHome} />}
+        {page === 'family' && <KeyFamilyPage onBack={goHome} />}
         {page === 'menu' && <MenuPage content={content} onBack={goHome} />}
         {page === 'love' && <LoveWisdomPage onBack={goHome} />}
-        {page === 'bridal' && <BridalPartyPage bridal={bridal} onBack={goHome} />}
         {page === 'seating' && <SeatingPlanPage guests={guests} onBack={goHome} />}
       </FadeInPage>
 
