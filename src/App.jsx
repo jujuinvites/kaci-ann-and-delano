@@ -200,11 +200,11 @@ const CEREMONY_PROGRAMME = [
 ];
 
 const COCKTAIL_PROGRAMME = [
+  { item: 'Refreshments', subItems: ['Water', 'Juice', 'Soup'] },
   { item: 'Dominoes' },
   { item: 'Jumbo Jenga' },
   { item: 'DJ Entertainment' },
   { item: 'Wedding Mirror' },
-  { item: 'Refreshments', subItems: ['Water', 'Juice', 'Soup'] },
 ];
 
 const RECEPTION_PROGRAMME = [
