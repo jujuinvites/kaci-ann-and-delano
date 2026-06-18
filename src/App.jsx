@@ -367,24 +367,25 @@ const SoftCard = ({ children, style, onClick, onMouseEnter, onMouseLeave, classN
   </div>
 );
 
-const BackLink = ({ onBack }) => (
+const BackLink = ({ onBack, light }) => (
   <button
     onClick={onBack}
     style={{
       background: 'transparent',
       border: 'none',
-      color: theme.dustyBlue,
+      color: light ? 'rgba(255,255,255,0.75)' : theme.dustyBlue,
       fontFamily: theme.fonts.body,
-      fontSize: 12,
-      letterSpacing: 2,
+      fontSize: 11,
+      letterSpacing: '0.18em',
       textTransform: 'uppercase',
-      marginBottom: 18,
+      marginBottom: 20,
       padding: 0,
       cursor: 'pointer',
-      animation: 'fadeIn 0.4s ease both'
+      animation: 'fadeIn 0.4s ease both',
+      display: 'block'
     }}
   >
-    ← Back
+    ← Back to Main Menu
   </button>
 );
 
@@ -1306,9 +1307,12 @@ const ProgrammeItemRow = ({ item, delay }) => (
     width: '100%',
     padding: '13px 20px 14px',
     marginBottom: 7,
-    borderRadius: 10,
-    background: PROG_CARD_BG,
-    backdropFilter: 'blur(6px)',
+    borderRadius: 12,
+    background: 'rgba(255,255,255,0.18)',
+    backdropFilter: 'blur(14px)',
+    WebkitBackdropFilter: 'blur(14px)',
+    border: '1px solid rgba(255,255,255,0.28)',
+    boxShadow: '0 4px 16px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.25)',
     textAlign: 'center',
     animation: 'fadeInUp 0.45s ease both',
     animationDelay: `${delay}s`,
@@ -1368,29 +1372,10 @@ const ProgrammeItemRow = ({ item, delay }) => (
    ============================================================= */
 function CeremonyProgrammePage({ onBack }) {
   return (
-    <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80, position: 'relative' }}>
-      {/* Orchid — top right */}
-      <img src={theme.images.orchidImage} alt="" aria-hidden style={{
-        position: 'fixed', top: 80, right: 0, width: 180, opacity: 0.85,
-        pointerEvents: 'none', zIndex: 0
-      }} onError={e => { e.currentTarget.style.display='none'; }} />
-      {/* Orchid — top left, mirrored */}
-      <img src={theme.images.orchidImage} alt="" aria-hidden style={{
-        position: 'fixed', top: 80, left: 0, width: 180, opacity: 0.85,
-        pointerEvents: 'none', transform: 'scaleX(-1)', zIndex: 0
-      }} onError={e => { e.currentTarget.style.display='none'; }} />
+    <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80 }}>
+      <div style={{ maxWidth: 600, margin: '0 auto', padding: '20px 20px 0' }}>
+        <BackLink onBack={onBack} light />
 
-      {/* Back button — upper left */}
-      <div style={{ padding: '16px 20px 0', position: 'relative', zIndex: 1 }}>
-        <button onClick={onBack} style={{
-          background: 'transparent', border: 'none',
-          color: 'rgba(255,255,255,0.75)', fontFamily: theme.fonts.body,
-          fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
-          padding: 0, cursor: 'pointer'
-        }}>← Back to Main Menu</button>
-      </div>
-
-      <div style={{ maxWidth: 600, margin: '0 auto', padding: '16px 20px 0', position: 'relative', zIndex: 1 }}>
         {/* Wax seal top center */}
         <div style={{ textAlign: 'center', marginBottom: 4 }}>
           <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{
@@ -1439,19 +1424,10 @@ function CeremonyProgrammePage({ onBack }) {
    ============================================================= */
 function ReceptionProgrammePage({ onBack }) {
   return (
-    <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80, position: 'relative', overflow: 'hidden' }}>
-      {/* Decorative leaves — top right */}
-      <img src={theme.images.leaves2Image} alt="" aria-hidden style={{
-        position: 'absolute', top: 0, right: -20, width: 200, opacity: 0.18,
-        pointerEvents: 'none', filter: 'brightness(1.6) saturate(0.3)'
-      }} onError={e => { e.currentTarget.style.display='none'; }} />
-      {/* Decorative orchid — bottom left */}
-      <img src={theme.images.orchidImage} alt="" aria-hidden style={{
-        position: 'absolute', bottom: 40, left: -20, width: 200, opacity: 0.18,
-        pointerEvents: 'none', filter: 'brightness(1.6) saturate(0.3)', transform: 'scaleX(-1)'
-      }} onError={e => { e.currentTarget.style.display='none'; }} />
+    <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80 }}>
+      <div style={{ maxWidth: 600, margin: '0 auto', padding: '20px 20px 0' }}>
+        <BackLink onBack={onBack} light />
 
-      <div style={{ maxWidth: 600, margin: '0 auto', padding: '48px 20px 0', position: 'relative' }}>
         {/* Wax seal top center */}
         <div style={{ textAlign: 'center', marginBottom: 4 }}>
           <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{
@@ -1459,13 +1435,6 @@ function ReceptionProgrammePage({ onBack }) {
             animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both'
           }} onError={e => { e.currentTarget.style.display='none'; }} />
         </div>
-
-        <button onClick={onBack} style={{
-          background: 'transparent', border: 'none',
-          color: 'rgba(255,255,255,0.7)', fontFamily: theme.fonts.body,
-          fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
-          padding: 0, cursor: 'pointer', display: 'block', margin: '0 auto 12px'
-        }}>← Back to Main Menu</button>
 
         <ProgrammeSectionHeader overline="Evening Celebration" title="Reception" />
         {RECEPTION_PROGRAMME.map((item, i) => (
