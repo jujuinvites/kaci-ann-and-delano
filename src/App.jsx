@@ -92,6 +92,10 @@ const theme = {
     bigFlowersImage: '/images/big-flowers.png',
     blueFlowerImage: '/images/blue-flower.png',
     waxSealImage: '/images/wax-seal.png',
+    waxSeal2Image: '/images/wax-seal2.png',
+    orchidImage: '/images/orchid.png',
+    leavesImage: '/images/leaves.png',
+    leaves2Image: '/images/leaves2.png',
   }
 };
 
@@ -367,7 +371,6 @@ const BackLink = ({ onBack }) => (
   <button
     onClick={onBack}
     style={{
-      background: 'transparent',
       background: 'transparent',
       border: 'none',
       color: theme.dustyBlue,
@@ -1265,94 +1268,77 @@ function BridalPartyPage({ bridal, onBack }) {
 /* =============================================================
    PROGRAMME SHARED COMPONENTS
    ============================================================= */
+
+/* Solid dusty-blue page bg used across both programme pages */
+const PROG_BG = '#7a8fa8';
+const PROG_CARD_BG = 'rgba(255,255,255,0.14)';
+const PROG_CARD_BG_SOLID = '#8ea4b8'; /* slightly lighter for contrast */
+
 const ProgrammeSectionHeader = ({ overline, title }) => (
-  <div style={{
-    background: 'linear-gradient(135deg, #4e7a96 0%, #6b8fa8 55%, #8ab0c8 100%)',
-    borderRadius: 20,
-    padding: '36px 28px 30px',
-    textAlign: 'center',
-    marginBottom: 20,
-    boxShadow: '0 8px 36px rgba(80,110,140,0.22)',
-    position: 'relative',
-    overflow: 'hidden'
-  }}>
-    <div style={{
-      position: 'absolute', top: 0, left: 0, right: 0, height: '50%',
-      background: 'linear-gradient(to bottom, rgba(255,255,255,0.09), transparent)',
-      borderRadius: '20px 20px 0 0', pointerEvents: 'none'
-    }}/>
+  <div style={{ textAlign: 'center', padding: '8px 0 28px', position: 'relative' }}>
     {overline && (
       <div style={{
         fontFamily: theme.fonts.body, fontSize: 11,
-        letterSpacing: '0.3em', textTransform: 'uppercase',
-        color: 'rgba(255,255,255,0.7)', marginBottom: 10, position: 'relative'
+        letterSpacing: '0.32em', textTransform: 'uppercase',
+        color: 'rgba(255,255,255,0.75)', marginBottom: 6
       }}>
         {overline}
       </div>
     )}
     <div style={{
       fontFamily: theme.fonts.script,
-      fontSize: 'clamp(52px, 11vw, 72px)',
-      color: '#fff', lineHeight: 1.1, position: 'relative'
+      fontSize: 'clamp(58px, 13vw, 82px)',
+      color: '#fff', lineHeight: 1.05,
     }}>
       {title}
     </div>
-    <div style={{ marginTop: 14, display: 'flex', justifyContent: 'center', position: 'relative' }}>
-      <svg width="44" height="26" viewBox="0 0 44 26" fill="none">
-        <circle cx="15" cy="13" r="10" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2"/>
-        <circle cx="29" cy="13" r="10" stroke="rgba(255,255,255,0.45)" strokeWidth="1.2"/>
+    <div style={{ marginTop: 10, display: 'flex', justifyContent: 'center' }}>
+      <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
+        <circle cx="13" cy="12" r="9" stroke="rgba(255,255,255,0.4)" strokeWidth="1.2"/>
+        <circle cx="27" cy="12" r="9" stroke="rgba(255,255,255,0.4)" strokeWidth="1.2"/>
       </svg>
     </div>
   </div>
 );
 
-const ProgrammeItemRow = ({ item, index, delay }) => (
+const ProgrammeItemRow = ({ item, delay }) => (
   <div style={{
-    display: 'flex', gap: 14,
-    padding: '16px 18px', marginBottom: 8,
-    borderRadius: 12,
-    background: 'rgba(255,255,255,0.80)',
-    backdropFilter: 'blur(4px)',
-    boxShadow: '0 2px 10px rgba(80,120,150,0.08)',
+    width: '100%',
+    padding: '14px 20px',
+    marginBottom: 8,
+    borderRadius: 10,
+    background: PROG_CARD_BG,
+    backdropFilter: 'blur(6px)',
+    textAlign: 'center',
     animation: 'fadeInUp 0.45s ease both',
-    animationDelay: `${delay}s`
+    animationDelay: `${delay}s`,
+    boxSizing: 'border-box',
   }}>
     <div style={{
-      width: 26, height: 26, flexShrink: 0,
-      borderRadius: '50%',
-      border: `1px solid rgba(107,143,168,0.4)`,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      fontFamily: theme.fonts.body, fontSize: 11, color: theme.dustyBlue,
-      marginTop: 1
+      fontFamily: theme.fonts.body, fontSize: 14,
+      color: '#fff', fontWeight: 600,
+      letterSpacing: '0.18em', textTransform: 'uppercase',
+      lineHeight: 1.4
     }}>
-      {index + 1}
+      {item.item}
     </div>
-    <div style={{ flex: 1 }}>
+    {item.detail && (
       <div style={{
-        fontFamily: theme.fonts.body, fontSize: 15,
-        color: theme.text, fontWeight: 500,
-        letterSpacing: 0.2, lineHeight: 1.4
+        fontFamily: theme.fonts.body, fontSize: 12,
+        color: 'rgba(255,255,255,0.72)', marginTop: 4,
+        lineHeight: 1.5, letterSpacing: '0.04em'
       }}>
-        {item.item}
+        {item.detail}
       </div>
-      {item.detail && (
-        <div style={{
-          fontFamily: theme.fonts.body, fontSize: 13,
-          color: theme.textSoft, fontStyle: 'italic',
-          marginTop: 3, lineHeight: 1.5
-        }}>
-          {item.detail}
-        </div>
-      )}
-      {item.participant && (
-        <div style={{
-          fontFamily: theme.fonts.script, fontSize: 22,
-          color: theme.dustyBlue, marginTop: 2, lineHeight: 1.2
-        }}>
-          {item.participant}
-        </div>
-      )}
-    </div>
+    )}
+    {item.participant && (
+      <div style={{
+        fontFamily: theme.fonts.script, fontSize: 24,
+        color: 'rgba(255,255,255,0.9)', marginTop: 4, lineHeight: 1.2
+      }}>
+        {item.participant}
+      </div>
+    )}
   </div>
 );
 
@@ -1361,24 +1347,53 @@ const ProgrammeItemRow = ({ item, index, delay }) => (
    ============================================================= */
 function CeremonyProgrammePage({ onBack }) {
   return (
-    <div style={{
-      background: 'linear-gradient(160deg, #ddeef6 0%, #e8f2f8 55%, #f0f7fc 100%)',
-      minHeight: '100vh', paddingBottom: 72
-    }}>
-      <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 0' }}>
-        <BackLink onBack={onBack} />
-        <div style={{ marginTop: 16 }}>
-          <ProgrammeSectionHeader overline="Order of Service" title="Ceremony" />
-          {CEREMONY_PROGRAMME.map((item, i) => (
-            <ProgrammeItemRow key={i} item={item} index={i} delay={0.05 + i * 0.035} />
-          ))}
+    <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80, position: 'relative', overflow: 'hidden' }}>
+      {/* Decorative floral — top right */}
+      <img src={theme.images.orchidImage} alt="" aria-hidden style={{
+        position: 'absolute', top: -20, right: -20, width: 220, opacity: 0.22,
+        pointerEvents: 'none', filter: 'brightness(1.6) saturate(0.3)'
+      }} onError={e => { e.currentTarget.style.display='none'; }} />
+      {/* Decorative leaves — bottom left */}
+      <img src={theme.images.leavesImage} alt="" aria-hidden style={{
+        position: 'absolute', bottom: 60, left: -10, width: 160, opacity: 0.18,
+        pointerEvents: 'none', filter: 'brightness(1.6) saturate(0.3)'
+      }} onError={e => { e.currentTarget.style.display='none'; }} />
 
-          <div style={{ marginTop: 32 }}>
-            <ProgrammeSectionHeader overline="Following the Ceremony" title="Cocktail Hour" />
-            {COCKTAIL_PROGRAMME.map((item, i) => (
-              <ProgrammeItemRow key={i} item={item} index={i} delay={0.05 + i * 0.06} />
-            ))}
+      <div style={{ maxWidth: 600, margin: '0 auto', padding: '48px 20px 0', position: 'relative' }}>
+        {/* Wax seal top center */}
+        <div style={{ textAlign: 'center', marginBottom: 4 }}>
+          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{
+            width: 110, opacity: 0.9,
+            animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both'
+          }} onError={e => { e.currentTarget.style.display='none'; }} />
+        </div>
+
+        <button onClick={onBack} style={{
+          background: 'transparent', border: 'none',
+          color: 'rgba(255,255,255,0.7)', fontFamily: theme.fonts.body,
+          fontSize: 11, letterSpacing: 3, textTransform: 'uppercase',
+          padding: 0, cursor: 'pointer', display: 'block', margin: '0 auto 8px'
+        }}>← Back</button>
+
+        <ProgrammeSectionHeader overline="Order of Service" title="Ceremony" />
+        {CEREMONY_PROGRAMME.map((item, i) => (
+          <ProgrammeItemRow key={i} item={item} delay={0.05 + i * 0.035} />
+        ))}
+
+        <div style={{ marginTop: 40 }}>
+          {/* Divider */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 32 }}>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.22)' }} />
+            <svg width="32" height="20" viewBox="0 0 32 20" fill="none">
+              <circle cx="10" cy="10" r="8" stroke="rgba(255,255,255,0.35)" strokeWidth="1"/>
+              <circle cx="22" cy="10" r="8" stroke="rgba(255,255,255,0.35)" strokeWidth="1"/>
+            </svg>
+            <div style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.22)' }} />
           </div>
+          <ProgrammeSectionHeader overline="Following the Ceremony" title="Cocktail Hour" />
+          {COCKTAIL_PROGRAMME.map((item, i) => (
+            <ProgrammeItemRow key={i} item={item} delay={0.05 + i * 0.06} />
+          ))}
         </div>
       </div>
     </div>
@@ -1390,18 +1405,38 @@ function CeremonyProgrammePage({ onBack }) {
    ============================================================= */
 function ReceptionProgrammePage({ onBack }) {
   return (
-    <div style={{
-      background: 'linear-gradient(160deg, #ddeef6 0%, #e8f2f8 55%, #f0f7fc 100%)',
-      minHeight: '100vh', paddingBottom: 72
-    }}>
-      <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 0' }}>
-        <BackLink onBack={onBack} />
-        <div style={{ marginTop: 16 }}>
-          <ProgrammeSectionHeader overline="Evening Celebration" title="Reception" />
-          {RECEPTION_PROGRAMME.map((item, i) => (
-            <ProgrammeItemRow key={i} item={item} index={i} delay={0.05 + i * 0.04} />
-          ))}
+    <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80, position: 'relative', overflow: 'hidden' }}>
+      {/* Decorative leaves — top right */}
+      <img src={theme.images.leaves2Image} alt="" aria-hidden style={{
+        position: 'absolute', top: 0, right: -20, width: 200, opacity: 0.18,
+        pointerEvents: 'none', filter: 'brightness(1.6) saturate(0.3)'
+      }} onError={e => { e.currentTarget.style.display='none'; }} />
+      {/* Decorative orchid — bottom left */}
+      <img src={theme.images.orchidImage} alt="" aria-hidden style={{
+        position: 'absolute', bottom: 40, left: -20, width: 200, opacity: 0.18,
+        pointerEvents: 'none', filter: 'brightness(1.6) saturate(0.3)', transform: 'scaleX(-1)'
+      }} onError={e => { e.currentTarget.style.display='none'; }} />
+
+      <div style={{ maxWidth: 600, margin: '0 auto', padding: '48px 20px 0', position: 'relative' }}>
+        {/* Wax seal top center */}
+        <div style={{ textAlign: 'center', marginBottom: 4 }}>
+          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{
+            width: 110, opacity: 0.9,
+            animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both'
+          }} onError={e => { e.currentTarget.style.display='none'; }} />
         </div>
+
+        <button onClick={onBack} style={{
+          background: 'transparent', border: 'none',
+          color: 'rgba(255,255,255,0.7)', fontFamily: theme.fonts.body,
+          fontSize: 11, letterSpacing: 3, textTransform: 'uppercase',
+          padding: 0, cursor: 'pointer', display: 'block', margin: '0 auto 8px'
+        }}>← Back</button>
+
+        <ProgrammeSectionHeader overline="Evening Celebration" title="Reception" />
+        {RECEPTION_PROGRAMME.map((item, i) => (
+          <ProgrammeItemRow key={i} item={item} delay={0.05 + i * 0.04} />
+        ))}
       </div>
     </div>
   );
