@@ -26,13 +26,38 @@ function GlobalStyles() {
         from { opacity: 0; transform: translateX(32px); }
         to   { opacity: 1; transform: translateX(0); }
       }
+
+      /* Press feedback — every clickable element */
+      button:active, a:active {
+        transform: scale(0.96) !important;
+        transition: transform 100ms cubic-bezier(0.23,1,0.32,1) !important;
+      }
+
+      /* Hover effects only on devices that support hover */
+      @media (hover: hover) and (pointer: fine) {
+        .explore-card:hover {
+          transform: translateY(-6px) scale(1.02);
+          box-shadow: 0 14px 32px rgba(80,110,140,0.18);
+        }
+        .soft-card-hover:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 30px rgba(80,110,140,0.16);
+        }
+        .love-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 28px rgba(107,143,168,0.14);
+        }
+        .nav-menu-item:hover {
+          background: rgba(107,143,168,0.05) !important;
+        }
+      }
     `}</style>
   );
 }
 
 /* Wraps page content — re-mounts on navigation to replay animation */
 const FadeInPage = ({ children, style }) => (
-  <div style={{ animation: 'fadeInUp 0.55s cubic-bezier(0.22,1,0.36,1) both', ...style }}>
+  <div style={{ animation: 'fadeInUp 0.38s cubic-bezier(0.22,1,0.36,1) both', ...style }}>
     {children}
   </div>
 );
@@ -250,15 +275,18 @@ const SectionHeader = ({ overline, title, subtitle }) => (
   </div>
 );
 
-const SoftCard = ({ children, style, onClick }) => (
+const SoftCard = ({ children, style, onClick, onMouseEnter, onMouseLeave, className }) => (
   <div
     onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+    className={className}
     style={{
       background: theme.cardBg,
       borderRadius: 18,
       boxShadow: theme.cardShadow,
       padding: 24,
-      transition: 'transform 220ms ease, box-shadow 220ms ease',
+      transition: 'transform 220ms cubic-bezier(0.23,1,0.32,1), box-shadow 220ms ease-out',
       ...style
     }}
   >
@@ -314,7 +342,7 @@ function Header({ onNavigate, current }) {
         backdropFilter: 'blur(12px)',
         background: 'rgba(250,248,244,0.92)',
         borderBottom: `1px solid ${theme.divider}`,
-        transition: 'box-shadow 300ms ease'
+        transition: 'box-shadow 200ms ease-out'
       }}>
         <div style={{
           maxWidth: 1080,
@@ -331,7 +359,7 @@ function Header({ onNavigate, current }) {
             <img
               src={theme.images.logoImage}
               alt="K & D"
-              style={{ height: 52, width: 52, objectFit: 'contain', transition: 'transform 300ms ease' }}
+              style={{ height: 52, width: 52, objectFit: 'contain', transition: 'transform 200ms cubic-bezier(0.23,1,0.32,1)' }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
               onError={e => { e.currentTarget.style.display = 'none'; }}
@@ -430,8 +458,7 @@ function Header({ onNavigate, current }) {
                     animation: `fadeInUp 0.35s ease both`,
                     animationDelay: `${i * 0.04}s`
                   }}
-                  onMouseEnter={e => { if (current !== item.id) e.currentTarget.style.background = 'rgba(107,143,168,0.05)'; }}
-                  onMouseLeave={e => { if (current !== item.id) e.currentTarget.style.background = 'transparent'; }}
+                  className={`nav-menu-item${current === item.id ? ' active' : ''}`}
                 >
                   {item.label}
                 </button>
@@ -802,6 +829,7 @@ function ExploreGrid({ onNavigate }) {
           <button
             key={c.id}
             onClick={() => onNavigate(c.id)}
+            className="explore-card"
             style={{
               background: '#fff',
               border: 'none',
@@ -814,17 +842,9 @@ function ExploreGrid({ onNavigate }) {
               flexDirection: 'column',
               alignItems: 'center',
               gap: 12,
-              transition: 'transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms ease',
+              transition: 'transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms ease-out',
               animation: 'scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
               animationDelay: `${0.05 + i * 0.07}s`
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.transform = 'translateY(-6px) scale(1.02)';
-              e.currentTarget.style.boxShadow = '0 14px 32px rgba(80,110,140,0.18)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = theme.cardShadow;
             }}
           >
             <span style={{
@@ -1062,10 +1082,9 @@ function LoveWisdomPage({ onBack }) {
                 gap: 18,
                 animation: 'scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
                 animationDelay: `${0.35 + i * 0.1}s`,
-                transition: 'transform 250ms ease, box-shadow 250ms ease'
+                transition: 'transform 250ms cubic-bezier(0.23,1,0.32,1), box-shadow 250ms ease-out'
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(107,143,168,0.14)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 2px 18px rgba(107,143,168,0.07)'; }}
+              className="love-card"
             >
               <div style={{
                 width: 34,
@@ -1310,14 +1329,13 @@ function SeatingPlanPage({ guests, onBack }) {
         {grouped.map(([table, list], i) => (
           <SoftCard
             key={table}
+            className="soft-card-hover"
             style={{
               background: 'rgba(255,255,255,0.85)',
               animation: 'scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
               animationDelay: `${0.1 + i * 0.07}s`,
-              transition: 'transform 240ms ease, box-shadow 240ms ease'
+              transition: 'transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms ease-out'
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 30px rgba(80,110,140,0.16)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = theme.cardShadow; }}
           >
             <div style={{
               fontFamily: theme.fonts.body,
