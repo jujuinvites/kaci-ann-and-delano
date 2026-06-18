@@ -856,38 +856,14 @@ function FindYourSeat({ guests }) {
    EXPLORE GRID
    ============================================================= */
 const EXPLORE_CARDS = [
-  {
-    id: 'timeline', title: 'Wedding Timeline',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
-  },
-  {
-    id: 'ceremony', title: 'Ceremony Programme',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-  },
-  {
-    id: 'bridal', title: 'Bridal Party',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-  },
-  {
-    id: 'family', title: 'Key Family & Participants',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-  },
-  {
-    id: 'seating', title: 'Seating Plan',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-  },
-  {
-    id: 'reception', title: 'Reception Programme',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-  },
-  {
-    id: 'menu', title: 'Menu',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
-  },
-  {
-    id: 'love', title: 'Love & Wisdom',
-    icon: <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
-  },
+  { id: 'timeline',  title: 'Wedding Timeline',        img: '/images/icons/5.png'  },
+  { id: 'ceremony',  title: 'Ceremony Programme',       img: '/images/icons/6.png'  },
+  { id: 'bridal',    title: 'Bridal Party',             img: '/images/icons/7.png'  },
+  { id: 'family',    title: 'Key Family & Participants', img: '/images/icons/8.png'  },
+  { id: 'seating',   title: 'Seating Plan',             img: '/images/icons/9.png'  },
+  { id: 'reception', title: 'Reception Programme',      img: '/images/icons/10.png' },
+  { id: 'menu',      title: 'Menu',                     img: '/images/icons/11.png' },
+  { id: 'love',      title: 'Love & Wisdom',            img: '/images/icons/12.png' },
 ];
 
 function ExploreGrid({ onNavigate }) {
@@ -927,40 +903,30 @@ function ExploreGrid({ onNavigate }) {
             onClick={() => onNavigate(c.id)}
             className="explore-card"
             style={{
-              background: '#ffffff',
+              background: 'none',
               border: 'none',
               borderRadius: 18,
-              boxShadow: theme.cardShadow,
-              padding: '32px 20px',
+              padding: 0,
               cursor: 'pointer',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 12,
+              overflow: 'hidden',
               transition: 'transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms ease-out',
+              boxShadow: theme.cardShadow,
               animation: 'scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
               animationDelay: `${0.05 + i * 0.07}s`
             }}
           >
-            <span
+            <img
+              src={c.img}
+              alt={c.title}
               className="explore-icon"
               style={{
-                color: theme.dustyBlue,
-                transition: 'transform 180ms cubic-bezier(0.23,1,0.32,1)',
-                display: 'block'
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                borderRadius: 18,
+                transition: 'transform 180ms cubic-bezier(0.23,1,0.32,1)'
               }}
-            >
-              {c.icon}
-            </span>
-            <span style={{
-              fontFamily: theme.fonts.body,
-              fontSize: 16,
-              color: theme.text,
-              fontWeight: 400
-            }}>
-              {c.title}
-            </span>
+            />
           </button>
         ))}
       </div>
