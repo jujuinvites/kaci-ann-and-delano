@@ -1369,15 +1369,15 @@ const ProgrammeItemRow = ({ item, delay }) => (
 function CeremonyProgrammePage({ onBack }) {
   return (
     <div style={{ background: PROG_BG, minHeight: '100vh', paddingBottom: 80, position: 'relative', overflow: 'hidden' }}>
-      {/* Decorative floral — top right */}
+      {/* Orchid — top right */}
       <img src={theme.images.orchidImage} alt="" aria-hidden style={{
-        position: 'absolute', top: -20, right: -20, width: 220, opacity: 0.22,
-        pointerEvents: 'none', filter: 'brightness(1.6) saturate(0.3)'
+        position: 'absolute', top: -10, right: -10, width: 200, opacity: 0.85,
+        pointerEvents: 'none'
       }} onError={e => { e.currentTarget.style.display='none'; }} />
-      {/* Decorative leaves — bottom left */}
-      <img src={theme.images.leavesImage} alt="" aria-hidden style={{
-        position: 'absolute', bottom: 60, left: -10, width: 160, opacity: 0.18,
-        pointerEvents: 'none', filter: 'brightness(1.6) saturate(0.3)'
+      {/* Orchid — top left, mirrored */}
+      <img src={theme.images.orchidImage} alt="" aria-hidden style={{
+        position: 'absolute', top: -10, left: -10, width: 200, opacity: 0.85,
+        pointerEvents: 'none', transform: 'scaleX(-1)'
       }} onError={e => { e.currentTarget.style.display='none'; }} />
 
       <div style={{ maxWidth: 600, margin: '0 auto', padding: '48px 20px 0', position: 'relative' }}>
