@@ -27,35 +27,28 @@ function GlobalStyles() {
         to   { opacity: 1; transform: translateX(0); }
       }
 
-      /* Dark base */
-      body { background: #0a0f18; }
-
       /* Press feedback — every clickable element */
       button:active, a:active {
         transform: scale(0.96) !important;
         transition: transform 100ms cubic-bezier(0.23,1,0.32,1) !important;
       }
 
-      /* Input dark styling */
-      input::placeholder { color: rgba(138,164,184,0.6); }
-      input { color-scheme: dark; }
-
       /* Hover effects only on devices that support hover */
       @media (hover: hover) and (pointer: fine) {
         .explore-card:hover {
           transform: translateY(-6px) scale(1.02);
-          box-shadow: 0 14px 32px rgba(80,110,140,0.18);
+          box-shadow: 0 14px 32px rgba(80,120,150,0.18);
         }
         .soft-card-hover:hover {
           transform: translateY(-4px);
-          box-shadow: 0 12px 30px rgba(80,110,140,0.16);
+          box-shadow: 0 12px 30px rgba(80,120,150,0.16);
         }
         .love-card:hover {
           transform: translateY(-3px);
-          box-shadow: 0 8px 28px rgba(107,143,168,0.14);
+          box-shadow: 0 8px 28px rgba(90,136,168,0.14);
         }
         .nav-menu-item:hover {
-          background: rgba(107,143,168,0.05) !important;
+          background: rgba(90,136,168,0.06) !important;
         }
       }
     `}</style>
@@ -73,15 +66,17 @@ const FadeInPage = ({ children, style }) => (
    THEME
    ============================================================= */
 const theme = {
-  dustyBlue: '#a8c8dc',
-  cream: '#0a0f18',
-  beigeBg: '#0d1520',
-  pageBg: '#0a0f18',
-  cardBg: 'rgba(255,255,255,0.06)',
-  cardShadow: '0 4px 24px rgba(0,0,0,0.5)',
-  text: '#dce8f2',
-  textSoft: '#8aa4b8',
-  divider: 'rgba(168,200,220,0.12)',
+  dustyBlue: '#5a88a8',
+  blueMid: '#7aaac4',
+  bluePale: '#ddeef6',
+  cream: '#f4f9fc',
+  beigeBg: '#e2eff8',
+  pageBg: '#f4f9fc',
+  cardBg: '#ffffff',
+  cardShadow: '0 4px 20px rgba(80,120,150,0.10)',
+  text: '#1e2d3d',
+  textSoft: '#5a7a8e',
+  divider: 'rgba(90,136,168,0.18)',
 
   fonts: {
     script: "'Great Vibes', cursive",
@@ -373,18 +368,17 @@ const BackLink = ({ onBack }) => (
     onClick={onBack}
     style={{
       background: 'transparent',
-      border: `1px solid rgba(168,200,220,0.25)`,
-      borderRadius: 999,
+      background: 'transparent',
+      border: 'none',
       color: theme.dustyBlue,
       fontFamily: theme.fonts.body,
-      fontSize: 11,
+      fontSize: 12,
       letterSpacing: 2,
       textTransform: 'uppercase',
       marginBottom: 18,
-      padding: '8px 20px',
+      padding: 0,
       cursor: 'pointer',
-      animation: 'fadeIn 0.4s ease both',
-      transition: 'border-color 200ms ease-out, color 200ms ease-out'
+      animation: 'fadeIn 0.4s ease both'
     }}
   >
     ← Back
@@ -418,7 +412,7 @@ function Header({ onNavigate, current }) {
         top: 0,
         zIndex: 50,
         backdropFilter: 'blur(12px)',
-        background: 'rgba(8,12,20,0.92)',
+        background: 'rgba(244,249,252,0.92)',
         borderBottom: `1px solid ${theme.divider}`,
         transition: 'box-shadow 200ms ease-out'
       }}>
@@ -479,7 +473,7 @@ function Header({ onNavigate, current }) {
           />
           <div style={{
             width: 300,
-            background: '#0d1520',
+            background: '#ffffff',
             height: '100%',
             overflowY: 'auto',
             display: 'flex',
@@ -571,7 +565,7 @@ function Footer() {
 function Hero({ content }) {
   return (
     <div style={{
-      background: 'linear-gradient(to bottom, #050810 0%, #080e18 60%, #0a1020 100%)',
+      background: 'linear-gradient(to bottom, #e8f2f8 0%, #d4e8f4 50%, #c0d8ec 100%)',
       textAlign: 'center',
       overflow: 'hidden'
     }}>
@@ -661,7 +655,7 @@ function Hero({ content }) {
       </div>
 
       <img
-        src={theme.images.bigFlowersImage}
+        src={theme.images.flowersImage}
         alt=""
         aria-hidden
         style={{
@@ -744,16 +738,16 @@ function FindYourSeat({ guests }) {
             minWidth: 220,
             padding: '14px 20px',
             borderRadius: 999,
-            border: `1px solid rgba(168,200,220,0.2)`,
-            background: 'rgba(255,255,255,0.06)',
+            border: `1px solid ${theme.divider}`,
+            background: theme.cardBg,
             fontSize: 15,
             outline: 'none',
             color: theme.text,
-            boxShadow: 'none',
+            boxShadow: theme.cardShadow,
             transition: 'box-shadow 200ms ease, border-color 200ms ease'
           }}
-          onFocus={e => { e.currentTarget.style.borderColor = theme.dustyBlue; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(168,200,220,0.15)'; }}
-          onBlur={e => { e.currentTarget.style.borderColor = 'rgba(168,200,220,0.2)'; e.currentTarget.style.boxShadow = 'none'; }}
+          onFocus={e => { e.currentTarget.style.borderColor = theme.dustyBlue; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(90,136,168,0.15)'; }}
+          onBlur={e => { e.currentTarget.style.borderColor = theme.divider; e.currentTarget.style.boxShadow = theme.cardShadow; }}
         />
         <button
           type="submit"
@@ -789,8 +783,7 @@ function FindYourSeat({ guests }) {
             maxWidth: 420,
             margin: '0 auto',
             textAlign: 'center',
-            background: 'rgba(168,200,220,0.08)',
-            border: `1px solid rgba(168,200,220,0.18)`,
+            background: `linear-gradient(180deg, #fff, ${theme.beigeBg})`,
             animation: 'scaleIn 0.45s cubic-bezier(0.22,1,0.36,1) both'
           }}>
             <div style={{
@@ -918,8 +911,8 @@ function ExploreGrid({ onNavigate }) {
             onClick={() => onNavigate(c.id)}
             className="explore-card"
             style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: `1px solid rgba(168,200,220,0.12)`,
+              background: '#ffffff',
+              border: 'none',
               borderRadius: 18,
               boxShadow: theme.cardShadow,
               padding: '32px 20px',
@@ -1102,7 +1095,7 @@ function LoveWisdomPage({ onBack }) {
 
   return (
     <div style={{
-      background: 'linear-gradient(175deg, #080e18 0%, #0d1520 55%, #0a1018 100%)',
+      background: 'linear-gradient(175deg, #d4e8f4 0%, #ddeef6 55%, #e8f4fa 100%)',
       minHeight: '100vh',
       paddingBottom: 72
     }}>
@@ -1160,8 +1153,8 @@ function LoveWisdomPage({ onBack }) {
             <div
               key={i}
               style={{
-                background: 'rgba(168,200,220,0.07)',
-                border: `1px solid rgba(168,200,220,0.12)`,
+                background: 'rgba(255,255,255,0.65)',
+                border: `1px solid rgba(90,136,168,0.12)`,
                 borderRadius: 20,
                 padding: '22px 24px',
                 boxShadow: '0 2px 18px rgba(107,143,168,0.07)',
@@ -1318,10 +1311,9 @@ const ProgrammeItemRow = ({ item, index, delay }) => (
     display: 'flex', gap: 14,
     padding: '16px 18px', marginBottom: 8,
     borderRadius: 12,
-    background: 'rgba(255,255,255,0.05)',
-    border: '1px solid rgba(168,200,220,0.1)',
+    background: 'rgba(255,255,255,0.80)',
     backdropFilter: 'blur(4px)',
-    boxShadow: '0 2px 12px rgba(0,0,0,0.3)',
+    boxShadow: '0 2px 10px rgba(80,120,150,0.08)',
     animation: 'fadeInUp 0.45s ease both',
     animationDelay: `${delay}s`
   }}>
@@ -1370,7 +1362,7 @@ const ProgrammeItemRow = ({ item, index, delay }) => (
 function CeremonyProgrammePage({ onBack }) {
   return (
     <div style={{
-      background: 'linear-gradient(160deg, #080e18 0%, #0d1520 55%, #0a1018 100%)',
+      background: 'linear-gradient(160deg, #ddeef6 0%, #e8f2f8 55%, #f0f7fc 100%)',
       minHeight: '100vh', paddingBottom: 72
     }}>
       <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 0' }}>
@@ -1399,7 +1391,7 @@ function CeremonyProgrammePage({ onBack }) {
 function ReceptionProgrammePage({ onBack }) {
   return (
     <div style={{
-      background: 'linear-gradient(160deg, #080e18 0%, #0d1520 55%, #0a1018 100%)',
+      background: 'linear-gradient(160deg, #ddeef6 0%, #e8f2f8 55%, #f0f7fc 100%)',
       minHeight: '100vh', paddingBottom: 72
     }}>
       <div style={{ maxWidth: 640, margin: '0 auto', padding: '48px 20px 0' }}>
@@ -1510,8 +1502,7 @@ function SeatingPlanPage({ guests, onBack }) {
             key={table}
             className="soft-card-hover"
             style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: `1px solid rgba(168,200,220,0.12)`,
+              background: 'rgba(255,255,255,0.85)',
               animation: 'scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
               animationDelay: `${0.1 + i * 0.07}s`,
               transition: 'transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms ease-out'
@@ -1573,7 +1564,7 @@ export default function App() {
 
   const bg = page === 'home'
     ? theme.pageBg
-    : 'linear-gradient(160deg, #080e18 0%, #0d1520 55%, #0a1018 100%)';
+    : 'linear-gradient(160deg, #ddeef6 0%, #e8f2f8 55%, #f0f7fc 100%)';
 
   const goHome = () => setPage('home');
 
@@ -1586,10 +1577,10 @@ export default function App() {
         {page === 'home' && (
           <>
             <Hero content={content} />
-            <div style={{ background: 'linear-gradient(180deg, #0a1020 0%, #0d1525 100%)' }}>
+            <div style={{ background: 'linear-gradient(180deg, #c0d8ec 0%, #cce0f0 100%)' }}>
               <FindYourSeat guests={guests} />
             </div>
-            <div style={{ background: 'linear-gradient(180deg, #0d1525 0%, #0a1020 100%)' }}>
+            <div style={{ background: 'linear-gradient(180deg, #cce0f0 0%, #ddeef6 100%)' }}>
               <ExploreGrid onNavigate={setPage} />
             </div>
           </>
