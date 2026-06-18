@@ -183,18 +183,18 @@ const CEREMONY_PROGRAMME = [
   { item: 'Processional' },
   { item: 'Musical Prelude' },
   { item: 'Seating of Family & Guests' },
-  { item: 'Entrance', detail: "Groom's Parents · Grandparents of the Couple · Bridal Party · Ring Bearer · Flower Girls" },
+  { item: 'Entrance', subItems: ["Groom's Parents", "Grandparents of the Couple", "Bridal Party", "Ring Bearer & Flower Girls"] },
   { item: "Bride's Entrance" },
   { item: 'Opening Song' },
   { item: 'Officiant', participant: 'Bishop Vernon Morrison' },
   { item: 'Invocation', participant: 'Rev. Deloris Trowers' },
   { item: 'Welcome' },
-  { item: 'Scripture Readings', participant: 'Mr. Adrian Huntley & Ms. Shelian Samuels' },
-  { item: 'Officiant Address to Couple' },
+  { item: 'Scripture Readings', participant: 'Mr. Adrian Huntley & Mrs. Shelian Samuels' },
+  { item: "Officiant's Address to the Couple" },
   { item: 'Exchange of Vows & Rings' },
-  { item: 'Signing of Registry', detail: 'Ministry of Song', participant: 'Sis. Shanique Davis' },
-  { item: 'Unity Ceremony', detail: 'Sand Ceremony' },
-  { item: 'Blessings & Prayer for Couple' },
+  { item: 'Signing of the Registry', detail: 'Ministry of Song', participant: 'Sis. Shanique Davis' },
+  { item: 'Unity Ceremony', detail: 'The Sand Ceremony' },
+  { item: 'Blessing & Prayer for the Couple' },
   { item: 'Pronouncement' },
   { item: 'Recessional' },
 ];
@@ -1304,8 +1304,8 @@ const ProgrammeSectionHeader = ({ overline, title }) => (
 const ProgrammeItemRow = ({ item, delay }) => (
   <div style={{
     width: '100%',
-    padding: '14px 20px',
-    marginBottom: 8,
+    padding: '13px 20px 14px',
+    marginBottom: 7,
     borderRadius: 10,
     background: PROG_CARD_BG,
     backdropFilter: 'blur(6px)',
@@ -1314,27 +1314,48 @@ const ProgrammeItemRow = ({ item, delay }) => (
     animationDelay: `${delay}s`,
     boxSizing: 'border-box',
   }}>
+    {/* Primary heading — ALL CAPS */}
     <div style={{
-      fontFamily: theme.fonts.body, fontSize: 14,
-      color: '#fff', fontWeight: 600,
-      letterSpacing: '0.18em', textTransform: 'uppercase',
+      fontFamily: theme.fonts.body, fontSize: 13,
+      color: '#fff', fontWeight: 700,
+      letterSpacing: '0.2em', textTransform: 'uppercase',
       lineHeight: 1.4
     }}>
       {item.item}
     </div>
+
+    {/* Sub-items list (e.g. Entrance processional order) */}
+    {item.subItems && (
+      <div style={{ marginTop: 6, display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {item.subItems.map((s, i) => (
+          <div key={i} style={{
+            fontFamily: theme.fonts.title, fontSize: 13,
+            fontStyle: 'italic', color: 'rgba(255,255,255,0.82)',
+            letterSpacing: '0.02em', lineHeight: 1.5
+          }}>
+            {s}
+          </div>
+        ))}
+      </div>
+    )}
+
+    {/* Inline detail (e.g. "Ministry of Song", "The Sand Ceremony") */}
     {item.detail && (
       <div style={{
-        fontFamily: theme.fonts.body, fontSize: 12,
-        color: 'rgba(255,255,255,0.72)', marginTop: 4,
-        lineHeight: 1.5, letterSpacing: '0.04em'
+        fontFamily: theme.fonts.title, fontSize: 13,
+        fontStyle: 'italic', color: 'rgba(255,255,255,0.78)',
+        marginTop: 5, lineHeight: 1.5, letterSpacing: '0.02em'
       }}>
         {item.detail}
       </div>
     )}
+
+    {/* Named participant — Playfair italic at readable size */}
     {item.participant && (
       <div style={{
-        fontFamily: theme.fonts.script, fontSize: 24,
-        color: 'rgba(255,255,255,0.9)', marginTop: 4, lineHeight: 1.2
+        fontFamily: theme.fonts.title, fontSize: 15,
+        fontStyle: 'italic', fontWeight: 500,
+        color: 'rgba(255,255,255,0.95)', marginTop: 5, lineHeight: 1.3
       }}>
         {item.participant}
       </div>
@@ -1371,11 +1392,21 @@ function CeremonyProgrammePage({ onBack }) {
         <button onClick={onBack} style={{
           background: 'transparent', border: 'none',
           color: 'rgba(255,255,255,0.7)', fontFamily: theme.fonts.body,
-          fontSize: 11, letterSpacing: 3, textTransform: 'uppercase',
-          padding: 0, cursor: 'pointer', display: 'block', margin: '0 auto 8px'
-        }}>← Back</button>
+          fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
+          padding: 0, cursor: 'pointer', display: 'block', margin: '0 auto 12px'
+        }}>← Back to Main Menu</button>
 
         <ProgrammeSectionHeader overline="Order of Service" title="Ceremony" />
+
+        {/* Courtesy note */}
+        <p style={{
+          fontFamily: theme.fonts.title, fontSize: 15, fontStyle: 'italic',
+          color: 'rgba(255,255,255,0.80)', textAlign: 'center',
+          margin: '-12px 0 20px', lineHeight: 1.6, letterSpacing: '0.02em'
+        }}>
+          Thank you for joining us as we exchange vows and begin our forever.
+        </p>
+
         {CEREMONY_PROGRAMME.map((item, i) => (
           <ProgrammeItemRow key={i} item={item} delay={0.05 + i * 0.035} />
         ))}
@@ -1429,9 +1460,9 @@ function ReceptionProgrammePage({ onBack }) {
         <button onClick={onBack} style={{
           background: 'transparent', border: 'none',
           color: 'rgba(255,255,255,0.7)', fontFamily: theme.fonts.body,
-          fontSize: 11, letterSpacing: 3, textTransform: 'uppercase',
-          padding: 0, cursor: 'pointer', display: 'block', margin: '0 auto 8px'
-        }}>← Back</button>
+          fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
+          padding: 0, cursor: 'pointer', display: 'block', margin: '0 auto 12px'
+        }}>← Back to Main Menu</button>
 
         <ProgrammeSectionHeader overline="Evening Celebration" title="Reception" />
         {RECEPTION_PROGRAMME.map((item, i) => (
