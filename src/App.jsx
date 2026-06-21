@@ -168,7 +168,6 @@ const DEFAULT_BRIDAL = {
     { role: 'Officiant', names: ['Bishop Vernon Morrison'] },
     { role: 'Flower Girls', names: ["Khalian Russell", "K'Drian Russell"] },
     { role: 'Ring Bearer', names: ['Mykal Russell'] },
-    { role: 'Scripture Readers', names: ['Mr. Adrian Huntley', 'Ms. Shelian Samuels'] }
   ]
 };
 
@@ -965,9 +964,12 @@ const TIMELINE_ICON_SRCS = [
 
 function TimelinePage({ content, onBack }) {
   return (
-    <Section>
-      <BackLink onBack={onBack} />
-      <SectionHeader overline="The day at a glance" title="Timeline" />
+    <>
+      <div style={{ padding: '20px 20px 0' }}>
+        <BackLink onBack={onBack} />
+      </div>
+      <Section>
+        <SectionHeader overline="The day at a glance" title="Timeline" />
 
       <div style={{ maxWidth: 460, margin: '0 auto', position: 'relative', padding: '12px 8px 32px' }}>
         {/* Centre vertical line */}
@@ -993,7 +995,7 @@ function TimelinePage({ content, onBack }) {
                 paddingRight: iconLeft ? 0 : 20
               }}>
                 {iconLeft
-                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg)' : 'none' }} />
+                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'none' }} />
                   : <div style={{ textAlign: 'right' }}>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
@@ -1019,7 +1021,7 @@ function TimelinePage({ content, onBack }) {
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
                     </div>
-                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg)' : 'none' }} />
+                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'none' }} />
                 }
               </div>
             </div>
@@ -1027,6 +1029,7 @@ function TimelinePage({ content, onBack }) {
         })}
       </div>
     </Section>
+    </>
   );
 }
 
@@ -1035,9 +1038,12 @@ function TimelinePage({ content, onBack }) {
    ============================================================= */
 function MenuPage({ content, onBack }) {
   return (
-    <Section>
-      <BackLink onBack={onBack} />
-      <SectionHeader overline="Tonight's Table" title="Menu" />
+    <>
+      <div style={{ padding: '20px 20px 0' }}>
+        <BackLink onBack={onBack} />
+      </div>
+      <Section>
+        <SectionHeader overline="Tonight's Table" title="Menu" />
       <div style={{ maxWidth: 520, margin: '0 auto', textAlign: 'center' }}>
         {content.menu.map((sec, i) => (
           <div
@@ -1091,6 +1097,7 @@ function MenuPage({ content, onBack }) {
         )}
       </div>
     </Section>
+    </>
   );
 }
 
@@ -1112,7 +1119,7 @@ function LoveWisdomPage({ onBack }) {
       minHeight: '100vh',
       paddingBottom: 72
     }}>
-      <div style={{ maxWidth: 580, margin: '0 auto', padding: '48px 24px 0' }}>
+      <div style={{ maxWidth: 580, margin: '0 auto', padding: '20px 24px 0' }}>
         <BackLink onBack={onBack} />
 
         <div style={{ textAlign: 'center', marginTop: 20, marginBottom: 24, animation: 'fadeInUp 0.65s cubic-bezier(0.22,1,0.36,1) both', animationDelay: '0.05s' }}>
@@ -1231,9 +1238,12 @@ function LoveWisdomPage({ onBack }) {
 function BridalPartyPage({ bridal, onBack }) {
   const roles = bridal.roles || [];
   return (
-    <Section>
-      <BackLink onBack={onBack} />
-      <SectionHeader overline="By Our Side" title="Bridal Party" />
+    <>
+      <div style={{ padding: '20px 20px 0' }}>
+        <BackLink onBack={onBack} />
+      </div>
+      <Section>
+        <SectionHeader overline="By Our Side" title="Bridal Party" />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
         {roles.map((item, i) => (
           <div
@@ -1272,6 +1282,7 @@ function BridalPartyPage({ bridal, onBack }) {
         ))}
       </div>
     </Section>
+    </>
   );
 }
 
@@ -1459,9 +1470,12 @@ function ReceptionProgrammePage({ onBack }) {
    ============================================================= */
 function KeyFamilyPage({ onBack }) {
   return (
-    <Section>
-      <BackLink onBack={onBack} />
-      <SectionHeader overline="With Gratitude" title="Key Participants" />
+    <>
+      <div style={{ padding: '20px 20px 0' }}>
+        <BackLink onBack={onBack} />
+      </div>
+      <Section>
+        <SectionHeader overline="With Gratitude" title="Key Participants" />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
         {DEFAULT_KEY_FAMILY.map((group, gi) => (
           <div key={gi} style={{ marginBottom: 52 }}>
@@ -1504,6 +1518,7 @@ function KeyFamilyPage({ onBack }) {
         ))}
       </div>
     </Section>
+    </>
   );
 }
 
@@ -1536,9 +1551,12 @@ function SeatingPlanPage({ guests, onBack }) {
   }, [guests]);
 
   return (
-    <Section>
-      <BackLink onBack={onBack} />
-      <SectionHeader overline="Seating" title="Seating Plan" />
+    <>
+      <div style={{ padding: '20px 20px 0' }}>
+        <BackLink onBack={onBack} />
+      </div>
+      <Section>
+        <SectionHeader overline="Seating" title="Seating Plan" />
       <div style={{
         display: 'grid',
         gap: 18,
@@ -1586,6 +1604,7 @@ function SeatingPlanPage({ guests, onBack }) {
         ))}
       </div>
     </Section>
+    </>
   );
 }
 
