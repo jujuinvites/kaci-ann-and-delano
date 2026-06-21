@@ -840,8 +840,8 @@ function FindYourSeat({ guests }) {
               color: theme.textSoft
             }}>
               {[
-                { label: 'Table', value: result.table || '—', big: true },
-                { label: 'Seat', value: result.seat || '—', big: true },
+                { label: 'Table', value: result.table || (['bride','groom'].includes((result.group||'').toLowerCase()) ? 'Sweetheart' : '—'), big: true },
+                { label: 'Reserved Seat', value: result.seat || '—', big: true },
                 { label: 'Group', value: result.group || '—', big: false }
               ].map(({ label, value, big }) => (
                 <div key={label}>
@@ -1603,7 +1603,7 @@ function SeatingPlanPage({ guests, onBack }) {
                 justifyContent: 'space-between'
               }}>
                 <span>{g.name}</span>
-                {g.seat && <span style={{ color: theme.textSoft, fontSize: 12 }}>seat {g.seat}</span>}
+                {g.seat && <span style={{ color: theme.textSoft, fontSize: 12 }}>Reserved Seat {g.seat}</span>}
               </div>
             ))}
           </SoftCard>
