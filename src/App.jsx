@@ -1529,11 +1529,17 @@ function SeatingPlanPage({ guests, onBack }) {
   const grouped = useMemo(() => {
     const map = {};
     guests.forEach(g => {
-      const t = g.table || 'Unassigned';
+      let t = g.table;
+      if (!t) {
+        const grp = (g.group || '').toLowerCase();
+        t = (grp === 'bride' || grp === 'groom') ? 'Sweetheart' : 'Unassigned';
+      }
       if (!map[t]) map[t] = [];
       map[t].push(g);
     });
     const ordered = Object.entries(map).sort((a, b) => {
+      if (a[0] === 'Sweetheart') return -1;
+      if (b[0] === 'Sweetheart') return 1;
       const an = parseInt(a[0], 10);
       const bn = parseInt(b[0], 10);
       if (!isNaN(an) && !isNaN(bn)) return an - bn;
