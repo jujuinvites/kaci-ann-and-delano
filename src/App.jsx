@@ -955,54 +955,12 @@ function ExploreGrid({ onNavigate }) {
 /* =============================================================
    PAGE: TIMELINE
    ============================================================= */
-const TIMELINE_ICONS = [
-  /* Guest Arrival — wedding journal */
-  <svg key="0" width="60" height="60" viewBox="0 0 60 60" fill="none">
-    <rect x="14" y="7" width="30" height="40" rx="3" stroke="#4a6b8a" strokeWidth="1.5"/>
-    <rect x="12" y="7" width="5" height="40" rx="2.5" fill="#4a6b8a" fillOpacity="0.25"/>
-    <path d="M24 27 Q30 22 36 27" stroke="#4a6b8a" strokeWidth="1.3" fill="none" strokeLinecap="round"/>
-    <line x1="30" y1="22" x2="30" y2="33" stroke="#4a6b8a" strokeWidth="1.3" strokeLinecap="round"/>
-    <path d="M26 31 Q30 35 34 31" stroke="#4a6b8a" strokeWidth="1.3" fill="none" strokeLinecap="round"/>
-    <line x1="24" y1="18" x2="36" y2="18" stroke="#4a6b8a" strokeWidth="1.2" strokeLinecap="round"/>
-  </svg>,
-  /* Ceremony Begins — wedding rings */
-  <svg key="1" width="60" height="60" viewBox="0 0 60 60" fill="none">
-    <circle cx="22" cy="30" r="12" stroke="#4a6b8a" strokeWidth="1.5"/>
-    <circle cx="38" cy="30" r="12" stroke="#4a6b8a" strokeWidth="1.5"/>
-    <path d="M30 20 Q36 25 30 30 Q24 25 30 20Z" fill="#4a6b8a" fillOpacity="0.12" stroke="#4a6b8a" strokeWidth="1"/>
-  </svg>,
-  /* Cocktail Hour — champagne flutes */
-  <svg key="2" width="60" height="60" viewBox="0 0 60 60" fill="none">
-    <path d="M19 11 L25 27 L25 40" stroke="#4a6b8a" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M41 11 L35 27 L35 40" stroke="#4a6b8a" strokeWidth="1.5" strokeLinecap="round"/>
-    <line x1="20" y1="40" x2="30" y2="40" stroke="#4a6b8a" strokeWidth="1.5" strokeLinecap="round"/>
-    <line x1="30" y1="40" x2="40" y2="40" stroke="#4a6b8a" strokeWidth="1.5" strokeLinecap="round"/>
-    <line x1="25" y1="27" x2="35" y2="27" stroke="#4a6b8a" strokeWidth="1.2" strokeLinecap="round"/>
-    <circle cx="23" cy="17" r="1.8" fill="#4a6b8a" fillOpacity="0.45"/>
-    <circle cx="37" cy="15" r="1.8" fill="#4a6b8a" fillOpacity="0.45"/>
-    <line x1="30" y1="11" x2="30" y2="18" stroke="#4a6b8a" strokeWidth="1" strokeLinecap="round" strokeDasharray="2 2"/>
-  </svg>,
-  /* Reception — place setting */
-  <svg key="3" width="60" height="60" viewBox="0 0 60 60" fill="none">
-    <circle cx="30" cy="30" r="16" stroke="#4a6b8a" strokeWidth="1.5"/>
-    <circle cx="30" cy="30" r="10" stroke="#4a6b8a" strokeWidth="1"/>
-    <line x1="12" y1="15" x2="12" y2="45" stroke="#4a6b8a" strokeWidth="1.4" strokeLinecap="round"/>
-    <path d="M9 15 L9 25 Q12 28 15 25 L15 15" stroke="#4a6b8a" strokeWidth="1.2" strokeLinecap="round" fill="none"/>
-    <line x1="48" y1="15" x2="48" y2="45" stroke="#4a6b8a" strokeWidth="1.4" strokeLinecap="round"/>
-    <line x1="45" y1="15" x2="45" y2="45" stroke="#4a6b8a" strokeWidth="1.2" strokeLinecap="round"/>
-  </svg>,
-  /* Send Off — just married car */
-  <svg key="4" width="60" height="60" viewBox="0 0 60 60" fill="none">
-    <rect x="7" y="27" width="46" height="16" rx="4" stroke="#4a6b8a" strokeWidth="1.5"/>
-    <path d="M14 27 L19 18 L41 18 L46 27" stroke="#4a6b8a" strokeWidth="1.5" strokeLinejoin="round" fill="none"/>
-    <circle cx="17" cy="43" r="5" stroke="#4a6b8a" strokeWidth="1.5"/>
-    <circle cx="43" cy="43" r="5" stroke="#4a6b8a" strokeWidth="1.5"/>
-    <rect x="22" y="20" width="16" height="9" rx="1.5" fill="#4a6b8a" fillOpacity="0.12" stroke="#4a6b8a" strokeWidth="1"/>
-    <line x1="17" y1="49" x2="15" y2="53" stroke="#4a6b8a" strokeWidth="1.2" strokeLinecap="round"/>
-    <line x1="19" y1="49" x2="21" y2="53" stroke="#4a6b8a" strokeWidth="1.2" strokeLinecap="round"/>
-    <line x1="43" y1="49" x2="41" y2="53" stroke="#4a6b8a" strokeWidth="1.2" strokeLinecap="round"/>
-    <line x1="43" y1="49" x2="45" y2="53" stroke="#4a6b8a" strokeWidth="1.2" strokeLinecap="round"/>
-  </svg>
+const TIMELINE_ICON_SRCS = [
+  { src: '/images/timeline/1.png', dark: false }, // Guest Arrival — white bg
+  { src: '/images/timeline/2.png', dark: true  }, // Ceremony Begins — dark bg
+  { src: '/images/timeline/3.png', dark: true  }, // Cocktail Hour — dark bg
+  { src: '/images/timeline/4.png', dark: true  }, // Reception — dark bg
+  { src: '/images/timeline/5.png', dark: true  }, // Send Off — dark bg
 ];
 
 function TimelinePage({ content, onBack }) {
@@ -1035,7 +993,7 @@ function TimelinePage({ content, onBack }) {
                 paddingRight: iconLeft ? 0 : 20
               }}>
                 {iconLeft
-                  ? TIMELINE_ICONS[i]
+                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg)' : 'none' }} />
                   : <div style={{ textAlign: 'right' }}>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
@@ -1061,7 +1019,7 @@ function TimelinePage({ content, onBack }) {
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
                     </div>
-                  : TIMELINE_ICONS[i]
+                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg)' : 'none' }} />
                 }
               </div>
             </div>
