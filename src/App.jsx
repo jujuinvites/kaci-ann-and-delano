@@ -707,19 +707,19 @@ function Hero({ content }) {
 function FindYourSeat({ guests }) {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
+  const [results, setResults] = useState([]);
   const [searched, setSearched] = useState(false);
 
   const handleSearch = (e) => {
     e?.preventDefault?.();
     if (!query.trim()) return;
     setLoading(true);
-    setResult(null);
+    setResults([]);
     setSearched(false);
     setTimeout(() => {
       const q = query.trim().toLowerCase();
-      const match = guests.find(g => (g.name || '').toLowerCase().includes(q));
-      setResult(match || null);
+      const matches = guests.filter(g => (g.name || '').toLowerCase().includes(q));
+      setResults(matches);
       setLoading(false);
       setSearched(true);
     }, 450);
@@ -809,51 +809,53 @@ function FindYourSeat({ guests }) {
           </div>
         )}
 
-        {!loading && searched && result && (
-          <SoftCard style={{
-            maxWidth: 420,
-            margin: '0 auto',
-            textAlign: 'center',
-            background: `linear-gradient(180deg, #fff, ${theme.beigeBg})`,
-            animation: 'scaleIn 0.45s cubic-bezier(0.22,1,0.36,1) both'
-          }}>
-            <div style={{
-              fontFamily: theme.fonts.body,
-              fontSize: 11,
-              letterSpacing: 3,
-              textTransform: 'uppercase',
-              color: theme.dustyBlue,
-              marginBottom: 8
-            }}>
-              You're seated here
-            </div>
-            <div style={{ fontFamily: theme.fonts.title, fontSize: 24, color: theme.text }}>
-              {result.name}
-            </div>
-            <div style={{
-              marginTop: 16,
-              display: 'flex',
-              justifyContent: 'center',
-              gap: 28,
-              fontFamily: theme.fonts.body,
-              fontSize: 14,
-              color: theme.textSoft
-            }}>
-              {[
-                { label: 'Table', value: result.table || (['bride','groom'].includes((result.group||'').toLowerCase()) ? 'Sweetheart' : '—'), big: true },
-                { label: 'Reserved Seat', value: result.seat || '—', big: true },
-                { label: 'Group', value: result.group || '—', big: false }
-              ].map(({ label, value, big }) => (
-                <div key={label}>
-                  <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</div>
-                  <div style={{ fontSize: big ? 22 : 14, color: theme.text, marginTop: 4 }}>{value}</div>
+        {!loading && searched && results.length > 0 && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 420, margin: '0 auto' }}>
+            {results.map((r, idx) => (
+              <SoftCard key={idx} style={{
+                textAlign: 'center',
+                background: `linear-gradient(180deg, #fff, ${theme.beigeBg})`,
+                animation: `scaleIn 0.45s cubic-bezier(0.22,1,0.36,1) ${idx * 0.07}s both`
+              }}>
+                <div style={{
+                  fontFamily: theme.fonts.body,
+                  fontSize: 11,
+                  letterSpacing: 3,
+                  textTransform: 'uppercase',
+                  color: theme.dustyBlue,
+                  marginBottom: 8
+                }}>
+                  You're seated here
                 </div>
-              ))}
-            </div>
-          </SoftCard>
+                <div style={{ fontFamily: theme.fonts.title, fontSize: 24, color: theme.text }}>
+                  {r.name}
+                </div>
+                <div style={{
+                  marginTop: 16,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: 28,
+                  fontFamily: theme.fonts.body,
+                  fontSize: 14,
+                  color: theme.textSoft
+                }}>
+                  {[
+                    { label: 'Table', value: r.table || (['bride','groom'].includes((r.group||'').toLowerCase()) ? 'Sweetheart' : '—'), big: true },
+                    { label: 'Reserved Seat', value: r.seat || '—', big: true },
+                    { label: 'Group', value: r.group || '—', big: false }
+                  ].map(({ label, value, big }) => (
+                    <div key={label}>
+                      <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</div>
+                      <div style={{ fontSize: big ? 22 : 14, color: theme.text, marginTop: 4 }}>{value}</div>
+                    </div>
+                  ))}
+                </div>
+              </SoftCard>
+            ))}
+          </div>
         )}
 
-        {!loading && searched && !result && (
+        {!loading && searched && results.length === 0 && (
           <div style={{
             fontFamily: theme.fonts.body,
             color: theme.textSoft,
@@ -1603,7 +1605,7 @@ function SeatingPlanPage({ guests, onBack }) {
                 justifyContent: 'space-between'
               }}>
                 <span>{g.name}</span>
-                {g.seat && <span style={{ color: theme.textSoft, fontSize: 12 }}>Reserved Seat {g.seat}</span>}
+                {g.seat && <span style={{ color: theme.textSoft, fontSize: 12 }}>seat {g.seat}</span>}
               </div>
             ))}
           </SoftCard>
