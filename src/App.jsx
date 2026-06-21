@@ -292,7 +292,7 @@ async function fetchGuestsFromSheet() {
     const headers = splitCSVLine(lines[0]).map(h => h.toLowerCase());
     const ni = headers.indexOf('name');
     const ti = headers.indexOf('table');
-    const si = headers.indexOf('seat');
+    const si = headers.indexOf('reserved seat') !== -1 ? headers.indexOf('reserved seat') : headers.indexOf('seat');
     const gi = headers.indexOf('group');
     const rows = lines.slice(1).map(line => {
       const c = splitCSVLine(line);
