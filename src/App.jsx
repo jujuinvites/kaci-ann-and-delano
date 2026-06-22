@@ -1070,7 +1070,7 @@ function TimelinePage({ content, onBack }) {
                 paddingRight: iconLeft ? 0 : 20
               }}>
                 {iconLeft
-                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'brightness(4) saturate(0.55)', transform: 'translateX(15px)' }} />
+                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: TIMELINE_ICON_SRCS[i].dark ? 'multiply' : 'overlay', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'none', transform: 'translateX(15px)' }} />
                   : <div style={{ textAlign: 'right' }}>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 17, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
@@ -1553,9 +1553,9 @@ function KeyFamilyPage({ onBack }) {
         {DEFAULT_KEY_FAMILY.map((group, gi) => (
           <div key={gi} style={{ marginBottom: 52 }}>
             <div style={{
-              fontFamily: theme.fonts.body, fontSize: 21,
-              fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.75)', textAlign: 'center',
+              fontFamily: theme.fonts.script, fontSize: 'clamp(34px, 8vw, 46px)',
+              fontWeight: 400,
+              color: 'rgba(255,255,255,0.90)', textAlign: 'center',
               paddingBottom: 14, marginBottom: 24,
               borderBottom: '1px solid rgba(255,255,255,0.18)'
             }}>
