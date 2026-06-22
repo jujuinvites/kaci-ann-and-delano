@@ -965,8 +965,8 @@ const EXPLORE_CARDS = [
 
 function ExploreGrid({ onNavigate }) {
   return (
-    <div style={{ padding: '64px 24px' }}>
-      <div style={{ textAlign: 'center', marginBottom: 40 }}>
+    <div style={{ padding: '36px 16px' }}>
+      <div style={{ textAlign: 'center', marginBottom: 24 }}>
         <h2 style={{
           fontFamily: theme.fonts.script,
           fontSize: 'clamp(58px, 12vw, 82px)',
@@ -994,8 +994,8 @@ function ExploreGrid({ onNavigate }) {
 
       <div style={{
         display: 'grid',
-        gap: 16,
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: 10,
+        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
         maxWidth: 880,
         margin: '0 auto'
       }}>
@@ -1010,7 +1010,7 @@ function ExploreGrid({ onNavigate }) {
               WebkitBackdropFilter: 'blur(12px)',
               border: '1px solid rgba(255,255,255,0.75)',
               borderRadius: 18,
-              padding: '8px 4%',
+              padding: '6px 5%',
               cursor: 'pointer',
               overflow: 'hidden',
               transition: 'transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms ease-out',
