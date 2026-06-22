@@ -367,7 +367,7 @@ const SectionHeader = ({ overline, title, subtitle, light }) => (
     {subtitle && (
       <p style={{
         fontFamily: theme.fonts.body,
-        fontSize: 15,
+        fontSize: 17,
         color: theme.textSoft,
         marginTop: 14,
         lineHeight: 1.6,
@@ -1070,7 +1070,7 @@ function TimelinePage({ content, onBack }) {
                 paddingRight: iconLeft ? 0 : 20
               }}>
                 {iconLeft
-                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(0.8) hue-rotate(185deg) saturate(2) brightness(0.65)', transform: 'translateX(15px)' }} />
+                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(0.5) hue-rotate(185deg) saturate(1.5) brightness(2.2)', transform: 'translateX(15px)' }} />
                   : <div style={{ textAlign: 'right' }}>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 17, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
@@ -1096,7 +1096,7 @@ function TimelinePage({ content, onBack }) {
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 17, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
                     </div>
-                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(0.8) hue-rotate(185deg) saturate(2) brightness(0.65)', transform: 'translateX(-15px)' }} />
+                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(0.5) hue-rotate(185deg) saturate(1.5) brightness(2.2)', transform: 'translateX(-15px)' }} />
                 }
               </div>
             </div>
@@ -1229,7 +1229,7 @@ function LoveWisdomPage({ onBack }) {
 
         <p style={{
           fontFamily: theme.fonts.body,
-          fontSize: 15,
+          fontSize: 17,
           color: theme.dustyBlue,
           lineHeight: 2,
           textAlign: 'center',
