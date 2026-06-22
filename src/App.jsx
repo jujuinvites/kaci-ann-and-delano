@@ -808,7 +808,8 @@ function FindYourSeat({ guests }) {
         </h2>
         <div style={{
           fontFamily: theme.fonts.body,
-          fontSize: 11,
+          fontSize: 15,
+          fontWeight: 700,
           letterSpacing: 4,
           textTransform: 'uppercase',
           color: theme.dustyBlue
@@ -857,7 +858,8 @@ function FindYourSeat({ guests }) {
             border: 'none',
             background: theme.dustyBlue,
             color: '#fff',
-            fontSize: 12,
+            fontSize: 15,
+            fontWeight: 700,
             letterSpacing: 2,
             textTransform: 'uppercase',
             cursor: 'pointer',
@@ -888,7 +890,8 @@ function FindYourSeat({ guests }) {
               }}>
                 <div style={{
                   fontFamily: theme.fonts.body,
-                  fontSize: 11,
+                  fontSize: 15,
+                  fontWeight: 700,
                   letterSpacing: 3,
                   textTransform: 'uppercase',
                   color: theme.dustyBlue,
@@ -914,7 +917,7 @@ function FindYourSeat({ guests }) {
                     { label: 'Group', value: r.group || '—', big: false }
                   ].map(({ label, value, big }) => (
                     <div key={label}>
-                      <div style={{ fontSize: 12, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</div>
                       <div style={{ fontSize: big ? 22 : 14, color: theme.text, marginTop: 4 }}>{value}</div>
                     </div>
                   ))}
@@ -967,7 +970,8 @@ function ExploreGrid({ onNavigate }) {
         </h2>
         <div style={{
           fontFamily: theme.fonts.body,
-          fontSize: 11,
+          fontSize: 15,
+          fontWeight: 700,
           letterSpacing: 4,
           textTransform: 'uppercase',
           color: theme.dustyBlue
@@ -1368,8 +1372,8 @@ const ProgrammeSectionHeader = ({ overline, title }) => (
   <div style={{ textAlign: 'center', padding: '8px 0 28px', position: 'relative' }}>
     {overline && (
       <div style={{
-        fontFamily: theme.fonts.body, fontSize: 11,
-        letterSpacing: '0.32em', textTransform: 'uppercase',
+        fontFamily: theme.fonts.body, fontSize: 15,
+        fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase',
         color: 'rgba(255,255,255,0.75)', marginBottom: 6
       }}>
         {overline}
@@ -1477,7 +1481,7 @@ function CeremonyProgrammePage({ onBack }) {
 
         {/* Courtesy note */}
         <p style={{
-          fontFamily: theme.fonts.title, fontSize: 15, fontStyle: 'italic',
+          fontFamily: theme.fonts.title, fontSize: 17, fontStyle: 'italic',
           color: 'rgba(255,255,255,0.80)', textAlign: 'center',
           margin: '-12px 0 20px', lineHeight: 1.6, letterSpacing: '0.02em'
         }}>
@@ -1549,8 +1553,8 @@ function KeyFamilyPage({ onBack }) {
         {DEFAULT_KEY_FAMILY.map((group, gi) => (
           <div key={gi} style={{ marginBottom: 52 }}>
             <div style={{
-              fontFamily: theme.fonts.body, fontSize: 11,
-              letterSpacing: 4, textTransform: 'uppercase',
+              fontFamily: theme.fonts.body, fontSize: 15,
+              fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase',
               color: 'rgba(255,255,255,0.75)', textAlign: 'center',
               paddingBottom: 14, marginBottom: 24,
               borderBottom: '1px solid rgba(255,255,255,0.18)'
@@ -1565,7 +1569,7 @@ function KeyFamilyPage({ onBack }) {
                 animationDelay: `${0.1 + (gi * 4 + mi) * 0.08}s`
               }}>
                 <div style={{
-                  fontFamily: theme.fonts.body, fontSize: 10,
+                  fontFamily: theme.fonts.body, fontSize: 13,
                   fontWeight: 700, letterSpacing: 3,
                   textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)',
                   marginBottom: 12
@@ -1575,7 +1579,7 @@ function KeyFamilyPage({ onBack }) {
                 {member.names.map((name, ni) => (
                   <div key={ni} style={{
                     fontFamily: theme.fonts.title,
-                    fontSize: 'clamp(17px, 3.5vw, 22px)',
+                    fontSize: 'clamp(19px, 4vw, 25px)',
                     fontWeight: 400, color: '#fff', lineHeight: 1.6
                   }}>
                     {name}
