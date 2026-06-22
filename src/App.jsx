@@ -1553,7 +1553,7 @@ function KeyFamilyPage({ onBack }) {
         {DEFAULT_KEY_FAMILY.map((group, gi) => (
           <div key={gi} style={{ marginBottom: 52 }}>
             <div style={{
-              fontFamily: theme.fonts.body, fontSize: 15,
+              fontFamily: theme.fonts.body, fontSize: 21,
               fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase',
               color: 'rgba(255,255,255,0.75)', textAlign: 'center',
               paddingBottom: 14, marginBottom: 24,
@@ -1569,18 +1569,18 @@ function KeyFamilyPage({ onBack }) {
                 animationDelay: `${0.1 + (gi * 4 + mi) * 0.08}s`
               }}>
                 <div style={{
-                  fontFamily: theme.fonts.body, fontSize: 13,
-                  fontWeight: 700, letterSpacing: 3,
+                  fontFamily: theme.fonts.body, fontSize: 21,
+                  fontWeight: 700, letterSpacing: 4,
                   textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)',
-                  marginBottom: 12
+                  marginBottom: 14
                 }}>
                   {member.role}
                 </div>
                 {member.names.map((name, ni) => (
                   <div key={ni} style={{
                     fontFamily: theme.fonts.title,
-                    fontSize: 'clamp(19px, 4vw, 25px)',
-                    fontWeight: 400, color: '#fff', lineHeight: 1.6
+                    fontSize: 'clamp(23px, 4.5vw, 29px)',
+                    fontWeight: 400, color: '#fff', lineHeight: 1.5
                   }}>
                     {name}
                   </div>
