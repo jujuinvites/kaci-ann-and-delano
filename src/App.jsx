@@ -18,6 +18,10 @@ function GlobalStyles() {
         from { opacity: 0; transform: scale(0.93); }
         to   { opacity: 1; transform: scale(1); }
       }
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(8px); }
+        }
       @keyframes floatY {
         0%, 100% { transform: translateY(0px); }
         50%       { transform: translateY(-10px); }
@@ -331,7 +335,7 @@ const Section = ({ children, style }) => (
   </section>
 );
 
-const SectionHeader = ({ overline, title, subtitle }) => (
+const SectionHeader = ({ overline, title, subtitle, light }) => (
   <div style={{ textAlign: 'center', marginBottom: 40 }}>
     {overline && (
       <div style={{
@@ -340,7 +344,7 @@ const SectionHeader = ({ overline, title, subtitle }) => (
         fontWeight: 700,
         letterSpacing: 4,
         textTransform: 'uppercase',
-        color: theme.dustyBlue,
+        color: light ? 'rgba(255,255,255,0.75)' : theme.dustyBlue,
         marginBottom: 12,
         animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
         animationDelay: '0.05s'
@@ -350,9 +354,9 @@ const SectionHeader = ({ overline, title, subtitle }) => (
     )}
     <h2 style={{
       fontFamily: theme.fonts.script,
-      fontSize: 'clamp(44px, 9vw, 68px)',
+      fontSize: 'clamp(58px, 12vw, 82px)',
       fontWeight: 400,
-      color: theme.dustyBlue,
+      color: light ? '#fff' : theme.dustyBlue,
       margin: 0,
       lineHeight: 1.15,
       animation: 'fadeInUp 0.65s cubic-bezier(0.22,1,0.36,1) both',
@@ -416,6 +420,39 @@ const BackLink = ({ onBack, light }) => (
     ← Back to Main Menu
   </button>
 );
+
+/* =============================================================
+   SCROLL DOWN INDICATOR
+   ============================================================= */
+function ScrollDownIndicator() {
+  const [visible, setVisible] = React.useState(true);
+  React.useEffect(() => {
+    const check = () => {
+      const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 80;
+      const tooShort = document.documentElement.scrollHeight <= window.innerHeight + 40;
+      setVisible(!atBottom && !tooShort);
+    };
+    check();
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check, { passive: true });
+    return () => { window.removeEventListener('scroll', check); window.removeEventListener('resize', check); };
+  }, []);
+  if (!visible) return null;
+  return (
+    <div style={{
+      position: 'fixed', bottom: 22, left: '50%',
+      transform: 'translateX(-50%)',
+      zIndex: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
+      animation: 'scrollBounce 1.6s ease-in-out infinite',
+      pointerEvents: 'none', opacity: 0.65
+    }}>
+      <span style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#5a88a8' }}>Scroll</span>
+      <svg width="18" height="11" viewBox="0 0 18 11" fill="none">
+        <polyline points="1,1 9,9 17,1" stroke="#5a88a8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    </div>
+  );
+}
 
 /* =============================================================
    HEADER / NAV
@@ -686,6 +723,37 @@ function Hero({ content }) {
         </p>
       </div>
 
+      <div style={{
+        textAlign: 'center',
+        padding: '0 24px 52px',
+        animation: 'fadeInUp 0.5s cubic-bezier(0.23,1,0.32,1) both',
+        animationDelay: '0.6s'
+      }}>
+        <div style={{
+          fontFamily: "'Raleway', sans-serif",
+          fontSize: 13,
+          letterSpacing: '0.18em',
+          textTransform: 'uppercase',
+          color: '#5a7a8e',
+          marginBottom: 20
+        }}>
+          Don't forget to use our hashtags — we'd love to see them!
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px 20px' }}>
+          {['#HappilyEverHuntley', '#HuntleyHarmony', '#HuntleyHolyUnion', '#HeavenlyHitchedHuntleys'].map(tag => (
+            <div key={tag} style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 18,
+              fontStyle: 'italic',
+              fontWeight: 600,
+              color: '#5a88a8'
+            }}>
+              {tag}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <img
         src={theme.images.flowersImage}
         alt=""
@@ -731,7 +799,7 @@ function FindYourSeat({ guests }) {
       <div style={{ textAlign: 'center', marginBottom: 36 }}>
         <h2 style={{
           fontFamily: theme.fonts.script,
-          fontSize: 'clamp(36px, 6vw, 52px)',
+          fontSize: 'clamp(58px, 12vw, 82px)',
           fontWeight: 400,
           color: theme.text,
           margin: '0 0 8px'
@@ -890,7 +958,7 @@ function ExploreGrid({ onNavigate }) {
       <div style={{ textAlign: 'center', marginBottom: 40 }}>
         <h2 style={{
           fontFamily: theme.fonts.script,
-          fontSize: 'clamp(36px, 6vw, 52px)',
+          fontSize: 'clamp(58px, 12vw, 82px)',
           fontWeight: 400,
           color: theme.text,
           margin: '0 0 8px'
@@ -998,9 +1066,9 @@ function TimelinePage({ content, onBack }) {
                 paddingRight: iconLeft ? 0 : 20
               }}>
                 {iconLeft
-                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'none' }} />
+                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(0.8) hue-rotate(185deg) saturate(2) brightness(0.65)', transform: 'translateX(15px)' }} />
                   : <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontFamily: theme.fonts.body, fontSize: 14, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
+                      <div style={{ fontFamily: theme.fonts.body, fontSize: 17, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
                     </div>
                 }
@@ -1021,10 +1089,10 @@ function TimelinePage({ content, onBack }) {
               }}>
                 {iconLeft
                   ? <div style={{ textAlign: 'left' }}>
-                      <div style={{ fontFamily: theme.fonts.body, fontSize: 14, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
+                      <div style={{ fontFamily: theme.fonts.body, fontSize: 17, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
                     </div>
-                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'none' }} />
+                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(0.8) hue-rotate(185deg) saturate(2) brightness(0.65)', transform: 'translateX(-15px)' }} />
                 }
               </div>
             </div>
@@ -1128,7 +1196,7 @@ function LoveWisdomPage({ onBack }) {
         <div style={{ textAlign: 'center', marginTop: 20, marginBottom: 24, animation: 'fadeInUp 0.65s cubic-bezier(0.22,1,0.36,1) both', animationDelay: '0.05s' }}>
           <h1 style={{
             fontFamily: theme.fonts.script,
-            fontSize: 'clamp(52px, 11vw, 76px)',
+            fontSize: 'clamp(58px, 12vw, 82px)',
             fontWeight: 400,
             color: theme.dustyBlue,
             margin: 0,
@@ -1157,9 +1225,7 @@ function LoveWisdomPage({ onBack }) {
 
         <p style={{
           fontFamily: theme.fonts.body,
-          fontSize: 11,
-          letterSpacing: '0.2em',
-          textTransform: 'uppercase',
+          fontSize: 15,
           color: theme.dustyBlue,
           lineHeight: 2,
           textAlign: 'center',
@@ -1210,7 +1276,7 @@ function LoveWisdomPage({ onBack }) {
               <div style={{ flex: 1 }}>
                 <div style={{
                   fontFamily: theme.fonts.title,
-                  fontSize: 19,
+                  fontSize: 22,
                   fontWeight: 500,
                   color: theme.text,
                   marginBottom: 8,
@@ -1220,7 +1286,7 @@ function LoveWisdomPage({ onBack }) {
                 </div>
                 <div style={{
                   fontFamily: theme.fonts.body,
-                  fontSize: 14,
+                  fontSize: 17,
                   color: theme.textSoft,
                   lineHeight: 1.75
                 }}>
@@ -1241,12 +1307,12 @@ function LoveWisdomPage({ onBack }) {
 function BridalPartyPage({ bridal, onBack }) {
   const roles = bridal.roles || [];
   return (
-    <>
+    <div style={{ background: '#2c4870', minHeight: '100vh', paddingBottom: 64 }}>
       <div style={{ padding: '20px 20px 0' }}>
-        <BackLink onBack={onBack} />
+        <BackLink onBack={onBack} light />
       </div>
       <Section>
-        <SectionHeader overline="By Our Side" title="Bridal Party" />
+        <SectionHeader overline="By Our Side" title="Bridal Party" light />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
         {roles.map((item, i) => (
           <div
@@ -1254,7 +1320,7 @@ function BridalPartyPage({ bridal, onBack }) {
             style={{
               textAlign: 'center',
               padding: '32px 0',
-              borderBottom: i < roles.length - 1 ? `1px solid ${theme.divider}` : 'none',
+              borderBottom: i < roles.length - 1 ? `1px solid rgba(255,255,255,0.18)` : 'none',
               animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
               animationDelay: `${0.1 + i * 0.09}s`
             }}
@@ -1265,7 +1331,7 @@ function BridalPartyPage({ bridal, onBack }) {
               fontWeight: 700,
               letterSpacing: 4,
               textTransform: 'uppercase',
-              color: theme.dustyBlue,
+              color: 'rgba(255,255,255,0.75)',
               marginBottom: 14
             }}>
               {item.role}
@@ -1275,7 +1341,7 @@ function BridalPartyPage({ bridal, onBack }) {
                 fontFamily: theme.fonts.title,
                 fontSize: 'clamp(23px, 4.5vw, 29px)',
                 fontWeight: 400,
-                color: theme.text,
+                color: '#fff',
                 lineHeight: 1.5
               }}>
                 {name}
@@ -1285,7 +1351,7 @@ function BridalPartyPage({ bridal, onBack }) {
         ))}
       </div>
     </Section>
-    </>
+    </div>
   );
 }
 
@@ -1356,7 +1422,7 @@ const ProgrammeItemRow = ({ item, delay }) => (
       <div style={{ marginTop: 6, display: 'flex', flexDirection: 'column', gap: 2 }}>
         {item.subItems.map((s, i) => (
           <div key={i} style={{
-            fontFamily: theme.fonts.title, fontSize: 15,
+            fontFamily: theme.fonts.title, fontSize: 17,
             fontStyle: 'italic', color: 'rgba(255,255,255,0.88)',
             letterSpacing: '0.02em', lineHeight: 1.5
           }}>
@@ -1369,7 +1435,7 @@ const ProgrammeItemRow = ({ item, delay }) => (
     {/* Inline detail (e.g. "Ministry of Song", "The Sand Ceremony") */}
     {item.detail && (
       <div style={{
-        fontFamily: theme.fonts.title, fontSize: 15,
+        fontFamily: theme.fonts.title, fontSize: 17,
         fontStyle: 'italic', color: 'rgba(255,255,255,0.84)',
         marginTop: 5, lineHeight: 1.5, letterSpacing: '0.02em'
       }}>
@@ -1380,7 +1446,7 @@ const ProgrammeItemRow = ({ item, delay }) => (
     {/* Named participant — Playfair italic at readable size */}
     {item.participant && (
       <div style={{
-        fontFamily: theme.fonts.title, fontSize: 17,
+        fontFamily: theme.fonts.title, fontSize: 19,
         fontStyle: 'italic', fontWeight: 600,
         color: 'rgba(255,255,255,0.95)', marginTop: 5, lineHeight: 1.3
       }}>
@@ -1473,35 +1539,35 @@ function ReceptionProgrammePage({ onBack }) {
    ============================================================= */
 function KeyFamilyPage({ onBack }) {
   return (
-    <>
+    <div style={{ background: '#2c4870', minHeight: '100vh', paddingBottom: 64 }}>
       <div style={{ padding: '20px 20px 0' }}>
-        <BackLink onBack={onBack} />
+        <BackLink onBack={onBack} light />
       </div>
       <Section>
-        <SectionHeader overline="With Gratitude" title="Key Participants" />
+        <SectionHeader overline="With Gratitude" title="Key Participants" light />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
         {DEFAULT_KEY_FAMILY.map((group, gi) => (
           <div key={gi} style={{ marginBottom: 52 }}>
             <div style={{
               fontFamily: theme.fonts.body, fontSize: 11,
               letterSpacing: 4, textTransform: 'uppercase',
-              color: theme.dustyBlue, textAlign: 'center',
+              color: 'rgba(255,255,255,0.75)', textAlign: 'center',
               paddingBottom: 14, marginBottom: 24,
-              borderBottom: `1px solid ${theme.divider}`
+              borderBottom: '1px solid rgba(255,255,255,0.18)'
             }}>
               {group.group}
             </div>
             {group.members.map((member, mi) => (
               <div key={mi} style={{
                 textAlign: 'center', padding: '28px 0',
-                borderBottom: mi < group.members.length - 1 ? `1px solid ${theme.divider}` : 'none',
+                borderBottom: mi < group.members.length - 1 ? `1px solid rgba(255,255,255,0.18)` : 'none',
                 animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
                 animationDelay: `${0.1 + (gi * 4 + mi) * 0.08}s`
               }}>
                 <div style={{
-                  fontFamily: theme.fonts.body, fontSize: 14,
+                  fontFamily: theme.fonts.body, fontSize: 10,
                   fontWeight: 700, letterSpacing: 3,
-                  textTransform: 'uppercase', color: theme.dustyBlue,
+                  textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)',
                   marginBottom: 12
                 }}>
                   {member.role}
@@ -1509,8 +1575,8 @@ function KeyFamilyPage({ onBack }) {
                 {member.names.map((name, ni) => (
                   <div key={ni} style={{
                     fontFamily: theme.fonts.title,
-                    fontSize: 'clamp(21px, 4vw, 26px)',
-                    fontWeight: 400, color: theme.text, lineHeight: 1.6
+                    fontSize: 'clamp(17px, 3.5vw, 22px)',
+                    fontWeight: 400, color: '#fff', lineHeight: 1.6
                   }}>
                     {name}
                   </div>
@@ -1521,7 +1587,7 @@ function KeyFamilyPage({ onBack }) {
         ))}
       </div>
     </Section>
-    </>
+    </div>
   );
 }
 
@@ -1647,6 +1713,7 @@ export default function App() {
 
   return (
     <div style={{ background: bg, minHeight: '100vh' }}>
+      <ScrollDownIndicator />
       <GlobalStyles />
       <Header onNavigate={setPage} current={page} />
 
