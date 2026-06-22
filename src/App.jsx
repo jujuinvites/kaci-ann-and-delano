@@ -444,11 +444,12 @@ function ScrollDownIndicator() {
       transform: 'translateX(-50%)',
       zIndex: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
       animation: 'scrollBounce 1.6s ease-in-out infinite',
-      pointerEvents: 'none', opacity: 0.65
+      pointerEvents: 'none', opacity: 0.9
     }}>
-      <span style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#5a88a8' }}>Scroll</span>
+      <span style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#fff', textShadow: '0 1px 4px rgba(0,0,0,0.35)' }}>Scroll</span>
       <svg width="18" height="11" viewBox="0 0 18 11" fill="none">
-        <polyline points="1,1 9,9 17,1" stroke="#5a88a8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <polyline points="1,1 9,9 17,1" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#shadow)"/>
+        <defs><filter id="shadow"><feDropShadow dx="0" dy="1" stdDeviation="1.5" floodColor="rgba(0,0,0,0.4)"/></filter></defs>
       </svg>
     </div>
   );
@@ -461,10 +462,10 @@ const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
   { id: 'timeline', label: 'Wedding Timeline' },
   { id: 'ceremony', label: 'Ceremony Programme' },
+  { id: 'reception', label: 'Reception Programme' },
   { id: 'bridal', label: 'Bridal Party' },
   { id: 'family', label: 'Key Family Members & Participants' },
   { id: 'seating', label: 'Seating Plan' },
-  { id: 'reception', label: 'Reception Programme' },
   { id: 'menu', label: 'Menu' },
   { id: 'love', label: 'Love & Wisdom' },
 ];
@@ -947,10 +948,10 @@ function FindYourSeat({ guests }) {
 const EXPLORE_CARDS = [
   { id: 'timeline',  title: 'Wedding Timeline',        img: '/images/icons/5.png'  },
   { id: 'ceremony',  title: 'Ceremony Programme',       img: '/images/icons/6.png'  },
+  { id: 'reception', title: 'Reception Programme',      img: '/images/icons/10.png' },
   { id: 'bridal',    title: 'Bridal Party',             img: '/images/icons/7.png'  },
   { id: 'family',    title: 'Key Family & Participants', img: '/images/icons/8.png'  },
   { id: 'seating',   title: 'Seating Plan',             img: '/images/icons/9.png'  },
-  { id: 'reception', title: 'Reception Programme',      img: '/images/icons/10.png' },
   { id: 'menu',      title: 'Menu',                     img: '/images/icons/11.png' },
   { id: 'love',      title: 'Love & Wisdom',            img: '/images/icons/12.png' },
 ];
@@ -1311,7 +1312,7 @@ function LoveWisdomPage({ onBack }) {
 function BridalPartyPage({ bridal, onBack }) {
   const roles = bridal.roles || [];
   return (
-    <div style={{ background: '#2c4870', minHeight: '100vh', paddingBottom: 64 }}>
+    <div style={{ background: '#2c4870', minHeight: '100vh', paddingBottom: 20 }}>
       <div style={{ padding: '20px 20px 0' }}>
         <BackLink onBack={onBack} light />
       </div>
@@ -1550,7 +1551,7 @@ function ReceptionProgrammePage({ onBack }) {
    ============================================================= */
 function KeyFamilyPage({ onBack }) {
   return (
-    <div style={{ background: '#2c4870', minHeight: '100vh', paddingBottom: 64 }}>
+    <div style={{ background: '#2c4870', minHeight: '100vh', paddingBottom: 20 }}>
       <div style={{ padding: '20px 20px 0' }}>
         <BackLink onBack={onBack} light />
       </div>
