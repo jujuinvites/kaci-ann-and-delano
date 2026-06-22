@@ -1070,7 +1070,7 @@ function TimelinePage({ content, onBack }) {
                 paddingRight: iconLeft ? 0 : 20
               }}>
                 {iconLeft
-                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: TIMELINE_ICON_SRCS[i].dark ? 'multiply' : 'overlay', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'none', transform: 'translateX(15px)' }} />
+                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(1) hue-rotate(186deg) saturate(0.5) brightness(1.1)', transform: 'translateX(15px)' }} />
                   : <div style={{ textAlign: 'right' }}>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 17, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
@@ -1550,11 +1550,18 @@ function KeyFamilyPage({ onBack }) {
       <Section>
         <SectionHeader overline="With Gratitude" title="Key Participants" light />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
+        <p style={{
+          fontFamily: theme.fonts.body, fontSize: 17,
+          color: 'rgba(255,255,255,0.75)', textAlign: 'center',
+          lineHeight: 1.8, marginBottom: 48, padding: '0 8px'
+        }}>
+          We are deeply grateful for the love and support of our family and the special individuals who have walked alongside us. Thank you for being part of this beautiful journey.
+        </p>
         {DEFAULT_KEY_FAMILY.map((group, gi) => (
           <div key={gi} style={{ marginBottom: 52 }}>
             <div style={{
-              fontFamily: theme.fonts.script, fontSize: 'clamp(34px, 8vw, 46px)',
-              fontWeight: 400,
+              fontFamily: theme.fonts.body, fontSize: 21,
+              fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase',
               color: 'rgba(255,255,255,0.90)', textAlign: 'center',
               paddingBottom: 14, marginBottom: 24,
               borderBottom: '1px solid rgba(255,255,255,0.18)'
@@ -1563,16 +1570,16 @@ function KeyFamilyPage({ onBack }) {
             </div>
             {group.members.map((member, mi) => (
               <div key={mi} style={{
-                textAlign: 'center', padding: '28px 0',
+                textAlign: 'center', padding: '24px 0',
                 borderBottom: mi < group.members.length - 1 ? `1px solid rgba(255,255,255,0.18)` : 'none',
                 animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
                 animationDelay: `${0.1 + (gi * 4 + mi) * 0.08}s`
               }}>
                 <div style={{
-                  fontFamily: theme.fonts.body, fontSize: 21,
+                  fontFamily: theme.fonts.body, fontSize: 15,
                   fontWeight: 700, letterSpacing: 4,
-                  textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)',
-                  marginBottom: 14
+                  textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)',
+                  marginBottom: 10
                 }}>
                   {member.role}
                 </div>
