@@ -336,7 +336,8 @@ const SectionHeader = ({ overline, title, subtitle }) => (
     {overline && (
       <div style={{
         fontFamily: theme.fonts.body,
-        fontSize: 14,
+        fontSize: 15,
+        fontWeight: 700,
         letterSpacing: 4,
         textTransform: 'uppercase',
         color: theme.dustyBlue,
@@ -402,7 +403,7 @@ const BackLink = ({ onBack, light }) => (
       border: 'none',
       color: light ? 'rgba(255,255,255,0.75)' : theme.dustyBlue,
       fontFamily: theme.fonts.body,
-      fontSize: 11,
+      fontSize: 13,
       letterSpacing: '0.18em',
       textTransform: 'uppercase',
       marginBottom: 20,
@@ -827,7 +828,7 @@ function FindYourSeat({ guests }) {
                 }}>
                   You're seated here
                 </div>
-                <div style={{ fontFamily: theme.fonts.title, fontSize: 24, color: theme.text }}>
+                <div style={{ fontFamily: theme.fonts.title, fontSize: 28, color: theme.text }}>
                   {r.name}
                 </div>
                 <div style={{
@@ -840,12 +841,12 @@ function FindYourSeat({ guests }) {
                   color: theme.textSoft
                 }}>
                   {[
-                    { label: 'Table', value: r.table || (['bride','groom'].includes((r.group||'').toLowerCase()) ? 'Sweetheart' : '—'), big: true },
-                    { label: 'Reserved Seat', value: r.seat || '—', big: true },
+                    { label: 'Table', value: r.table || (['bride','groom'].includes((r.group||'').toLowerCase()) ? 'Sweetheart' : '—'), big: false },
+                    { label: 'Reserved Seat', value: r.seat || '—', big: false },
                     { label: 'Group', value: r.group || '—', big: false }
                   ].map(({ label, value, big }) => (
                     <div key={label}>
-                      <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</div>
+                      <div style={{ fontSize: 12, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</div>
                       <div style={{ fontSize: big ? 22 : 14, color: theme.text, marginTop: 4 }}>{value}</div>
                     </div>
                   ))}
@@ -925,7 +926,7 @@ function ExploreGrid({ onNavigate }) {
               WebkitBackdropFilter: 'blur(12px)',
               border: '1px solid rgba(255,255,255,0.75)',
               borderRadius: 18,
-              padding: '6px 15%',
+              padding: '5px 22%',
               cursor: 'pointer',
               overflow: 'hidden',
               transition: 'transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms ease-out',
@@ -999,8 +1000,8 @@ function TimelinePage({ content, onBack }) {
                 {iconLeft
                   ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'none' }} />
                   : <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontFamily: theme.fonts.body, fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
-                      <div style={{ fontFamily: theme.fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
+                      <div style={{ fontFamily: theme.fonts.body, fontSize: 14, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
+                      <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
                     </div>
                 }
               </div>
@@ -1020,8 +1021,8 @@ function TimelinePage({ content, onBack }) {
               }}>
                 {iconLeft
                   ? <div style={{ textAlign: 'left' }}>
-                      <div style={{ fontFamily: theme.fonts.body, fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
-                      <div style={{ fontFamily: theme.fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
+                      <div style={{ fontFamily: theme.fonts.body, fontSize: 14, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
+                      <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
                     </div>
                   : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 68, height: 68, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'none' }} />
                 }
@@ -1058,7 +1059,7 @@ function MenuPage({ content, onBack }) {
           >
             <div style={{
               fontFamily: theme.fonts.body,
-              fontSize: 18,
+              fontSize: 21,
               fontWeight: 700,
               letterSpacing: 4,
               textTransform: 'uppercase',
@@ -1071,7 +1072,7 @@ function MenuPage({ content, onBack }) {
             {sec.items.map((it, j) => (
               <div key={j} style={{
                 fontFamily: theme.fonts.title,
-                fontSize: 20,
+                fontSize: 23,
                 color: theme.text,
                 margin: '8px 0',
                 lineHeight: 1.6
@@ -1260,7 +1261,7 @@ function BridalPartyPage({ bridal, onBack }) {
           >
             <div style={{
               fontFamily: theme.fonts.body,
-              fontSize: 18,
+              fontSize: 21,
               fontWeight: 700,
               letterSpacing: 4,
               textTransform: 'uppercase',
@@ -1272,7 +1273,7 @@ function BridalPartyPage({ bridal, onBack }) {
             {(item.names || []).map((name, j) => (
               <div key={j} style={{
                 fontFamily: theme.fonts.title,
-                fontSize: 'clamp(20px, 4vw, 26px)',
+                fontSize: 'clamp(23px, 4.5vw, 29px)',
                 fontWeight: 400,
                 color: theme.text,
                 lineHeight: 1.5
@@ -1498,7 +1499,7 @@ function KeyFamilyPage({ onBack }) {
                 animationDelay: `${0.1 + (gi * 4 + mi) * 0.08}s`
               }}>
                 <div style={{
-                  fontFamily: theme.fonts.body, fontSize: 11,
+                  fontFamily: theme.fonts.body, fontSize: 14,
                   fontWeight: 700, letterSpacing: 3,
                   textTransform: 'uppercase', color: theme.dustyBlue,
                   marginBottom: 12
@@ -1508,7 +1509,7 @@ function KeyFamilyPage({ onBack }) {
                 {member.names.map((name, ni) => (
                   <div key={ni} style={{
                     fontFamily: theme.fonts.title,
-                    fontSize: 'clamp(18px, 3.5vw, 24px)',
+                    fontSize: 'clamp(21px, 4vw, 26px)',
                     fontWeight: 400, color: theme.text, lineHeight: 1.6
                   }}>
                     {name}
@@ -1583,7 +1584,8 @@ function SeatingPlanPage({ guests, onBack }) {
           >
             <div style={{
               fontFamily: theme.fonts.body,
-              fontSize: 11,
+              fontSize: 13,
+              fontWeight: 700,
               letterSpacing: 3,
               textTransform: 'uppercase',
               color: theme.dustyBlue,
@@ -1591,14 +1593,15 @@ function SeatingPlanPage({ guests, onBack }) {
             }}>
               Table
             </div>
-            <div style={{ fontFamily: theme.fonts.title, fontSize: 28, color: theme.text, marginBottom: 14 }}>
+            <div style={{ fontFamily: theme.fonts.title, fontSize: 32, fontWeight: 700, color: theme.text, marginBottom: 14 }}>
               {table}
             </div>
             <div style={{ height: 1, background: theme.divider, margin: '0 0 14px' }} />
             {list.map((g, j) => (
               <div key={j} style={{
                 fontFamily: theme.fonts.body,
-                fontSize: 14,
+                fontSize: 16,
+                fontWeight: 600,
                 color: theme.text,
                 padding: '6px 0',
                 display: 'flex',
