@@ -1010,7 +1010,7 @@ function ExploreGrid({ onNavigate }) {
               WebkitBackdropFilter: 'blur(12px)',
               border: '1px solid rgba(255,255,255,0.75)',
               borderRadius: 18,
-              padding: '10px 10%',
+              padding: '8px 4%',
               cursor: 'pointer',
               overflow: 'hidden',
               transition: 'transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms ease-out',
