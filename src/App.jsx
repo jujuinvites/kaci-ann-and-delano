@@ -742,11 +742,11 @@ function Hero({ content }) {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px 20px' }}>
           {['#HappilyEverHuntley', '#HuntleyHarmony', '#HuntleyHolyUnion', '#HeavenlyHitchedHuntleys'].map(tag => (
             <div key={tag} style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: 18,
-              fontStyle: 'italic',
+              fontFamily: "'Raleway', sans-serif",
+              fontSize: 15,
               fontWeight: 600,
-              color: '#5a88a8'
+              color: '#5a88a8',
+              whiteSpace: 'nowrap'
             }}>
               {tag}
             </div>
@@ -1030,7 +1030,7 @@ function ExploreGrid({ onNavigate }) {
    PAGE: TIMELINE
    ============================================================= */
 const TIMELINE_ICON_SRCS = [
-  { src: '/images/timeline/1.png', dark: false }, // Guest Arrival — white bg
+  { src: '/images/timeline/1.png', dark: false }, // Guest Arrival — white bg, use brightness boost to lighten strokes for multiply
   { src: '/images/timeline/2.png', dark: true  }, // Ceremony Begins — dark bg
   { src: '/images/timeline/3.png', dark: true  }, // Cocktail Hour — dark bg
   { src: '/images/timeline/4.png', dark: true  }, // Reception — dark bg
@@ -1070,7 +1070,7 @@ function TimelinePage({ content, onBack }) {
                 paddingRight: iconLeft ? 0 : 20
               }}>
                 {iconLeft
-                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(0.5) hue-rotate(185deg) saturate(1.5) brightness(2.2)', transform: 'translateX(15px)' }} />
+                  ? <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'brightness(4) saturate(0.55)', transform: 'translateX(15px)' }} />
                   : <div style={{ textAlign: 'right' }}>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 17, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
@@ -1096,7 +1096,7 @@ function TimelinePage({ content, onBack }) {
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 17, fontWeight: 800, letterSpacing: 2, textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 3 }}>{t.time}</div>
                       <div style={{ fontFamily: theme.fonts.body, fontSize: 16, fontWeight: 800, letterSpacing: 1.5, textTransform: 'uppercase', color: theme.text, lineHeight: 1.35 }}>{t.title}</div>
                     </div>
-                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'sepia(0.5) hue-rotate(185deg) saturate(1.5) brightness(2.2)', transform: 'translateX(-15px)' }} />
+                  : <img src={TIMELINE_ICON_SRCS[i].src} alt={t.title} style={{ width: 78, height: 78, objectFit: 'contain', mixBlendMode: 'multiply', filter: TIMELINE_ICON_SRCS[i].dark ? 'invert(1) hue-rotate(180deg) saturate(1.8) brightness(0.55)' : 'brightness(4) saturate(0.55)', transform: 'translateX(-15px)' }} />
                 }
               </div>
             </div>
