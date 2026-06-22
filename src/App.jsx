@@ -20,7 +20,7 @@ function GlobalStyles() {
       }
         @keyframes scrollBounce {
           0%, 100% { transform: translateX(-50%) translateY(0); }
-          50% { transform: translateX(-50%) translateY(8px); }
+          50% { transform: translateX(-50%) translateY(5px); }
         }
       @keyframes floatY {
         0%, 100% { transform: translateY(0px); }
@@ -33,18 +33,21 @@ function GlobalStyles() {
 
       /* Press feedback — every clickable element */
       button:active, a:active {
-        transform: scale(0.96) !important;
-        transition: transform 100ms cubic-bezier(0.23,1,0.32,1) !important;
+        transform: scale(0.97) !important;
+        transition: transform 120ms cubic-bezier(0.22,1,0.36,1) !important;
       }
 
       /* Hover effects only on devices that support hover */
       @media (hover: hover) and (pointer: fine) {
         .explore-card:hover {
-          transform: translateY(-6px) scale(1.02);
-          box-shadow: 0 14px 32px rgba(80,120,150,0.18);
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 16px 36px rgba(80,120,150,0.20);
         }
         .explore-card:hover .explore-icon {
-          transform: scale(1.12);
+          transform: scale(1.10);
+        }
+        .explore-card {
+          will-change: transform;
         }
         .soft-card-hover:hover {
           transform: translateY(-4px);
@@ -639,7 +642,7 @@ function Footer() {
 function Hero({ content }) {
   return (
     <div style={{
-      background: 'linear-gradient(to bottom, #e8f2f8 0%, #d4e8f4 50%, #c0d8ec 100%)',
+      background: 'linear-gradient(to bottom, #ddeef8 0%, #c8dff2 45%, #aecce6 100%)',
       textAlign: 'center',
       overflow: 'hidden'
     }}>
@@ -716,7 +719,7 @@ function Hero({ content }) {
 
         <p style={{
           fontFamily: theme.fonts.body,
-          fontSize: 16,
+          fontSize: 17,
           color: theme.textSoft,
           lineHeight: 1.8,
           maxWidth: 480,
@@ -969,7 +972,9 @@ function ExploreGrid({ onNavigate }) {
           fontSize: 'clamp(58px, 12vw, 82px)',
           fontWeight: 400,
           color: theme.text,
-          margin: '0 0 8px'
+          margin: '0 0 8px',
+          animation: 'fadeInUp 0.6s cubic-bezier(0.22,1,0.36,1) both',
+          animationDelay: '0.05s'
         }}>
           Explore the Day
         </h2>
@@ -979,7 +984,9 @@ function ExploreGrid({ onNavigate }) {
           fontWeight: 700,
           letterSpacing: 4,
           textTransform: 'uppercase',
-          color: theme.dustyBlue
+          color: theme.dustyBlue,
+          animation: 'fadeIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
+          animationDelay: '0.2s'
         }}>
           Tap to navigate
         </div>
@@ -1003,9 +1010,10 @@ function ExploreGrid({ onNavigate }) {
               WebkitBackdropFilter: 'blur(12px)',
               border: '1px solid rgba(255,255,255,0.75)',
               borderRadius: 18,
-              padding: '5px 22%',
+              padding: '12px 22%',
               cursor: 'pointer',
               overflow: 'hidden',
+              minHeight: 80,
               transition: 'transform 240ms cubic-bezier(0.22,1,0.36,1), box-shadow 240ms ease-out',
               boxShadow: '0 4px 20px rgba(80,120,160,0.12)',
               animation: 'scaleIn 0.5s cubic-bezier(0.22,1,0.36,1) both',
@@ -1021,7 +1029,7 @@ function ExploreGrid({ onNavigate }) {
                 height: 'auto',
                 display: 'block',
                 mixBlendMode: 'multiply',
-                transition: 'transform 180ms cubic-bezier(0.23,1,0.32,1)'
+                transition: 'transform 180ms cubic-bezier(0.22,1,0.36,1)'
               }}
             />
           </button>
