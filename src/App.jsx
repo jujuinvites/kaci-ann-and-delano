@@ -442,14 +442,18 @@ function ScrollDownIndicator() {
     <div style={{
       position: 'fixed', bottom: 22, left: '50%',
       transform: 'translateX(-50%)',
-      zIndex: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
+      zIndex: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
       animation: 'scrollBounce 1.6s ease-in-out infinite',
-      pointerEvents: 'none', opacity: 0.9
+      pointerEvents: 'none',
+      background: 'rgba(44,72,112,0.45)',
+      backdropFilter: 'blur(8px)',
+      borderRadius: 20,
+      padding: '7px 16px 9px',
+      boxShadow: '0 2px 12px rgba(0,0,0,0.18)'
     }}>
-      <span style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#fff', textShadow: '0 1px 4px rgba(0,0,0,0.35)' }}>Scroll</span>
-      <svg width="18" height="11" viewBox="0 0 18 11" fill="none">
-        <polyline points="1,1 9,9 17,1" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" filter="url(#shadow)"/>
-        <defs><filter id="shadow"><feDropShadow dx="0" dy="1" stdDeviation="1.5" floodColor="rgba(0,0,0,0.4)"/></filter></defs>
+      <span style={{ fontFamily: "'Raleway', sans-serif", fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#fff' }}>Scroll</span>
+      <svg width="16" height="10" viewBox="0 0 18 11" fill="none">
+        <polyline points="1,1 9,9 17,1" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     </div>
   );
