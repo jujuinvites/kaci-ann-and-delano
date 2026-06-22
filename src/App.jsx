@@ -702,7 +702,7 @@ function Hero({ content }) {
           fontSize: 17,
           fontStyle: 'italic',
           color: theme.textSoft,
-          marginBottom: 28,
+          marginBottom: 36,
           animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.44s'
         }}>
@@ -725,7 +725,7 @@ function Hero({ content }) {
 
       <div style={{
         textAlign: 'center',
-        padding: '0 24px 52px',
+        padding: '20px 24px 68px',
         animation: 'fadeInUp 0.5s cubic-bezier(0.23,1,0.32,1) both',
         animationDelay: '0.6s'
       }}>
@@ -735,7 +735,7 @@ function Hero({ content }) {
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
           color: '#5a7a8e',
-          marginBottom: 20
+          marginBottom: 16
         }}>
           Don't forget to use our hashtags — we'd love to see them!
         </div>
@@ -1318,6 +1318,13 @@ function BridalPartyPage({ bridal, onBack }) {
       <Section>
         <SectionHeader overline="By Our Side" title="Bridal Party" light />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
+        <p style={{
+          fontFamily: theme.fonts.body, fontSize: 17,
+          color: 'rgba(255,255,255,0.75)', textAlign: 'center',
+          lineHeight: 1.8, marginBottom: 48, padding: '0 8px'
+        }}>
+          These are the beautiful souls who stood by our side, cheered us on, and made this day even more special. We are so grateful to have you with us.
+        </p>
         {roles.map((item, i) => (
           <div
             key={i}
