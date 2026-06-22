@@ -1028,6 +1028,7 @@ function ExploreGrid({ onNavigate }) {
                 height: 'auto',
                 display: 'block',
                 mixBlendMode: 'multiply',
+                transform: 'scale(1.3)',
                 transition: 'transform 180ms cubic-bezier(0.22,1,0.36,1)'
               }}
             />
