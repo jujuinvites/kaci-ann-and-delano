@@ -1548,7 +1548,7 @@ function KeyFamilyPage({ onBack }) {
         <BackLink onBack={onBack} light />
       </div>
       <Section>
-        <SectionHeader overline="With Gratitude" title="Key Participants" light />
+        <SectionHeader overline="With Gratitude" title="Our People" light />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
         <p style={{
           fontFamily: theme.fonts.body, fontSize: 17,
@@ -1558,7 +1558,7 @@ function KeyFamilyPage({ onBack }) {
           We are deeply grateful for the love and support of our family and the special individuals who have walked alongside us. Thank you for being part of this beautiful journey.
         </p>
         {DEFAULT_KEY_FAMILY.map((group, gi) => (
-          <div key={gi} style={{ marginBottom: 52 }}>
+          <div key={gi} style={{ marginBottom: gi < DEFAULT_KEY_FAMILY.length - 1 ? 80 : 52, paddingTop: gi > 0 ? 16 : 0 }}>
             <div style={{
               fontFamily: theme.fonts.body, fontSize: 21,
               fontWeight: 700, letterSpacing: 4, textTransform: 'uppercase',
