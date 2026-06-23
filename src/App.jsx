@@ -1987,10 +1987,9 @@ function HashtagTicker() {
           HASHTAGS.flatMap((tag, i) => [
             <span key={`t-${copy}-${i}`} style={{
               fontFamily: theme.fonts.body,
-              fontSize: 14,
-              fontWeight: 700,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
+              fontSize: 15,
+              fontWeight: 600,
+              letterSpacing: '0.04em',
               color: 'rgba(255,255,255,0.82)',
               whiteSpace: 'nowrap',
               padding: '0 28px',
@@ -2046,7 +2045,6 @@ export default function App() {
         {page === 'home' && (
           <>
             <Hero content={content} />
-            <HashtagTicker />
             <div style={{ background: '#2c4870' }}>
               <FindYourSeat guests={guests} />
             </div>
@@ -2066,6 +2064,7 @@ export default function App() {
         {page === 'seating' && <SeatingPlanPage guests={guests} onBack={goHome} />}
       </FadeInPage>
 
+      <HashtagTicker />
       <Footer />
     </div>
   );
