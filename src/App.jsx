@@ -646,20 +646,48 @@ function Footer() {
    HERO
    ============================================================= */
 function Hero({ content }) {
+  const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <div style={{
-      background: 'linear-gradient(to bottom, #ffffff 0%, #f0f7fd 18%, #ddeef8 42%, #cce0f2 70%, #c0d8ec 100%)',
-      textAlign: 'center',
-      overflow: 'hidden'
-    }}>
-      <div style={{ padding: '72px 24px 48px', maxWidth: 680, margin: '0 auto' }}>
+    <div style={{ position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
+      {/* Couple photo — parallax background */}
+      <img
+        src={theme.images.coupleBannerImage}
+        alt=""
+        aria-hidden
+        style={{
+          position: 'absolute',
+          top: 0, left: 0,
+          width: '100%',
+          height: '140%',
+          objectFit: 'cover',
+          objectPosition: 'center top',
+          transform: `translateY(${scrollY * 0.35}px)`,
+          willChange: 'transform',
+        }}
+        onError={e => { e.currentTarget.style.display = 'none'; }}
+      />
+
+      {/* Dark overlay — lighter in mid to show photo, darker at edges */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 1,
+        background: 'linear-gradient(to bottom, rgba(15,28,48,0.62) 0%, rgba(15,28,48,0.38) 45%, rgba(15,28,48,0.70) 100%)'
+      }} />
+
+      {/* Text content */}
+      <div style={{ position: 'relative', zIndex: 2, padding: '72px 24px 40px', maxWidth: 680, margin: '0 auto' }}>
         <div style={{
           fontFamily: theme.fonts.body,
           fontSize: 17,
           fontWeight: 700,
           letterSpacing: 4,
           textTransform: 'uppercase',
-          color: theme.dustyBlue,
+          color: 'rgba(255,255,255,0.80)',
           marginBottom: 36,
           animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.05s'
@@ -675,6 +703,7 @@ function Hero({ content }) {
             maxWidth: 560,
             display: 'block',
             margin: '0 auto 40px',
+            filter: 'brightness(0) invert(1)',
             animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
             animationDelay: '0.15s'
           }}
@@ -690,19 +719,19 @@ function Hero({ content }) {
           animation: 'fadeIn 0.4s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.28s'
         }}>
-          <div style={{ height: 1, width: 56, background: theme.divider }} />
+          <div style={{ height: 1, width: 56, background: 'rgba(255,255,255,0.35)' }} />
           <svg width="32" height="18" viewBox="0 0 32 18" fill="none">
-            <circle cx="11" cy="9" r="7" stroke={theme.dustyBlue} strokeWidth="1.5" fill="none" />
-            <circle cx="21" cy="9" r="7" stroke={theme.dustyBlue} strokeWidth="1.5" fill="none" />
+            <circle cx="11" cy="9" r="7" stroke="rgba(255,255,255,0.70)" strokeWidth="1.5" fill="none" />
+            <circle cx="21" cy="9" r="7" stroke="rgba(255,255,255,0.70)" strokeWidth="1.5" fill="none" />
           </svg>
-          <div style={{ height: 1, width: 56, background: theme.divider }} />
+          <div style={{ height: 1, width: 56, background: 'rgba(255,255,255,0.35)' }} />
         </div>
 
         <div style={{
           fontFamily: theme.fonts.title,
           fontSize: 'clamp(20px, 3vw, 26px)',
           fontWeight: 700,
-          color: theme.text,
+          color: '#ffffff',
           letterSpacing: 1,
           marginBottom: 10,
           animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
@@ -715,7 +744,7 @@ function Hero({ content }) {
           fontFamily: theme.fonts.title,
           fontSize: 17,
           fontStyle: 'italic',
-          color: theme.textSoft,
+          color: 'rgba(255,255,255,0.80)',
           marginBottom: 36,
           animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.44s'
@@ -726,7 +755,7 @@ function Hero({ content }) {
         <p style={{
           fontFamily: theme.fonts.body,
           fontSize: 17,
-          color: theme.textSoft,
+          color: 'rgba(255,255,255,0.75)',
           lineHeight: 1.8,
           maxWidth: 480,
           margin: '0 auto',
@@ -737,42 +766,30 @@ function Hero({ content }) {
         </p>
       </div>
 
+      {/* Hashtag — single display element */}
       <div style={{
-        textAlign: 'center',
-        padding: '20px 24px 68px',
-        animation: 'fadeInUp 0.5s cubic-bezier(0.23,1,0.32,1) both',
-        animationDelay: '0.6s'
+        position: 'relative', zIndex: 2,
+        padding: '16px 24px 52px',
+        animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
+        animationDelay: '0.65s'
       }}>
         <div style={{
-          fontFamily: "'Raleway', sans-serif",
-          fontSize: 13,
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          color: '#5a7a8e',
-          marginBottom: 16
+          fontFamily: theme.fonts.script,
+          fontSize: 'clamp(30px, 6vw, 50px)',
+          color: 'rgba(255,255,255,0.82)',
+          letterSpacing: '0.01em',
         }}>
-          Don't forget to use our hashtags — we'd love to see them!
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px 20px' }}>
-          {['#HappilyEverHuntley', '#HuntleyHarmony', '#HuntleyHolyUnion', '#HeavenlyHitchedHuntleys'].map(tag => (
-            <div key={tag} style={{
-              fontFamily: "'Raleway', sans-serif",
-              fontSize: 15,
-              fontWeight: 600,
-              color: '#5a88a8',
-              whiteSpace: 'nowrap'
-            }}>
-              {tag}
-            </div>
-          ))}
+          #HappilyEverHuntley
         </div>
       </div>
 
+      {/* Flowers */}
       <img
         src={theme.images.flowersImage}
         alt=""
         aria-hidden
         style={{
+          position: 'relative', zIndex: 2,
           width: '100%',
           display: 'block',
           animation: 'fadeIn 0.7s cubic-bezier(0.23,1,0.32,1) both',
@@ -780,6 +797,14 @@ function Hero({ content }) {
         }}
         onError={e => { e.currentTarget.style.display = 'none'; }}
       />
+
+      {/* Gradient transition → Find Your Seat navy */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0,
+        height: 90, zIndex: 3,
+        background: 'linear-gradient(to bottom, transparent 0%, #2c4870 100%)',
+        pointerEvents: 'none',
+      }} />
     </div>
   );
 }
@@ -1047,7 +1072,7 @@ function ExploreGrid({ onNavigate }) {
       <div style={{
         display: 'grid',
         gap: 10,
-        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+        gridTemplateColumns: 'repeat(2, 1fr)',
         maxWidth: 880,
         margin: '0 auto'
       }}>
