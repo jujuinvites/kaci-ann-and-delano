@@ -30,6 +30,10 @@ function GlobalStyles() {
         from { opacity: 0; transform: translateX(32px); }
         to   { opacity: 1; transform: translateX(0); }
       }
+      @keyframes ticker {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
 
       /* Press feedback — every clickable element */
       button:active, a:active {
@@ -760,20 +764,38 @@ function Hero({ content }) {
         </p>
       </div>
 
-      {/* Hashtag — single display element */}
+      {/* Hashtag marquee ticker */}
       <div style={{
         position: 'relative', zIndex: 2,
-        padding: '16px 24px 52px',
+        overflow: 'hidden',
+        padding: '20px 0 52px',
         animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
-        animationDelay: '0.65s'
+        animationDelay: '0.65s',
       }}>
         <div style={{
-          fontFamily: theme.fonts.script,
-          fontSize: 'clamp(30px, 6vw, 50px)',
-          color: theme.dustyBlue,
-          letterSpacing: '0.01em',
+          display: 'flex',
+          alignItems: 'center',
+          width: 'max-content',
+          animation: 'ticker 30s linear infinite',
+          willChange: 'transform',
         }}>
-          #HappilyEverHuntley
+          {[0, 1].flatMap(copy =>
+            ['#HappilyEverHuntley', '#HuntleyHarmony', '#HuntleyHolyUnion', '#HeavenlyHitchedHuntleys'].flatMap((tag, i) => [
+              <span key={`t-${copy}-${i}`} style={{
+                fontFamily: theme.fonts.script,
+                fontSize: 'clamp(22px, 4vw, 34px)',
+                color: '#6b90a8',
+                whiteSpace: 'nowrap',
+                padding: '0 22px',
+              }}>
+                {tag}
+              </span>,
+              <svg key={`d-${copy}-${i}`} width="22" height="14" viewBox="0 0 22 14" fill="none" style={{ flexShrink: 0 }}>
+                <circle cx="7" cy="7" r="5" stroke="#6b90a8" strokeWidth="1.1" fill="none" />
+                <circle cx="15" cy="7" r="5" stroke="#6b90a8" strokeWidth="1.1" fill="none" />
+              </svg>
+            ])
+          )}
         </div>
       </div>
 
