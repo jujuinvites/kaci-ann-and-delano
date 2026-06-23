@@ -1110,9 +1110,6 @@ function TimelinePage({ content, onBack }) {
         <BackLink onBack={onBack} />
       </div>
       <Section>
-        <div style={{ textAlign: 'center', marginBottom: 4 }}>
-          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
-        </div>
         <SectionHeader overline="The day at a glance" title="Timeline" />
 
       <div style={{ maxWidth: 460, margin: '0 auto', position: 'relative', padding: '12px 8px 32px' }}>
@@ -1187,9 +1184,6 @@ function MenuPage({ content, onBack }) {
         <BackLink onBack={onBack} />
       </div>
       <Section>
-        <div style={{ textAlign: 'center', marginBottom: 4 }}>
-          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
-        </div>
         <SectionHeader overline="Tonight's Table" title="Menu" subtitle={content.menuNote} />
       <div style={{ maxWidth: 520, margin: '0 auto', textAlign: 'center' }}>
         {content.menu.map((sec, i) => (
@@ -1253,9 +1247,6 @@ function LoveWisdomPage({ onBack }) {
       <div style={{ maxWidth: 580, margin: '0 auto', padding: '20px 24px 0' }}>
         <BackLink onBack={onBack} />
 
-        <div style={{ textAlign: 'center', marginBottom: 4, marginTop: 20 }}>
-          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
-        </div>
         <SectionHeader overline="Table Activities" title="Love & Wisdom" />
 
         <p style={{
@@ -1913,9 +1904,6 @@ function SeatingPlanPage({ guests, onBack }) {
         <BackLink onBack={onBack} />
       </div>
       <Section>
-        <div style={{ textAlign: 'center', marginBottom: 4 }}>
-          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
-        </div>
         <SectionHeader overline="Seating" title="Seating Plan" />
         <SeatingFinder guests={guests} />
       <div style={{
