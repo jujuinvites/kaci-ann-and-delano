@@ -1975,7 +1975,7 @@ const HASHTAGS = ['#HappilyEverHuntley', '#HuntleyHarmony', '#HuntleyHolyUnion',
 
 function HashtagTicker() {
   return (
-    <div style={{ background: '#2c4870', overflow: 'hidden', padding: '13px 0' }}>
+    <div style={{ overflow: 'hidden', padding: '14px 0' }}>
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -1988,20 +1988,22 @@ function HashtagTicker() {
             <span key={`t-${copy}-${i}`} style={{
               fontFamily: theme.fonts.body,
               fontSize: 15,
-              fontWeight: 600,
+              fontWeight: 700,
               letterSpacing: '0.04em',
-              color: 'rgba(255,255,255,0.82)',
+              color: '#2c4870',
               whiteSpace: 'nowrap',
               padding: '0 28px',
             }}>
               {tag}
             </span>,
-            <img key={`d-${copy}-${i}`}
-              src={theme.images.dividerImage}
-              alt=""
-              aria-hidden
-              style={{ height: 38, width: 38, flexShrink: 0, objectFit: 'cover' }}
-            />,
+            <span key={`d-${copy}-${i}`} style={{
+              color: '#2c4870',
+              fontSize: 13,
+              flexShrink: 0,
+              lineHeight: 1,
+            }}>
+              ✦
+            </span>,
           ])
         )}
       </div>
