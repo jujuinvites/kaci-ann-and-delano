@@ -107,6 +107,7 @@ const theme = {
     logoImage: '/images/logo.png',
     namesImage: '/images/names.png',
     flowersImage: '/images/flowers.png',
+    heroBgImage: '/images/hero.jpg',
     coupleBannerImage: '/images/couple-banner.png',
     bigFlowersImage: '/images/big-flowers.png',
     blueFlowerImage: '/images/blue-flower.png',
@@ -655,9 +656,9 @@ function Hero({ content }) {
 
   return (
     <div style={{ position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
-      {/* Couple photo — parallax background */}
+      {/* Watercolor background — parallax */}
       <img
-        src={theme.images.coupleBannerImage}
+        src={theme.images.heroBgImage}
         alt=""
         aria-hidden
         style={{
@@ -673,12 +674,6 @@ function Hero({ content }) {
         onError={e => { e.currentTarget.style.display = 'none'; }}
       />
 
-      {/* Dark overlay — lighter in mid to show photo, darker at edges */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to bottom, rgba(15,28,48,0.62) 0%, rgba(15,28,48,0.38) 45%, rgba(15,28,48,0.70) 100%)'
-      }} />
-
       {/* Text content */}
       <div style={{ position: 'relative', zIndex: 2, padding: '72px 24px 40px', maxWidth: 680, margin: '0 auto' }}>
         <div style={{
@@ -687,7 +682,7 @@ function Hero({ content }) {
           fontWeight: 700,
           letterSpacing: 4,
           textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.80)',
+          color: theme.dustyBlue,
           marginBottom: 36,
           animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.05s'
@@ -703,7 +698,6 @@ function Hero({ content }) {
             maxWidth: 560,
             display: 'block',
             margin: '0 auto 40px',
-            filter: 'brightness(0) invert(1)',
             animation: 'fadeInUp 0.42s cubic-bezier(0.23,1,0.32,1) both',
             animationDelay: '0.15s'
           }}
@@ -719,19 +713,19 @@ function Hero({ content }) {
           animation: 'fadeIn 0.4s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.28s'
         }}>
-          <div style={{ height: 1, width: 56, background: 'rgba(255,255,255,0.35)' }} />
+          <div style={{ height: 1, width: 56, background: theme.divider }} />
           <svg width="32" height="18" viewBox="0 0 32 18" fill="none">
-            <circle cx="11" cy="9" r="7" stroke="rgba(255,255,255,0.70)" strokeWidth="1.5" fill="none" />
-            <circle cx="21" cy="9" r="7" stroke="rgba(255,255,255,0.70)" strokeWidth="1.5" fill="none" />
+            <circle cx="11" cy="9" r="7" stroke={theme.dustyBlue} strokeWidth="1.5" fill="none" />
+            <circle cx="21" cy="9" r="7" stroke={theme.dustyBlue} strokeWidth="1.5" fill="none" />
           </svg>
-          <div style={{ height: 1, width: 56, background: 'rgba(255,255,255,0.35)' }} />
+          <div style={{ height: 1, width: 56, background: theme.divider }} />
         </div>
 
         <div style={{
           fontFamily: theme.fonts.title,
           fontSize: 'clamp(20px, 3vw, 26px)',
           fontWeight: 700,
-          color: '#ffffff',
+          color: theme.text,
           letterSpacing: 1,
           marginBottom: 10,
           animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
@@ -744,7 +738,7 @@ function Hero({ content }) {
           fontFamily: theme.fonts.title,
           fontSize: 17,
           fontStyle: 'italic',
-          color: 'rgba(255,255,255,0.80)',
+          color: theme.textSoft,
           marginBottom: 36,
           animation: 'fadeInUp 0.45s cubic-bezier(0.23,1,0.32,1) both',
           animationDelay: '0.44s'
@@ -755,7 +749,7 @@ function Hero({ content }) {
         <p style={{
           fontFamily: theme.fonts.body,
           fontSize: 17,
-          color: 'rgba(255,255,255,0.75)',
+          color: theme.textSoft,
           lineHeight: 1.8,
           maxWidth: 480,
           margin: '0 auto',
@@ -776,7 +770,7 @@ function Hero({ content }) {
         <div style={{
           fontFamily: theme.fonts.script,
           fontSize: 'clamp(30px, 6vw, 50px)',
-          color: 'rgba(255,255,255,0.82)',
+          color: theme.dustyBlue,
           letterSpacing: '0.01em',
         }}>
           #HappilyEverHuntley
