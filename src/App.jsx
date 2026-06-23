@@ -783,23 +783,27 @@ function Hero({ content }) {
    ============================================================= */
 function FindYourSeat({ guests }) {
   const [query, setQuery] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | loading | results | none
   const [results, setResults] = useState([]);
-  const [searched, setSearched] = useState(false);
+  const resultRef = React.useRef(null);
+
+  function getTable(g) {
+    if (!g.table && ['bride','groom'].includes((g.group||'').toLowerCase())) return 'Sweetheart';
+    return g.table || '—';
+  }
 
   const handleSearch = (e) => {
     e?.preventDefault?.();
-    if (!query.trim()) return;
-    setLoading(true);
+    const q = query.trim();
+    if (!q) return;
+    setStatus('loading');
     setResults([]);
-    setSearched(false);
     setTimeout(() => {
-      const q = query.trim().toLowerCase();
-      const matches = guests.filter(g => (g.name || '').toLowerCase().includes(q));
-      setResults(matches);
-      setLoading(false);
-      setSearched(true);
-    }, 450);
+      const found = guests.filter(g => (g.name || '').toLowerCase().includes(q.toLowerCase()));
+      setResults(found);
+      setStatus(found.length > 0 ? 'results' : 'none');
+      setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+    }, 600);
   };
 
   return (
@@ -816,132 +820,167 @@ function FindYourSeat({ guests }) {
         </h2>
         <div style={{
           fontFamily: theme.fonts.body,
-          fontSize: 15,
-          fontWeight: 700,
-          letterSpacing: 4,
-          textTransform: 'uppercase',
-          color: theme.dustyBlue
+          fontSize: 14,
+          color: theme.textSoft
         }}>
-          Search by your name below
+          Type your name to find your table
         </div>
       </div>
 
-      <form
-        onSubmit={handleSearch}
-        style={{
-          display: 'flex',
-          gap: 10,
-          maxWidth: 520,
-          margin: '0 auto',
-          flexWrap: 'wrap',
-          justifyContent: 'center'
-        }}
-      >
-        <input
-          type="text"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder="Your name"
-          style={{
-            flex: '1 1 220px',
-            minWidth: 220,
-            padding: '14px 20px',
-            borderRadius: 999,
-            border: `1px solid ${theme.divider}`,
-            background: theme.cardBg,
-            fontSize: 15,
-            outline: 'none',
-            color: theme.text,
-            boxShadow: theme.cardShadow,
-            transition: 'box-shadow 200ms ease, border-color 200ms ease'
-          }}
-          onFocus={e => { e.currentTarget.style.borderColor = theme.dustyBlue; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(90,136,168,0.15)'; }}
-          onBlur={e => { e.currentTarget.style.borderColor = theme.divider; e.currentTarget.style.boxShadow = theme.cardShadow; }}
-        />
-        <button
-          type="submit"
-          style={{
-            padding: '14px 28px',
-            borderRadius: 999,
-            border: 'none',
-            background: theme.dustyBlue,
-            color: '#fff',
-            fontSize: 15,
-            fontWeight: 700,
-            letterSpacing: 2,
-            textTransform: 'uppercase',
-            cursor: 'pointer',
-            transition: 'transform 200ms ease, box-shadow 200ms ease',
-            boxShadow: '0 4px 14px rgba(107,143,168,0.30)'
-          }}
-          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 22px rgba(107,143,168,0.35)'; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(107,143,168,0.30)'; }}
-        >
-          Find My Seat
-        </button>
+      <form onSubmit={handleSearch} style={{ maxWidth: 520, margin: '0 auto' }}>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <input
+            type="text"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            placeholder="Enter your full name"
+            autoComplete="off"
+            spellCheck="false"
+            style={{
+              flex: '1 1 200px',
+              minWidth: 0,
+              padding: '14px 18px',
+              border: `2px solid ${status === 'none' ? '#e0a0a0' : 'rgba(90,136,168,0.35)'}`,
+              borderRadius: 14,
+              fontFamily: theme.fonts.body,
+              fontSize: 16,
+              color: theme.text,
+              background: 'rgba(255,255,255,0.88)',
+              outline: 'none',
+              transition: 'border-color 200ms ease, box-shadow 200ms ease',
+            }}
+            onFocus={e => { e.target.style.borderColor = theme.dustyBlue; e.target.style.boxShadow = '0 0 0 4px rgba(90,136,168,0.15)'; }}
+            onBlur={e => { e.target.style.borderColor = status === 'none' ? '#e0a0a0' : 'rgba(90,136,168,0.35)'; e.target.style.boxShadow = 'none'; }}
+          />
+          <button
+            type="submit"
+            disabled={status === 'loading'}
+            style={{
+              padding: '14px 24px',
+              border: 'none',
+              borderRadius: 14,
+              background: `linear-gradient(135deg, ${theme.dustyBlue} 0%, #3d6880 100%)`,
+              color: '#fff',
+              fontFamily: theme.fonts.body,
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+              boxShadow: '0 4px 16px rgba(61,104,128,0.32)',
+              transition: 'transform 160ms cubic-bezier(0.22,1,0.36,1), box-shadow 160ms ease',
+              whiteSpace: 'nowrap',
+              opacity: status === 'loading' ? 0.7 : 1,
+            }}
+            onMouseEnter={e => { if (status !== 'loading') { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 22px rgba(61,104,128,0.38)'; }}}
+            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 16px rgba(61,104,128,0.32)'; }}
+          >
+            {status === 'loading' ? 'Finding your seat…' : 'Find My Seat'}
+          </button>
+        </div>
       </form>
 
-      <div style={{ marginTop: 28, minHeight: 80, textAlign: 'center' }}>
-        {loading && (
-          <div style={{ fontFamily: theme.fonts.body, color: theme.textSoft, animation: 'fadeIn 0.3s cubic-bezier(0.23,1,0.32,1) both' }}>
-            Searching…
-          </div>
-        )}
+      <div ref={resultRef} style={{ maxWidth: 480, margin: '20px auto 0' }}>
 
-        {!loading && searched && results.length > 0 && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 420, margin: '0 auto' }}>
-            {results.map((r, idx) => (
-              <SoftCard key={idx} style={{
-                textAlign: 'center',
-                background: `linear-gradient(180deg, #fff, ${theme.beigeBg})`,
-                animation: `scaleIn 0.45s cubic-bezier(0.22,1,0.36,1) ${idx * 0.07}s both`
-              }}>
-                <div style={{
-                  fontFamily: theme.fonts.body,
-                  fontSize: 15,
-                  fontWeight: 700,
-                  letterSpacing: 3,
-                  textTransform: 'uppercase',
-                  color: theme.dustyBlue,
-                  marginBottom: 8
-                }}>
-                  You're seated here
+        {/* Single result */}
+        {status === 'results' && results.length === 1 && (() => {
+          const g = results[0];
+          const tbl = getTable(g);
+          return (
+            <div style={{
+              background: 'linear-gradient(160deg, #fff 0%, #eef5fb 100%)',
+              border: '1px solid rgba(90,136,168,0.20)',
+              borderRadius: 20,
+              padding: '28px 24px',
+              textAlign: 'center',
+              boxShadow: '0 6px 28px rgba(60,100,140,0.12)',
+              animation: 'scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both',
+            }}>
+              <div style={{ fontSize: 24, marginBottom: 6 }}>✨</div>
+              <div style={{ fontFamily: theme.fonts.body, fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 4 }}>
+                We found your seat!
+              </div>
+              <div style={{ fontFamily: theme.fonts.body, fontSize: 13, color: theme.textSoft, marginBottom: 14 }}>
+                💙 Welcome, you're seated at:
+              </div>
+              <div style={{ fontFamily: theme.fonts.names, fontSize: 'clamp(20px,4.5vw,26px)', color: theme.text, marginBottom: 24, lineHeight: 1.3 }}>
+                {g.name}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '10px 14px', marginBottom: 24 }}>
+                <div style={{ background: '#ddeaf5', border: '1.5px solid rgba(90,136,168,0.22)', borderRadius: 14, padding: '12px 24px', minWidth: 90 }}>
+                  <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3d6880', marginBottom: 5 }}>Table</div>
+                  <div style={{ fontFamily: theme.fonts.names, fontSize: 28, fontWeight: 700, color: theme.text }}>{tbl}</div>
                 </div>
-                <div style={{ fontFamily: theme.fonts.title, fontSize: 28, color: theme.text }}>
-                  {r.name}
-                </div>
-                <div style={{
-                  marginTop: 16,
+                {g.seat && (
+                  <div style={{ background: '#ddeaf5', border: '1.5px solid rgba(90,136,168,0.22)', borderRadius: 14, padding: '12px 24px', minWidth: 90 }}>
+                    <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3d6880', marginBottom: 5 }}>Seat</div>
+                    <div style={{ fontFamily: theme.fonts.names, fontSize: 28, fontWeight: 700, color: theme.text }}>{g.seat}</div>
+                  </div>
+                )}
+                {g.group && (
+                  <div style={{ background: '#ddeaf5', border: '1.5px solid rgba(90,136,168,0.22)', borderRadius: 14, padding: '12px 24px', minWidth: 90 }}>
+                    <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3d6880', marginBottom: 5 }}>Group</div>
+                    <div style={{ fontFamily: theme.fonts.names, fontSize: 16, fontWeight: 600, color: theme.text }}>{g.group}</div>
+                  </div>
+                )}
+              </div>
+              <div style={{ fontFamily: theme.fonts.body, fontSize: 14, color: theme.textSoft, paddingTop: 16, borderTop: '1px solid rgba(90,136,168,0.14)', lineHeight: 1.7 }}>
+                We can't wait to celebrate with you! 💙
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* Multiple results */}
+        {status === 'results' && results.length > 1 && (
+          <div style={{ animation: 'fadeInUp 0.4s cubic-bezier(0.22,1,0.36,1) both' }}>
+            <div style={{ fontFamily: theme.fonts.body, fontSize: 12, color: theme.textSoft, textAlign: 'center', marginBottom: 12, letterSpacing: '0.04em' }}>
+              {results.length} guests found — tap yours below
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {results.map((g, i) => (
+                <div key={i} style={{
+                  background: 'linear-gradient(160deg, #fff 0%, #eef5fb 100%)',
+                  border: '1px solid rgba(90,136,168,0.18)',
+                  borderRadius: 16,
+                  padding: '16px 20px',
                   display: 'flex',
-                  justifyContent: 'center',
-                  gap: 28,
-                  fontFamily: theme.fonts.body,
-                  fontSize: 14,
-                  color: theme.textSoft
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 16,
+                  boxShadow: '0 4px 14px rgba(60,100,140,0.08)',
+                  animation: 'scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both',
+                  animationDelay: `${i * 0.06}s`,
                 }}>
-                  {[
-                    { label: 'Table', value: r.table || (['bride','groom'].includes((r.group||'').toLowerCase()) ? 'Sweetheart' : '—'), big: false },
-                    { label: 'Reserved Seat', value: r.seat || '—', big: false },
-                    { label: 'Group', value: r.group || '—', big: false }
-                  ].map(({ label, value, big }) => (
-                    <div key={label}>
-                      <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase' }}>{label}</div>
-                      <div style={{ fontSize: big ? 22 : 14, color: theme.text, marginTop: 4 }}>{value}</div>
-                    </div>
-                  ))}
+                  <div>
+                    <div style={{ fontFamily: theme.fonts.names, fontSize: 17, color: theme.text }}>{g.name}</div>
+                    {g.group && <div style={{ fontFamily: theme.fonts.body, fontSize: 12, color: theme.textSoft, marginTop: 2 }}>{g.group}</div>}
+                  </div>
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: theme.dustyBlue }}>Table</div>
+                    <div style={{ fontFamily: theme.fonts.names, fontSize: 22, fontWeight: 600, color: theme.text }}>{getTable(g)}{g.seat ? ` · Seat ${g.seat}` : ''}</div>
+                  </div>
                 </div>
-              </SoftCard>
-            ))}
+              ))}
+            </div>
           </div>
         )}
 
-        {!loading && searched && results.length === 0 && (
+        {/* No result */}
+        {status === 'none' && (
           <div style={{
-            fontFamily: theme.fonts.body,
-            color: theme.textSoft,
-            animation: 'fadeIn 0.4s cubic-bezier(0.23,1,0.32,1) both'
+            background: 'rgba(255,255,255,0.7)',
+            border: '1px dashed rgba(90,136,168,0.30)',
+            borderRadius: 16,
+            padding: '24px 20px',
+            textAlign: 'center',
+            animation: 'fadeInUp 0.4s cubic-bezier(0.22,1,0.36,1) both',
           }}>
-            We couldn't find that name — please try a different spelling, or ask a host.
+            <div style={{ fontSize: 22, marginBottom: 8 }}>💙</div>
+            <div style={{ fontFamily: theme.fonts.body, fontSize: 14, color: theme.textSoft, lineHeight: 1.65 }}>
+              We couldn't find <strong style={{ color: '#3d6880' }}>"{query}"</strong> on the guest list.<br />
+              Please check the spelling or visit the welcome desk — we'll help you out!
+            </div>
           </div>
         )}
       </div>
@@ -1625,6 +1664,215 @@ function KeyFamilyPage({ onBack }) {
 /* =============================================================
    PAGE: SEATING PLAN
    ============================================================= */
+function SeatingFinder({ guests }) {
+  const [query, setQuery] = React.useState('');
+  const [status, setStatus] = React.useState('idle'); // idle | loading | results | none
+  const [results, setResults] = React.useState([]);
+  const resultRef = React.useRef(null);
+
+  function doSearch(e) {
+    e.preventDefault();
+    const q = query.trim();
+    if (!q) return;
+    setStatus('loading');
+    setResults([]);
+    setTimeout(() => {
+      const q2 = q.toLowerCase();
+      const found = guests.filter(g => (g.name || '').toLowerCase().includes(q2));
+      setResults(found);
+      setStatus(found.length > 0 ? 'results' : 'none');
+      setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+    }, 600);
+  }
+
+  function getTable(g) {
+    if (!g.table && ['bride','groom'].includes((g.group||'').toLowerCase())) return 'Sweetheart';
+    return g.table || '—';
+  }
+
+  return (
+    <div style={{ marginBottom: 40 }}>
+      {/* Header */}
+      <div style={{ textAlign: 'center', marginBottom: 28 }}>
+        <div style={{ fontFamily: theme.fonts.body, fontSize: 13, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 10 }}>
+          Find Your Seat
+        </div>
+        <div style={{ fontFamily: theme.fonts.body, fontSize: 15, color: theme.textSoft }}>
+          Type your name to find your table
+        </div>
+      </div>
+
+      {/* Search form — stacked column for mobile */}
+      <form onSubmit={doSearch} style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 480, margin: '0 auto' }}>
+        <input
+          type="text"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder="Enter your full name"
+          autoComplete="off"
+          spellCheck="false"
+          style={{
+            width: '100%',
+            boxSizing: 'border-box',
+            padding: '16px 20px',
+            border: `2.5px solid ${status === 'none' ? '#d9534f' : theme.dustyBlue}`,
+            borderRadius: 14,
+            fontFamily: theme.fonts.body,
+            fontSize: 17,
+            color: '#1a2a38',
+            background: '#ffffff',
+            outline: 'none',
+            boxShadow: '0 2px 8px rgba(61,104,128,0.10)',
+            transition: 'border-color 200ms ease, box-shadow 200ms ease',
+          }}
+          onFocus={e => { e.target.style.borderColor = '#2c5f7a'; e.target.style.boxShadow = '0 0 0 4px rgba(90,136,168,0.18)'; }}
+          onBlur={e => { e.target.style.borderColor = status === 'none' ? '#d9534f' : theme.dustyBlue; e.target.style.boxShadow = '0 2px 8px rgba(61,104,128,0.10)'; }}
+        />
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          style={{
+            width: '100%',
+            padding: '16px 24px',
+            border: 'none',
+            borderRadius: 14,
+            background: status === 'loading'
+              ? 'rgba(90,136,168,0.55)'
+              : `linear-gradient(135deg, #3d6880 0%, ${theme.dustyBlue} 100%)`,
+            color: '#ffffff',
+            fontFamily: theme.fonts.body,
+            fontSize: 15,
+            fontWeight: 700,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+            boxShadow: status === 'loading' ? 'none' : '0 4px 18px rgba(61,104,128,0.38)',
+            transition: 'background 200ms ease, box-shadow 200ms ease, transform 160ms cubic-bezier(0.22,1,0.36,1)',
+          }}
+          onMouseEnter={e => { if (status !== 'loading') { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(61,104,128,0.44)'; }}}
+          onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = status === 'loading' ? 'none' : '0 4px 18px rgba(61,104,128,0.38)'; }}
+        >
+          {status === 'loading' ? 'Finding your seat…' : 'Find My Seat'}
+        </button>
+      </form>
+
+      {/* Results */}
+      <div ref={resultRef} style={{ maxWidth: 480, margin: '20px auto 0' }}>
+
+        {/* Single result */}
+        {status === 'results' && results.length === 1 && (() => {
+          const g = results[0];
+          const tbl = getTable(g);
+          return (
+            <div style={{
+              background: 'linear-gradient(160deg, #ffffff 0%, #eef5fb 100%)',
+              border: '1.5px solid rgba(90,136,168,0.22)',
+              borderRadius: 22,
+              padding: '32px 28px',
+              textAlign: 'center',
+              boxShadow: '0 8px 32px rgba(60,100,140,0.14)',
+              animation: 'scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both',
+            }}>
+              <div style={{ fontSize: 26, marginBottom: 8 }}>✨</div>
+              <div style={{ fontFamily: theme.fonts.body, fontSize: 11, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 4 }}>
+                We found your seat!
+              </div>
+              <div style={{ fontFamily: theme.fonts.body, fontSize: 13, color: theme.textSoft, marginBottom: 14 }}>
+                💙 Welcome, you're seated at:
+              </div>
+              <div style={{ fontFamily: theme.fonts.names, fontSize: 'clamp(22px,4.5vw,28px)', fontWeight: 600, color: '#1a2a38', marginBottom: 24, lineHeight: 1.3 }}>
+                {g.name}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '10px 14px', marginBottom: 24 }}>
+                <div style={{ background: '#ddeaf5', border: '1.5px solid rgba(90,136,168,0.22)', borderRadius: 14, padding: '12px 24px', minWidth: 90 }}>
+                  <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3d6880', marginBottom: 5 }}>Table</div>
+                  <div style={{ fontFamily: theme.fonts.names, fontSize: 28, fontWeight: 700, color: '#1a2a38' }}>{tbl}</div>
+                </div>
+                {g.seat && (
+                  <div style={{ background: '#ddeaf5', border: '1.5px solid rgba(90,136,168,0.22)', borderRadius: 14, padding: '12px 24px', minWidth: 90 }}>
+                    <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3d6880', marginBottom: 5 }}>Seat</div>
+                    <div style={{ fontFamily: theme.fonts.names, fontSize: 28, fontWeight: 700, color: '#1a2a38' }}>{g.seat}</div>
+                  </div>
+                )}
+                {g.group && (
+                  <div style={{ background: '#ddeaf5', border: '1.5px solid rgba(90,136,168,0.22)', borderRadius: 14, padding: '12px 24px', minWidth: 90 }}>
+                    <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3d6880', marginBottom: 5 }}>Group</div>
+                    <div style={{ fontFamily: theme.fonts.names, fontSize: 16, fontWeight: 600, color: '#1a2a38' }}>{g.group}</div>
+                  </div>
+                )}
+              </div>
+              <div style={{ fontFamily: theme.fonts.body, fontSize: 14, color: theme.textSoft, paddingTop: 16, borderTop: '1px solid rgba(90,136,168,0.14)', lineHeight: 1.7 }}>
+                We can't wait to celebrate with you! 💙
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* Multiple results */}
+        {status === 'results' && results.length > 1 && (
+          <div style={{ animation: 'fadeInUp 0.4s cubic-bezier(0.22,1,0.36,1) both' }}>
+            <div style={{ fontFamily: theme.fonts.body, fontSize: 13, color: theme.textSoft, textAlign: 'center', marginBottom: 14, letterSpacing: '0.04em' }}>
+              {results.length} guests found — tap yours below
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {results.map((g, i) => (
+                <div key={i} style={{
+                  background: 'linear-gradient(160deg, #ffffff 0%, #eef5fb 100%)',
+                  border: '1.5px solid rgba(90,136,168,0.20)',
+                  borderRadius: 16,
+                  padding: '16px 20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 16,
+                  boxShadow: '0 4px 14px rgba(60,100,140,0.09)',
+                  animation: 'scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both',
+                  animationDelay: `${i * 0.06}s`,
+                }}>
+                  <div>
+                    <div style={{ fontFamily: theme.fonts.names, fontSize: 17, color: '#1a2a38' }}>{g.name}</div>
+                    {g.group && <div style={{ fontFamily: theme.fonts.body, fontSize: 12, color: theme.textSoft, marginTop: 3 }}>{g.group}</div>}
+                  </div>
+                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                    <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3d6880' }}>Table</div>
+                    <div style={{ fontFamily: theme.fonts.names, fontSize: 22, fontWeight: 700, color: '#1a2a38' }}>{getTable(g)}{g.seat ? ` · Seat ${g.seat}` : ''}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* No result */}
+        {status === 'none' && (
+          <div style={{
+            background: '#ffffff',
+            border: '1.5px dashed rgba(90,136,168,0.35)',
+            borderRadius: 18,
+            padding: '28px 24px',
+            textAlign: 'center',
+            animation: 'fadeInUp 0.4s cubic-bezier(0.22,1,0.36,1) both',
+            boxShadow: '0 4px 16px rgba(60,100,140,0.06)',
+          }}>
+            <div style={{ fontSize: 24, marginBottom: 10 }}>💙</div>
+            <div style={{ fontFamily: theme.fonts.body, fontSize: 15, color: '#4a5a6a', lineHeight: 1.7 }}>
+              We couldn't find your name.<br />
+              Please check the spelling or visit the welcome desk 💙
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Divider before full table listing */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, margin: '40px auto 0', maxWidth: 480, opacity: 0.45 }}>
+        <div style={{ flex: 1, height: 1, background: theme.dustyBlue }} />
+        <div style={{ fontFamily: theme.fonts.body, fontSize: 11, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: theme.dustyBlue }}>All Tables</div>
+        <div style={{ flex: 1, height: 1, background: theme.dustyBlue }} />
+      </div>
+    </div>
+  );
+}
+
 function SeatingPlanPage({ guests, onBack }) {
   const grouped = useMemo(() => {
     const map = {};
@@ -1663,6 +1911,7 @@ function SeatingPlanPage({ guests, onBack }) {
       </div>
       <Section>
         <SectionHeader overline="Seating" title="Seating Plan" />
+        <SeatingFinder guests={guests} />
       <div style={{
         display: 'grid',
         gap: 18,
