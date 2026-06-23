@@ -648,7 +648,7 @@ function Footer() {
 function Hero({ content }) {
   return (
     <div style={{
-      background: 'linear-gradient(to bottom, #ddeef8 0%, #c8dff2 45%, #aecce6 100%)',
+      background: 'linear-gradient(to bottom, #ffffff 0%, #f0f7fd 18%, #ddeef8 42%, #cce0f2 70%, #c0d8ec 100%)',
       textAlign: 'center',
       overflow: 'hidden'
     }}>
