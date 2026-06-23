@@ -1177,7 +1177,7 @@ function MenuPage({ content, onBack }) {
         <BackLink onBack={onBack} />
       </div>
       <Section>
-        <SectionHeader overline="Tonight's Table" title="Menu" />
+        <SectionHeader overline="Tonight's Table" title="Menu" subtitle={content.menuNote} />
       <div style={{ maxWidth: 520, margin: '0 auto', textAlign: 'center' }}>
         {content.menu.map((sec, i) => (
           <div
@@ -1213,22 +1213,6 @@ function MenuPage({ content, onBack }) {
             ))}
           </div>
         ))}
-        {content.menuNote && (
-          <div style={{
-            marginTop: 16,
-            paddingTop: 28,
-            borderTop: `1px solid ${theme.divider}`,
-            fontFamily: theme.fonts.body,
-            fontSize: 14,
-            fontStyle: 'italic',
-            color: theme.textSoft,
-            lineHeight: 1.7,
-            animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
-            animationDelay: '0.5s'
-          }}>
-            {content.menuNote}
-          </div>
-        )}
       </div>
     </Section>
     </>
@@ -1434,7 +1418,7 @@ const PROG_BG = '#7a8fa8';
 const PROG_CARD_BG = 'rgba(255,255,255,0.14)';
 const PROG_CARD_BG_SOLID = '#8ea4b8'; /* slightly lighter for contrast */
 
-const ProgrammeSectionHeader = ({ overline, title }) => (
+const ProgrammeSectionHeader = ({ overline, title, subtitle }) => (
   <div style={{ textAlign: 'center', padding: '8px 0 28px', position: 'relative' }}>
     {overline && (
       <div style={{
@@ -1452,6 +1436,17 @@ const ProgrammeSectionHeader = ({ overline, title }) => (
     }}>
       {title}
     </div>
+    {subtitle && (
+      <p style={{
+        fontFamily: theme.fonts.body,
+        fontSize: 17,
+        color: 'rgba(255,255,255,0.75)',
+        margin: '10px 0 0',
+        lineHeight: 1.6,
+      }}>
+        {subtitle}
+      </p>
+    )}
     <div style={{ marginTop: 10, display: 'flex', justifyContent: 'center' }}>
       <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
         <circle cx="13" cy="12" r="9" stroke="rgba(255,255,255,0.4)" strokeWidth="1.2"/>
@@ -1595,7 +1590,7 @@ function ReceptionProgrammePage({ onBack }) {
           }} onError={e => { e.currentTarget.style.display='none'; }} />
         </div>
 
-        <ProgrammeSectionHeader overline="Evening Celebration" title="Reception" />
+        <ProgrammeSectionHeader overline="Evening Celebration" title="Reception" subtitle="Dinner, dancing & unforgettable memories" />
         {RECEPTION_PROGRAMME.map((item, i) => (
           <ProgrammeItemRow key={i} item={item} delay={0.05 + i * 0.04} />
         ))}
