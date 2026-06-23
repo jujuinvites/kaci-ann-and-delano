@@ -367,12 +367,19 @@ const SectionHeader = ({ overline, title, subtitle, light }) => (
     }}>
       {title}
     </h2>
+    <div style={{ marginTop: 10, display: 'flex', justifyContent: 'center', animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both', animationDelay: '0.2s' }}>
+      <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
+        <circle cx="13" cy="12" r="9" stroke={light ? 'rgba(255,255,255,0.4)' : 'rgba(90,136,168,0.45)'} strokeWidth="1.2"/>
+        <circle cx="27" cy="12" r="9" stroke={light ? 'rgba(255,255,255,0.4)' : 'rgba(90,136,168,0.45)'} strokeWidth="1.2"/>
+      </svg>
+    </div>
     {subtitle && (
       <p style={{
-        fontFamily: theme.fonts.body,
+        fontFamily: theme.fonts.title,
         fontSize: 17,
-        color: theme.textSoft,
-        marginTop: 14,
+        fontStyle: 'italic',
+        color: light ? 'rgba(255,255,255,0.80)' : theme.textSoft,
+        margin: '12px 0 0',
         lineHeight: 1.6,
         animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
         animationDelay: '0.25s'
@@ -1103,6 +1110,9 @@ function TimelinePage({ content, onBack }) {
         <BackLink onBack={onBack} />
       </div>
       <Section>
+        <div style={{ textAlign: 'center', marginBottom: 4 }}>
+          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
+        </div>
         <SectionHeader overline="The day at a glance" title="Timeline" />
 
       <div style={{ maxWidth: 460, margin: '0 auto', position: 'relative', padding: '12px 8px 32px' }}>
@@ -1177,6 +1187,9 @@ function MenuPage({ content, onBack }) {
         <BackLink onBack={onBack} />
       </div>
       <Section>
+        <div style={{ textAlign: 'center', marginBottom: 4 }}>
+          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
+        </div>
         <SectionHeader overline="Tonight's Table" title="Menu" subtitle={content.menuNote} />
       <div style={{ maxWidth: 520, margin: '0 auto', textAlign: 'center' }}>
         {content.menu.map((sec, i) => (
@@ -1240,35 +1253,10 @@ function LoveWisdomPage({ onBack }) {
       <div style={{ maxWidth: 580, margin: '0 auto', padding: '20px 24px 0' }}>
         <BackLink onBack={onBack} />
 
-        <div style={{ textAlign: 'center', marginTop: 20, marginBottom: 24, animation: 'fadeInUp 0.65s cubic-bezier(0.22,1,0.36,1) both', animationDelay: '0.05s' }}>
-          <h1 style={{
-            fontFamily: theme.fonts.script,
-            fontSize: 'clamp(58px, 12vw, 82px)',
-            fontWeight: 400,
-            color: theme.dustyBlue,
-            margin: 0,
-            lineHeight: 1.15
-          }}>
-            Love &amp; Wisdom
-          </h1>
+        <div style={{ textAlign: 'center', marginBottom: 4, marginTop: 20 }}>
+          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
         </div>
-
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 12,
-          marginBottom: 32,
-          animation: 'fadeIn 0.8s cubic-bezier(0.23,1,0.32,1) both',
-          animationDelay: '0.2s'
-        }}>
-          <div style={{ flex: 1, maxWidth: 90, height: 1, background: 'rgba(107,143,168,0.35)' }} />
-          <svg width="34" height="20" viewBox="0 0 34 20" fill="none">
-            <circle cx="11" cy="10" r="8" stroke={theme.dustyBlue} strokeWidth="1.2" fill="none" opacity="0.55" />
-            <circle cx="23" cy="10" r="8" stroke={theme.dustyBlue} strokeWidth="1.2" fill="none" opacity="0.55" />
-          </svg>
-          <div style={{ flex: 1, maxWidth: 90, height: 1, background: 'rgba(107,143,168,0.35)' }} />
-        </div>
+        <SectionHeader overline="Table Activities" title="Love & Wisdom" />
 
         <p style={{
           fontFamily: theme.fonts.body,
@@ -1359,6 +1347,9 @@ function BridalPartyPage({ bridal, onBack }) {
         <BackLink onBack={onBack} light />
       </div>
       <Section>
+        <div style={{ textAlign: 'center', marginBottom: 4 }}>
+          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
+        </div>
         <SectionHeader overline="By Our Side" title="Bridal Party" light />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
         <p style={{
@@ -1609,6 +1600,9 @@ function KeyFamilyPage({ onBack }) {
         <BackLink onBack={onBack} light />
       </div>
       <Section>
+        <div style={{ textAlign: 'center', marginBottom: 4 }}>
+          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
+        </div>
         <SectionHeader overline="With Gratitude" title="Our People" light />
       <div style={{ maxWidth: 480, margin: '0 auto' }}>
         <p style={{
@@ -1919,6 +1913,9 @@ function SeatingPlanPage({ guests, onBack }) {
         <BackLink onBack={onBack} />
       </div>
       <Section>
+        <div style={{ textAlign: 'center', marginBottom: 4 }}>
+          <img src={theme.images.waxSeal2Image} alt="K & D seal" style={{ width: 110, opacity: 0.9, animation: 'scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both' }} onError={e => { e.currentTarget.style.display='none'; }} />
+        </div>
         <SectionHeader overline="Seating" title="Seating Plan" />
         <SeatingFinder guests={guests} />
       <div style={{
