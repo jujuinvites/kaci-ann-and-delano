@@ -903,10 +903,10 @@ function FindYourSeat({ guests }) {
                 textAlign: 'center',
                 boxShadow: '0 6px 28px rgba(60,100,140,0.12)',
               }}>
-                <div style={{ fontFamily: theme.fonts.body, fontSize: 11, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 4 }}>
+                <div style={{ fontFamily: theme.fonts.body, fontSize: 15, fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 4 }}>
                   We found your seat!
                 </div>
-                <div style={{ fontFamily: theme.fonts.body, fontSize: 13, color: theme.textSoft, marginBottom: 14 }}>
+                <div style={{ fontFamily: theme.fonts.body, fontSize: 17, color: theme.textSoft, marginBottom: 14 }}>
                   Welcome, you're seated at:
                 </div>
                 <div style={{ fontFamily: theme.fonts.names, fontSize: 'clamp(20px,4.5vw,26px)', color: theme.text, marginBottom: 24, lineHeight: 1.3 }}>
@@ -930,7 +930,7 @@ function FindYourSeat({ guests }) {
                     </div>
                   )}
                 </div>
-                <div style={{ fontFamily: theme.fonts.body, fontSize: 14, color: theme.textSoft, paddingTop: 16, borderTop: '1px solid rgba(90,136,168,0.14)', lineHeight: 1.7 }}>
+                <div style={{ fontFamily: theme.fonts.body, fontSize: 17, color: theme.textSoft, paddingTop: 16, borderTop: '1px solid rgba(90,136,168,0.14)', lineHeight: 1.7 }}>
                   We can't wait to celebrate with you!
                 </div>
               </div>
@@ -1790,10 +1790,10 @@ function SeatingFinder({ guests }) {
                 textAlign: 'center',
                 boxShadow: '0 8px 32px rgba(60,100,140,0.14)',
               }}>
-                <div style={{ fontFamily: theme.fonts.body, fontSize: 11, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 4 }}>
+                <div style={{ fontFamily: theme.fonts.body, fontSize: 15, fontWeight: 700, letterSpacing: '0.24em', textTransform: 'uppercase', color: theme.dustyBlue, marginBottom: 4 }}>
                   We found your seat!
                 </div>
-                <div style={{ fontFamily: theme.fonts.body, fontSize: 13, color: theme.textSoft, marginBottom: 14 }}>
+                <div style={{ fontFamily: theme.fonts.body, fontSize: 17, color: theme.textSoft, marginBottom: 14 }}>
                   Welcome, you're seated at:
                 </div>
                 <div style={{ fontFamily: theme.fonts.names, fontSize: 'clamp(22px,4.5vw,28px)', fontWeight: 600, color: '#1a2a38', marginBottom: 24, lineHeight: 1.3 }}>
@@ -1817,7 +1817,7 @@ function SeatingFinder({ guests }) {
                     </div>
                   )}
                 </div>
-                <div style={{ fontFamily: theme.fonts.body, fontSize: 14, color: theme.textSoft, paddingTop: 16, borderTop: '1px solid rgba(90,136,168,0.14)', lineHeight: 1.7 }}>
+                <div style={{ fontFamily: theme.fonts.body, fontSize: 17, color: theme.textSoft, paddingTop: 16, borderTop: '1px solid rgba(90,136,168,0.14)', lineHeight: 1.7 }}>
                   We can't wait to celebrate with you!
                 </div>
               </div>
