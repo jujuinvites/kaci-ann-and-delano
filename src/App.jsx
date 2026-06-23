@@ -1995,7 +1995,7 @@ export default function App() {
         {page === 'home' && (
           <>
             <Hero content={content} />
-            <div style={{ background: 'linear-gradient(180deg, #2d5570 0%, #264c66 100%)' }}>
+            <div style={{ background: '#2c4870' }}>
               <FindYourSeat guests={guests} />
             </div>
             <div style={{ background: 'linear-gradient(180deg, #ddeef8 0%, #eaf4fb 100%)' }}>
