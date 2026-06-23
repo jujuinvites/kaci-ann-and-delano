@@ -1244,9 +1244,10 @@ function LoveWisdomPage({ onBack }) {
       minHeight: '100vh',
       paddingBottom: 72
     }}>
-      <div style={{ maxWidth: 580, margin: '0 auto', padding: '20px 24px 0' }}>
+      <div style={{ padding: '20px 24px 0' }}>
         <BackLink onBack={onBack} />
-
+      </div>
+      <div style={{ maxWidth: 580, margin: '0 auto', padding: '44px 24px 0' }}>
         <SectionHeader overline="Table Activities" title="Love & Wisdom" />
 
         <p style={{
