@@ -1880,6 +1880,8 @@ function SeatingPlanPage({ guests, onBack }) {
       map[t].push(g);
     });
     const ordered = Object.entries(map).sort((a, b) => {
+      if (a[0] === '2026') return -1;
+      if (b[0] === '2026') return 1;
       if (a[0] === 'Sweetheart') return -1;
       if (b[0] === 'Sweetheart') return 1;
       const an = parseInt(a[0], 10);
