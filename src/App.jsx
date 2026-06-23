@@ -112,6 +112,7 @@ const theme = {
     namesImage: '/images/names.png',
     flowersImage: '/images/flowers.png',
     heroBgImage: '/images/hero.jpg',
+    dividerImage: '/images/divider.png',
     coupleBannerImage: '/images/couple-banner.png',
     bigFlowersImage: '/images/big-flowers.png',
     blueFlowerImage: '/images/blue-flower.png',
@@ -762,41 +763,6 @@ function Hero({ content }) {
         }}>
           {content.welcomeMessage}
         </p>
-      </div>
-
-      {/* Hashtag marquee ticker */}
-      <div style={{
-        position: 'relative', zIndex: 2,
-        overflow: 'hidden',
-        padding: '20px 0 52px',
-        animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
-        animationDelay: '0.65s',
-      }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          width: 'max-content',
-          animation: 'ticker 30s linear infinite',
-          willChange: 'transform',
-        }}>
-          {[0, 1].flatMap(copy =>
-            ['#HappilyEverHuntley', '#HuntleyHarmony', '#HuntleyHolyUnion', '#HeavenlyHitchedHuntleys'].flatMap((tag, i) => [
-              <span key={`t-${copy}-${i}`} style={{
-                fontFamily: theme.fonts.script,
-                fontSize: 'clamp(22px, 4vw, 34px)',
-                color: '#6b90a8',
-                whiteSpace: 'nowrap',
-                padding: '0 22px',
-              }}>
-                {tag}
-              </span>,
-              <svg key={`d-${copy}-${i}`} width="22" height="14" viewBox="0 0 22 14" fill="none" style={{ flexShrink: 0 }}>
-                <circle cx="7" cy="7" r="5" stroke="#6b90a8" strokeWidth="1.1" fill="none" />
-                <circle cx="15" cy="7" r="5" stroke="#6b90a8" strokeWidth="1.1" fill="none" />
-              </svg>
-            ])
-          )}
-        </div>
       </div>
 
       {/* Flowers */}
@@ -2003,6 +1969,48 @@ function SeatingPlanPage({ guests, onBack }) {
 }
 
 /* =============================================================
+   HASHTAG TICKER
+   ============================================================= */
+const HASHTAGS = ['#HappilyEverHuntley', '#HuntleyHarmony', '#HuntleyHolyUnion', '#HeavenlyHitchedHuntleys'];
+
+function HashtagTicker() {
+  return (
+    <div style={{ background: '#2c4870', overflow: 'hidden', padding: '13px 0' }}>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        width: 'max-content',
+        animation: 'ticker 30s linear infinite',
+        willChange: 'transform',
+      }}>
+        {[0, 1].flatMap(copy =>
+          HASHTAGS.flatMap((tag, i) => [
+            <span key={`t-${copy}-${i}`} style={{
+              fontFamily: theme.fonts.body,
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: '0.18em',
+              textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.82)',
+              whiteSpace: 'nowrap',
+              padding: '0 28px',
+            }}>
+              {tag}
+            </span>,
+            <img key={`d-${copy}-${i}`}
+              src={theme.images.dividerImage}
+              alt=""
+              aria-hidden
+              style={{ height: 38, width: 38, flexShrink: 0, objectFit: 'cover' }}
+            />,
+          ])
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* =============================================================
    APP ROOT
    ============================================================= */
 export default function App() {
@@ -2038,6 +2046,7 @@ export default function App() {
         {page === 'home' && (
           <>
             <Hero content={content} />
+            <HashtagTicker />
             <div style={{ background: '#2c4870' }}>
               <FindYourSeat guests={guests} />
             </div>
