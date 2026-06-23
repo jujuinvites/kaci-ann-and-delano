@@ -375,10 +375,9 @@ const SectionHeader = ({ overline, title, subtitle, light }) => (
     </div>
     {subtitle && (
       <p style={{
-        fontFamily: theme.fonts.title,
+        fontFamily: theme.fonts.body,
         fontSize: 17,
-        fontStyle: 'italic',
-        color: light ? 'rgba(255,255,255,0.80)' : theme.textSoft,
+        color: light ? 'rgba(255,255,255,0.75)' : theme.textSoft,
         margin: '12px 0 0',
         lineHeight: 1.6,
         animation: 'fadeIn 0.6s cubic-bezier(0.23,1,0.32,1) both',
