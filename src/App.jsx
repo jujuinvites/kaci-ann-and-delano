@@ -953,8 +953,7 @@ function FindYourSeat({ guests }) {
                   padding: '16px 20px',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: 16,
+                  gap: 10,
                   boxShadow: '0 4px 14px rgba(60,100,140,0.08)',
                   animation: 'scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both',
                   animationDelay: `${i * 0.06}s`,
@@ -966,11 +965,9 @@ function FindYourSeat({ guests }) {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 22px rgba(60,100,140,0.14)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 14px rgba(60,100,140,0.08)'; }}
                 >
-                  <div style={{ fontFamily: theme.fonts.names, fontSize: 17, color: theme.text }}>{g.name}</div>
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: theme.dustyBlue }}>Table</div>
-                    <div style={{ fontFamily: theme.fonts.names, fontSize: 22, fontWeight: 600, color: theme.text }}>{getTable(g)}{g.seat ? ` · Seat ${g.seat}` : ''}</div>
-                  </div>
+                  <span style={{ fontFamily: theme.fonts.names, fontSize: 17, color: theme.text }}>{g.name}</span>
+                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: 'rgba(90,136,168,0.5)' }}>|</span>
+                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: theme.textSoft }}>Table {getTable(g)}</span>
                 </button>
               ))}
             </div>
@@ -1840,8 +1837,7 @@ function SeatingFinder({ guests }) {
                   padding: '16px 20px',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: 16,
+                  gap: 10,
                   boxShadow: '0 4px 14px rgba(60,100,140,0.09)',
                   animation: 'scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both',
                   animationDelay: `${i * 0.06}s`,
@@ -1853,11 +1849,9 @@ function SeatingFinder({ guests }) {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 22px rgba(60,100,140,0.15)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 14px rgba(60,100,140,0.09)'; }}
                 >
-                  <div style={{ fontFamily: theme.fonts.names, fontSize: 17, color: '#1a2a38' }}>{g.name}</div>
-                  <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                    <div style={{ fontFamily: theme.fonts.body, fontSize: 10, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3d6880' }}>Table</div>
-                    <div style={{ fontFamily: theme.fonts.names, fontSize: 22, fontWeight: 700, color: '#1a2a38' }}>{getTable(g)}{g.seat ? ` · Seat ${g.seat}` : ''}</div>
-                  </div>
+                  <span style={{ fontFamily: theme.fonts.names, fontSize: 17, color: '#1a2a38' }}>{g.name}</span>
+                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: 'rgba(90,136,168,0.5)' }}>|</span>
+                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: '#5a7a90' }}>Table {getTable(g)}</span>
                 </button>
               ))}
             </div>
