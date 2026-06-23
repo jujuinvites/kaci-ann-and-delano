@@ -960,14 +960,14 @@ function FindYourSeat({ guests }) {
                   cursor: 'pointer',
                   textAlign: 'left',
                   width: '100%',
+                  justifyContent: 'space-between',
                   transition: 'transform 160ms cubic-bezier(0.22,1,0.36,1), box-shadow 160ms ease',
                 }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 22px rgba(60,100,140,0.14)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 14px rgba(60,100,140,0.08)'; }}
                 >
                   <span style={{ fontFamily: theme.fonts.names, fontSize: 17, color: theme.text }}>{g.name}</span>
-                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: 'rgba(90,136,168,0.5)' }}>|</span>
-                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: theme.textSoft }}>Table {getTable(g)}</span>
+                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: theme.textSoft, flexShrink: 0 }}>Table {getTable(g)}</span>
                 </button>
               ))}
             </div>
@@ -1844,14 +1844,14 @@ function SeatingFinder({ guests }) {
                   cursor: 'pointer',
                   textAlign: 'left',
                   width: '100%',
+                  justifyContent: 'space-between',
                   transition: 'transform 160ms cubic-bezier(0.22,1,0.36,1), box-shadow 160ms ease',
                 }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 22px rgba(60,100,140,0.15)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 14px rgba(60,100,140,0.09)'; }}
                 >
                   <span style={{ fontFamily: theme.fonts.names, fontSize: 17, color: '#1a2a38' }}>{g.name}</span>
-                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: 'rgba(90,136,168,0.5)' }}>|</span>
-                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: '#5a7a90' }}>Table {getTable(g)}</span>
+                  <span style={{ fontFamily: theme.fonts.body, fontSize: 15, color: '#5a7a90', flexShrink: 0 }}>Table {getTable(g)}</span>
                 </button>
               ))}
             </div>
