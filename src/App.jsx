@@ -821,7 +821,7 @@ function FindYourSeat({ guests }) {
           fontFamily: theme.fonts.script,
           fontSize: 'clamp(58px, 12vw, 82px)',
           fontWeight: 400,
-          color: theme.text,
+          color: '#ffffff',
           margin: '0 0 8px'
         }}>
           Find Your Seat
@@ -829,7 +829,7 @@ function FindYourSeat({ guests }) {
         <div style={{
           fontFamily: theme.fonts.body,
           fontSize: 14,
-          color: theme.textSoft
+          color: 'rgba(255,255,255,0.75)'
         }}>
           Type your name to find your table
         </div>
@@ -897,7 +897,7 @@ function FindYourSeat({ guests }) {
           return (
             <div style={{ animation: 'scaleIn 0.4s cubic-bezier(0.22,1,0.36,1) both' }}>
               {selected && (
-                <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: theme.fonts.body, fontSize: 13, color: theme.dustyBlue, letterSpacing: '0.06em', marginBottom: 14, padding: 0, display: 'flex', alignItems: 'center', gap: 4 }}>
+                <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: theme.fonts.body, fontSize: 13, color: 'rgba(255,255,255,0.80)', letterSpacing: '0.06em', marginBottom: 14, padding: 0, display: 'flex', alignItems: 'center', gap: 4 }}>
                   ← Back to results
                 </button>
               )}
@@ -947,7 +947,7 @@ function FindYourSeat({ guests }) {
         {/* Multiple results list */}
         {status === 'results' && results.length > 1 && !selected && (
           <div style={{ animation: 'fadeInUp 0.4s cubic-bezier(0.22,1,0.36,1) both' }}>
-            <div style={{ fontFamily: theme.fonts.body, fontSize: 12, color: theme.textSoft, textAlign: 'center', marginBottom: 12, letterSpacing: '0.04em' }}>
+            <div style={{ fontFamily: theme.fonts.body, fontSize: 12, color: 'rgba(255,255,255,0.70)', textAlign: 'center', marginBottom: 12, letterSpacing: '0.04em' }}>
               {results.length} guests found — tap your name
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -1995,10 +1995,10 @@ export default function App() {
         {page === 'home' && (
           <>
             <Hero content={content} />
-            <div style={{ background: 'linear-gradient(180deg, #c0d8ec 0%, #cce0f0 100%)' }}>
+            <div style={{ background: 'linear-gradient(180deg, #2d5570 0%, #264c66 100%)' }}>
               <FindYourSeat guests={guests} />
             </div>
-            <div style={{ background: 'linear-gradient(180deg, #cce0f0 0%, #ddeef6 100%)' }}>
+            <div style={{ background: 'linear-gradient(180deg, #ddeef8 0%, #eaf4fb 100%)' }}>
               <ExploreGrid onNavigate={setPage} />
             </div>
           </>
